@@ -1,4 +1,6 @@
+import "package:credit_wise_flutter/app/routes.dart";
 import "package:flutter/material.dart";
+import "package:get/get.dart";
 
 void main()
 {
@@ -12,6 +14,9 @@ class MyApp extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    return MaterialApp();
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      getPages: AppRoutes.routes,
+    );
   }
 }
