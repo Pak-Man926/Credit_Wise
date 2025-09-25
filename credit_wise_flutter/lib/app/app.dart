@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "package:get/get.dart";
+import "package:credit_wise_flutter/app/routes.dart";
 
 class App extends StatelessWidget
 {
@@ -7,6 +9,10 @@ class App extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    return Scaffold();
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/login",
+      getPages: AppRoutes.routes,
+    );
   }
 }
