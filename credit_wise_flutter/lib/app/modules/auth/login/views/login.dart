@@ -27,8 +27,8 @@ class Login extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFieldWidget(
-              hintText: "Password",
-              keyboardType: TextInputType.emailAddress,
+              hintText: ("Password"),
+              keyboardType: TextInputType.visiblePassword,
               obscureText: true,
             ),
           ]
