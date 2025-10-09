@@ -5,5 +5,5 @@ import "package:credit_wise_flutter/app/app.dart";
 
 void main() 
 {
-  runApp(const App());
+  runApp(App());
 }

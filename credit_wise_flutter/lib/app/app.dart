@@ -1,18 +1,8 @@
 import "package:flutter/material.dart";
-import "package:get/get.dart";
-import "package:credit_wise_flutter/app/routes.dart";
 
-class App extends StatelessWidget
-{
-  const App({super.key});
-
+class App extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/login",
-      getPages: AppRoutes.routes,
-    );
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }
