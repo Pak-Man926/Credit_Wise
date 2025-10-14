@@ -70,7 +70,7 @@ class AppTextStyles {
     fontFamily: bodyFontFamily,
     fontSize: AppFontSizes.body,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
+    color: AppColors.primaryText,
     height: 1.2,
   );
 }
