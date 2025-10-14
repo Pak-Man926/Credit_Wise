@@ -62,7 +62,15 @@ class AppTextStyles {
     fontFamily: bodyFontFamily,
     fontSize: AppFontSizes.caption,
     fontWeight: FontWeight.w500,
-    color: AppColors.secondaryText,
+    color: AppColors.background,
+    height: 1.2,
+  );
+
+  static const TextStyle button = TextStyle(
+    fontFamily: bodyFontFamily,
+    fontSize: AppFontSizes.body,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
     height: 1.2,
   );
 }

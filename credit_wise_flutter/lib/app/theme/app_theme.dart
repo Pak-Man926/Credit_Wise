@@ -23,5 +23,16 @@ ThemeData _buildAppTheme() {
       bodyMedium: AppTextStyles.bodySmall,
       bodySmall: AppTextStyles.bodySmall,
     ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.accent,
+        foregroundColor: Colors.white,
+        textStyle: AppTextStyles.button,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    ),
   );
 }
