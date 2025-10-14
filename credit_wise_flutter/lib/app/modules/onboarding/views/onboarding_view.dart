@@ -1,9 +1,12 @@
+import "package:credit_wise_flutter/app/data/widgets/button_widget.dart";
+import "package:credit_wise_flutter/app/theme/app_colors.dart";
 import "package:flutter/material.dart";
 import "package:credit_wise_flutter/app/theme/app_text_styles.dart";
 import "package:credit_wise_flutter/app/utils/constants.dart";
 import "package:get/get.dart";
 import "../controllers/onboarding_controller.dart";
 import "package:credit_wise_flutter/app/routes/app_routes.dart";
+import "package:flutter_onboarding_slider/flutter_onboarding_slider.dart";
 
 class OnboardingView extends GetView<OnboardingController> {
   const OnboardingView({super.key});
@@ -11,24 +14,37 @@ class OnboardingView extends GetView<OnboardingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Onboarding')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Welcome! First Time User.', style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Example of setting the flag and navigating
-                controller.markOnboardingComplete();
-                Get.offAllNamed(Routes.LOGIN); 
-              },
-              child: const Text('Proceed to Login'),
-            ),
-          ],
+        body: Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(children: [
+        SizedBox(height: 70),
+        Align(
+          alignment: Alignment.center,
+          child: Text("Get started with your \n    financial journey",
+              style: AppTextStyles.headingXL),
         ),
-      ),
-    );
+        smallSpaceSize,
+        Text(
+            "Unlock your financial potential with personalizes      insights and recommendations",
+            style: AppTextStyles.headingM),
+        mediumSpaceSize,
+        SizedBox(
+          width: double.infinity,
+          height: 450,
+          child: Image.asset("assets/onboarding_page_1.png", fit: BoxFit.fill),
+        ),
+        mediumSpaceSize,
+        CustomButton(
+          text: "Get Started",
+          color: AppColors.accent,
+          onPressed: () {},
+        ),
+        smallSpaceSize,
+        CustomButton(
+            text: ("Login"),
+             color: AppColors.background,
+              onPressed: () {}),
+      ]),
+    ));
   }
 }
