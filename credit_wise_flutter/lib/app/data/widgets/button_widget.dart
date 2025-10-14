@@ -8,12 +8,22 @@ class CustomButton extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
   final Color? color;
+  final TextStyle? textStyle;
 
   const CustomButton({
     super.key,
     required this.text,
     this.onPressed,
-    this.color,
+    this.color = AppColors.background,
+    this.textStyle = AppTextStyles.button,
+  });
+
+  const CustomButton.primary({
+    super.key,
+    required this.text,
+    this.onPressed,
+    this.color = AppColors.accent,
+    this.textStyle,
   });
 
   @override
@@ -29,7 +39,10 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          child: Text(text,),
+          child: Text(
+            text,
+            style: textStyle,
+          ),
         ));
   }
 }
