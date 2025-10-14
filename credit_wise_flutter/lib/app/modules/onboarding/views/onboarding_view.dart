@@ -25,7 +25,7 @@ class OnboardingView extends GetView<OnboardingController> {
         ),
         smallSpaceSize,
         Text(
-            "Unlock your financial potential with personalizes      insights and recommendations",
+            "Unlock your financial potential with personalizes insights and recommendations",
             style: AppTextStyles.headingM),
         mediumSpaceSize,
         SizedBox(
@@ -34,16 +34,18 @@ class OnboardingView extends GetView<OnboardingController> {
           child: Image.asset("assets/onboarding_page_1.png", fit: BoxFit.fill),
         ),
         mediumSpaceSize,
-        CustomButton(
+        CustomButton.primary(
           text: "Get Started",
-          color: AppColors.accent,
+          //color: AppColors.accent,
           onPressed: () {},
         ),
         smallSpaceSize,
-        CustomButton(
-            text: ("Login"),
-             color: AppColors.background,
-              onPressed: () {}),
+        CustomButton(text: ("Login"), onPressed: () {}),
+        smallSpaceSize,
+        Text(
+          "By continuining, you agree to our Terms of Service and Privacy Policy",
+          style: TextStyle(color: AppColors.secondaryText),
+        )
       ]),
     ));
   }
