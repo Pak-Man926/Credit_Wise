@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: App_Name,
-        initialRoute: AppPages.ONBOARDING,
+        initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         theme: appTheme,
       ));
