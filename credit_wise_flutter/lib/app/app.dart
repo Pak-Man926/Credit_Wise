@@ -3,6 +3,8 @@ import "package:credit_wise_flutter/app/utils/constants.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
+import "routes/app_pages.dart";
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -14,7 +16,7 @@ class App extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: App_Name,
-        initialRoute: AppPages.INITIAL,
+        initialRoute: AppPages.ONBOARDING,
         getPages: AppPages.routes,
         theme: appTheme,
       ));
