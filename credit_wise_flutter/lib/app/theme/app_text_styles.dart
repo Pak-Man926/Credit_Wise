@@ -46,7 +46,7 @@ class AppTextStyles {
     fontFamily: bodyFontFamily,
     fontSize: AppFontSizes.body,
     fontWeight: FontWeight.normal,
-    color: AppColors.secondaryText,
+    color: AppColors.primaryText,
     height: 1.4,
   );
 
