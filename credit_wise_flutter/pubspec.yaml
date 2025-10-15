@@ -37,6 +37,8 @@ dependencies:
   google_fonts: ^6.3.2
   shared_preferences: ^2.5.3
   flutter_onboarding_slider: ^1.0.11
+  smooth_page_indicator: ^1.2.1
+  
 
 dev_dependencies:
   flutter_lints: '>=3.0.0 <7.0.0'
