@@ -1,4 +1,5 @@
 import "package:credit_wise_flutter/app/data/widgets/button_widget.dart";
+import "package:credit_wise_flutter/app/modules/onboarding/views/onboarding_screens_view.dart";
 import "package:credit_wise_flutter/app/theme/app_colors.dart";
 import "package:flutter/material.dart";
 import "package:credit_wise_flutter/app/theme/app_text_styles.dart";
@@ -17,7 +18,7 @@ class OnboardingView extends GetView<OnboardingController> {
         body: Padding(
       padding: const EdgeInsets.all(15),
       child: Column(children: [
-        SizedBox(height: 70),
+        SizedBox(height: 40),
         Align(
           alignment: Alignment.center,
           child: Text("Get started with your \n    financial journey",
@@ -37,10 +38,15 @@ class OnboardingView extends GetView<OnboardingController> {
         CustomButton.primary(
           text: "Get Started",
           //color: AppColors.accent,
-          onPressed: () {},
+          onPressed: () {
+            Get.to(OnboardingScreens());
+          },
         ),
         smallSpaceSize,
-        CustomButton(text: ("Login"), onPressed: () {}),
+        CustomButton(
+          text: ("Login"),
+          onPressed: () => Get.toNamed(Routes.LOGIN),
+        ),
         smallSpaceSize,
         Text(
           "By continuining, you agree to our Terms of Service and Privacy Policy",
