@@ -1,4 +1,6 @@
+import 'package:credit_wise_flutter/app/data/widgets/textbox_widget.dart';
 import 'package:credit_wise_flutter/app/routes/app_routes.dart';
+import 'package:credit_wise_flutter/app/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/login_controller.dart';
@@ -9,23 +11,24 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Center(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Welcome Back',
+          style: AppTextStyles.headingXL,
+        ),
+      ),
+      body:Padding(
+        padding: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Login Screen', style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 20),
-            // Use Obx to listen to controller state if needed
-            Obx(() => Text('Status: ${controller.isLoggedIn.value ? "Logged In" : "Logged Out"}')),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                controller.login(); // Update state in controller
-                Get.offAllNamed(Routes.HOME); // Navigate to Home
-              },
-              child: const Text('Log In'),
-            ),
+            Expanded(
+              child: Column(
+                children: [
+                  TextBoxWidget(hintText: "Email or username"),
+                ]
+              )
+            )
           ],
         ),
       ),
