@@ -39,7 +39,7 @@ class OnboardingView extends GetView<OnboardingController> {
           text: "Get Started",
           //color: AppColors.accent,
           onPressed: () {
-            Get.to(OnboardingScreens());
+            Get.to(OnBoardingScreens());
           },
         ),
         smallSpaceSize,
