@@ -34,5 +34,13 @@ ThemeData _buildAppTheme() {
         ),
       ),
     ),
+
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.background,
+      elevation: 0,
+      centerTitle: true,
+      titleTextStyle: AppTextStyles.headingXL.copyWith(color: AppColors.primaryText),
+      iconTheme: IconThemeData(color: AppColors.primaryText),
+    ),
   );
 }

@@ -15,7 +15,6 @@ class AppFontSizes {
 const String headingXLFontFamily = "Manrope"; //Used for font sizes 18 and above
 const String bodyFontFamily = "notoSans"; //Used for font sizes below 18
 
-
 /// App Text Styles
 class AppTextStyles {
   static const TextStyle headingXL = TextStyle(
@@ -73,5 +72,12 @@ class AppTextStyles {
     color: AppColors.primaryText,
     height: 1.2,
   );
-}
 
+  static const TextStyle inputPlaceholder = TextStyle(
+    fontFamily: bodyFontFamily,
+    fontSize: AppFontSizes.bodySmall,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textPlaceholder,
+    height: 1.4,
+  );
+}

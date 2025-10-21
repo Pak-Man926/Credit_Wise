@@ -8,4 +8,7 @@ class AppColors {
   static const Color divider = Color(0xFFE7EFF3); // borders / cards
   static const Color accent = Color(0xFF4C809A); // buttons/icons highlight
   static const Color error = Color(0xFFB00020); // error messages
+  static const Color primaryButtonColor = Color(0xFF13A4EC); // hex #13a4ec
+  static const Color inputBackground = Color(0xFFE7EFF3);
+  static const Color textPlaceholder = Color(0xFF4C809A);
 }
