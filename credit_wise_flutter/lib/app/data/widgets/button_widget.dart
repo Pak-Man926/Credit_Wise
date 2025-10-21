@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.text,
     this.onPressed,
-    this.color = AppColors.accent,
+    this.color = AppColors.primaryButtonColor,
     this.textStyle,
   });
 
