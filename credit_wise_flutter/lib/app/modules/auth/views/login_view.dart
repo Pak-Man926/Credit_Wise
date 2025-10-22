@@ -37,7 +37,9 @@ class LoginView extends GetView<LoginController> {
                 onPressed: () {},
                 child: Text(
                   "Forgot Password?",
-                  style: AppTextStyles.bodySmall,
+                  style: AppTextStyles.bodySmall.copyWith(
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.accent),
                 ),
               ),
             ),
@@ -45,6 +47,23 @@ class LoginView extends GetView<LoginController> {
             CustomButton.primary(
               text: "Login",
               onPressed: () {},
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextButton(
+                  onPressed: () {
+                    Get.toNamed(Routes.REGISTRATION);
+                  },
+                  child: Text(
+                    "Don\'t have an account? Sign Up",
+                    style: AppTextStyles.bodySmall.copyWith(
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.accent,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
