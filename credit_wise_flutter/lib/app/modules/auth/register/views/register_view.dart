@@ -8,10 +8,8 @@ class RegistrationView extends GetView<RegistrationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('New User Registration')),
-      body: const Center(
-        child: Text('Registration Form goes here!'),
-      ),
+      appBar: AppBar(title: const Text('Create Account')),
+      
     );
   }
 }
