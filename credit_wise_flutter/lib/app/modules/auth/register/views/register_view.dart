@@ -1,4 +1,5 @@
 import 'package:credit_wise_flutter/app/data/widgets/input_field_widget.dart';
+import 'package:credit_wise_flutter/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/register_controller.dart';
@@ -17,9 +18,13 @@ class RegistrationView extends GetView<RegistrationController> {
         child: Column(
           children: [
             InputFieldWidget(hintText: "Enter your first name:"),
+            smallSpaceSize,
             InputFieldWidget(hintText: "Enter your Last name:"),
+            smallSpaceSize,
             InputFieldWidget(hintText: "Enter your  email address:"),
+            smallSpaceSize,
             InputFieldWidget(hintText: "Enter your phone number:"),
+            smallSpaceSize,
             InputFieldWidget(
               hintText: "Enter your password:",
               obscureText: true,
