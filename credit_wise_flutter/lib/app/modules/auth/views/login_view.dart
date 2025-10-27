@@ -46,7 +46,9 @@ class LoginView extends GetView<LoginController> {
             mediumSpaceSize,
             CustomButton.primary(
               text: "Login",
-              onPressed: () {},
+              onPressed: () {
+                Get.offAllNamed(Routes.HOME);
+              },
             ),
             Expanded(
               child: Align(
