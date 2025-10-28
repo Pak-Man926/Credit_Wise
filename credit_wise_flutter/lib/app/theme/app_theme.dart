@@ -35,12 +35,18 @@ ThemeData _buildAppTheme() {
       ),
     ),
 
-    appBarTheme: AppBarTheme(
+    appBarTheme: AppBarThemeData(
       backgroundColor: AppColors.background,
       elevation: 0,
       centerTitle: true,
       titleTextStyle: AppTextStyles.headingXL.copyWith(color: AppColors.primaryText),
       iconTheme: IconThemeData(color: AppColors.primaryText),
+    ),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.background,
+      selectedIconTheme: IconThemeData(color: AppColors.primaryText),
+      unselectedIconTheme: IconThemeData(color: AppColors.accent),
     ),
   );
 }
