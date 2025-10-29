@@ -47,7 +47,7 @@ class LoginView extends GetView<LoginController> {
             CustomButton.primary(
               text: "Login",
               onPressed: () {
-                Get.offAllNamed(Routes.HOME);
+                Get.offAllNamed(Routes.HOME_VIEW);
               },
             ),
             Expanded(
