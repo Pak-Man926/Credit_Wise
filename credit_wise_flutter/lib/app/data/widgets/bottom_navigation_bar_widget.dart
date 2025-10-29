@@ -27,17 +27,31 @@ class AppBottomNavigationBar extends StatelessWidget {
       selectedItemColor: appTheme.bottomNavigationBarTheme.selectedItemColor,
       unselectedItemColor:
           appTheme.bottomNavigationBarTheme.unselectedItemColor,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(
-  PhosphorIcons.house,
-  size: 32.0,
-), label: "Home"),
+      items: [
         BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded), label: "Search"),
+            icon: Icon(
+              PhosphorIcons.house(),
+              size: 32.0,
+            ),
+            label: "Home"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_outlined), label: "Schedule"),
+            icon: Icon(
+              PhosphorIcons.presentationChart(),
+              size: 32.0,
+            ),
+            label: "Credit Score"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_outline_rounded), label: "Saved"),
+            icon: Icon(
+              PhosphorIcons.star(),
+              size: 32.0,
+            ),
+            label: "Recommendations"),
+        BottomNavigationBarItem(
+            icon: Icon(
+              PhosphorIcons.user(),
+              size: 32.0,
+            ),
+            label: "Profile"),
       ],
     );
   }
