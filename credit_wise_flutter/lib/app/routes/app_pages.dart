@@ -9,7 +9,7 @@ import '../modules/home_view/account/views/account_view.dart';
 import '../modules/home_view/auth/bindings/login_binding.dart';
 import '../modules/home_view/auth/register/bindings/register_binding.dart';
 import '../modules/home_view/auth/register/views/register_view.dart';
-import '../modules/auth/views/login_view.dart';
+import '../modules/home_view/auth/views/login_view.dart';
 import '../modules/home_view/credit_score/bindings/credit_score_bindings.dart';
 import '../modules/home_view/credit_score/views/credit_score_views.dart';
 import '../modules/home_view/home/bindings/home_bindings.dart';
