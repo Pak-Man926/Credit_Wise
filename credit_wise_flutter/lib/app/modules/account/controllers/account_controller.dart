@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../../../routes/app_routes.dart';
+import '../../../routes/app_routes.dart';
 
 class AccountController extends GetxController {
   var userEmail = 'david@example.com'.obs;
