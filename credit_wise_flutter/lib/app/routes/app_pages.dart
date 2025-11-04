@@ -1,21 +1,22 @@
-import 'package:credit_wise_flutter/app/modules/home_view/home_page_view.dart';
+import 'package:credit_wise_flutter/app/modules/home_view/bindings/home_page_binding.dart';
+import 'package:credit_wise_flutter/app/modules/home_view/views/home_page_view.dart';
 import 'package:credit_wise_flutter/app/modules/onboarding/bindings/onboarding_binding.dart';
 import 'package:credit_wise_flutter/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:get/get.dart';
 
 
-import '../modules/home_view/account/bindings/account_binding.dart';
-import '../modules/home_view/account/views/account_view.dart';
-import '../modules/home_view/auth/bindings/login_binding.dart';
-import '../modules/home_view/auth/register/bindings/register_binding.dart';
-import '../modules/home_view/auth/register/views/register_view.dart';
-import '../modules/home_view/auth/views/login_view.dart';
-import '../modules/home_view/credit_score/bindings/credit_score_bindings.dart';
-import '../modules/home_view/credit_score/views/credit_score_views.dart';
-import '../modules/home_view/home/bindings/home_bindings.dart';
-import '../modules/home_view/home/views/home_view.dart';
-import '../modules/home_view/loan_offers/bindings/loan_offers_binding.dart';
-import '../modules/home_view/loan_offers/views/loan_offer_view.dart';
+import '../modules/account/bindings/account_binding.dart';
+import '../modules/account/views/account_view.dart';
+import '../modules/auth/bindings/login_binding.dart';
+import '../modules/auth/register/bindings/register_binding.dart';
+import '../modules/auth/register/views/register_view.dart';
+import '../modules/auth/views/login_view.dart';
+import '../modules/credit_score/bindings/credit_score_bindings.dart';
+import '../modules/credit_score/views/credit_score_views.dart';
+import '../modules/home/bindings/home_bindings.dart';
+import '../modules/home/views/home_view.dart';
+import '../modules/loan_offers/bindings/loan_offers_binding.dart';
+import '../modules/loan_offers/views/loan_offer_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -47,6 +48,7 @@ class AppPages {
     GetPage(
       name: Routes.HOME_VIEW,
       page: () => HomePageView(),
+      binding: HomePageBinding(),
     ),
     GetPage(
       name: Routes.HOME,
