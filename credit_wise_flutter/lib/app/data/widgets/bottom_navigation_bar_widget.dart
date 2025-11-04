@@ -1,6 +1,9 @@
+import "package:credit_wise_flutter/app/theme/app_colors.dart";
+import "package:credit_wise_flutter/app/theme/app_text_styles.dart";
 import "package:credit_wise_flutter/app/theme/app_theme.dart";
 import "package:flutter/material.dart";
 import "package:phosphor_flutter/phosphor_flutter.dart";
+
 
 class AppBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
@@ -24,32 +27,36 @@ class AppBottomNavigationBar extends StatelessWidget {
       //type: BottomNavigationBarType.fixed,
       currentIndex: currentIndex,
       onTap: onTap,
-      selectedItemColor: appTheme.bottomNavigationBarTheme.selectedItemColor,
-      unselectedItemColor:
-          appTheme.bottomNavigationBarTheme.unselectedItemColor,
+      unselectedItemColor: AppColors.accent,
+      selectedItemColor: AppColors.primaryText,
+      selectedFontSize: 8,
+      unselectedFontSize: 8,
+      showUnselectedLabels: true,
+      selectedLabelStyle: AppTextStyles.bodySmall,
+      unselectedLabelStyle: AppTextStyles.bodySmall,
       items: [
         BottomNavigationBarItem(
             icon: Icon(
               PhosphorIcons.house(),
-              size: 32.0,
+              size: 24.0,
             ),
             label: "Home"),
         BottomNavigationBarItem(
             icon: Icon(
               PhosphorIcons.presentationChart(),
-              size: 32.0,
+              size: 24.0,
             ),
             label: "Credit Score"),
         BottomNavigationBarItem(
             icon: Icon(
               PhosphorIcons.star(),
-              size: 32.0,
+              size: 24.0,
             ),
             label: "Recommendations"),
         BottomNavigationBarItem(
             icon: Icon(
               PhosphorIcons.user(),
-              size: 32.0,
+              size: 24.0,
             ),
             label: "Profile"),
       ],
