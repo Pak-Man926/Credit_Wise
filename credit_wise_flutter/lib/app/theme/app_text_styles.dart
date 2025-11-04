@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'app_colors.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 /// App Font Sizes
 class AppFontSizes {

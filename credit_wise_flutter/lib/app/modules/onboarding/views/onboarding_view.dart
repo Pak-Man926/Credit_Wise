@@ -7,7 +7,7 @@ import "package:credit_wise_flutter/app/utils/constants.dart";
 import "package:get/get.dart";
 import "../controllers/onboarding_controller.dart";
 import "package:credit_wise_flutter/app/routes/app_routes.dart";
-import "package:flutter_onboarding_slider/flutter_onboarding_slider.dart";
+//import "package:flutter_onboarding_slider/flutter_onboarding_slider.dart";
 
 class OnboardingView extends GetView<OnboardingController> {
   const OnboardingView({super.key});

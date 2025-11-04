@@ -4,9 +4,9 @@ import "package:credit_wise_flutter/app/modules/onboarding/views/onboarding_scre
 import "package:credit_wise_flutter/app/modules/onboarding/views/onboarding_screen_4.dart";
 import "package:credit_wise_flutter/app/routes/app_routes.dart";
 import "package:credit_wise_flutter/app/theme/app_colors.dart";
-import "package:credit_wise_flutter/app/theme/app_text_styles.dart";
+//import "package:credit_wise_flutter/app/theme/app_text_styles.dart";
 import "package:flutter/material.dart";
-import "package:flutter_onboarding_slider/flutter_onboarding_slider.dart";
+//import "package:flutter_onboarding_slider/flutter_onboarding_slider.dart";
 import "package:get/get.dart";
 import "package:smooth_page_indicator/smooth_page_indicator.dart";
 
