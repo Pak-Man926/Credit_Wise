@@ -47,6 +47,8 @@ ThemeData _buildAppTheme() {
       backgroundColor: AppColors.background,
       selectedIconTheme: IconThemeData(color: AppColors.primaryText),
       unselectedIconTheme: IconThemeData(color: AppColors.accent),
+      selectedLabelStyle: AppTextStyles.headingXL.copyWith(color: AppColors.primaryText),
+      unselectedLabelStyle: AppTextStyles.headingXL.copyWith(color: AppColors.accent)
     ),
   );
 }
