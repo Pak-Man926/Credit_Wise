@@ -1,5 +1,5 @@
-import 'package:credit_wise_flutter/app/modules/home_view/bindings/home_page_binding.dart';
-import 'package:credit_wise_flutter/app/modules/home_view/views/home_page_view.dart';
+import 'package:credit_wise_flutter/app/modules/home_page_view/bindings/home_page_binding.dart';
+import 'package:credit_wise_flutter/app/modules/home_page_view/views/home_page_view.dart';
 import 'package:credit_wise_flutter/app/modules/onboarding/bindings/onboarding_binding.dart';
 import 'package:credit_wise_flutter/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:get/get.dart';
