@@ -1,4 +1,4 @@
-import "package:credit_wise_flutter/app/modules/home_view/controllers/home_page_controller.dart";
+import "package:credit_wise_flutter/app/modules/home_page_view/controllers/home_page_controller.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
@@ -10,11 +10,9 @@ class HomePageView extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Obx(
+      body: Obx(
             () => controller.pages[controller.selectedIndex.value],
-          )),
+          ),
       bottomNavigationBar: Obx(
         () => AppBottomNavigationBar(
             currentIndex: controller.selectedIndex.value,
