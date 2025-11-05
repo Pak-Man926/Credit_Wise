@@ -6,7 +6,11 @@ class HomeFeedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+      width: double.infinity,
+      height: 80,
+      decoration: BoxDecoration(
+        borderRadius: Bo
+      ),
     );
   }
 }
