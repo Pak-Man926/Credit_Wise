@@ -10,6 +10,7 @@ class AppFontSizes {
   static const double body = 16;
   static const double bodySmall = 14;
   static const double caption = 12;
+  static const double captionL = 18;
 }
 
 const String headingXLFontFamily = "Manrope"; //Used for font sizes 18 and above
@@ -61,6 +62,14 @@ class AppTextStyles {
     fontFamily: bodyFontFamily,
     fontSize: AppFontSizes.caption,
     fontWeight: FontWeight.w500,
+    color: AppColors.background,
+    height: 1.2,
+  );
+
+  static const TextStyle captionL = TextStyle(
+    fontFamily: bodyFontFamily,
+    fontSize: AppFontSizes.captionL,
+    fontWeight: FontWeight.bold,
     color: AppColors.background,
     height: 1.2,
   );
