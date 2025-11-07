@@ -25,7 +25,8 @@ class HomeView extends GetView<HomeController> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Welcome back, David", style: AppTextStyles.headingXL),
+                const Text("Welcome back, David",
+                    style: AppTextStyles.headingXL),
                 mediumSpaceSize,
                 HomeFeedWidget(
                   headlineText: "Credit Score",
@@ -47,7 +48,54 @@ class HomeView extends GetView<HomeController> {
                 mediumSpaceSize,
                 const Text("Tips", style: AppTextStyles.headingXL),
                 mediumSpaceSize,
-                
+                SizedBox(
+                  height: 275,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      // Background image
+                      Positioned.fill(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.asset(
+                            "assets/improve_credit_score_backround_image.png",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      // Text overlay
+                      Positioned(
+                        left: 20, // distance from left edge
+                        top: 120,
+                        bottom: 0,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            width:
+                                290, // limits text width so it doesn’t stretch across
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  "Improve your credit score",
+                                  style: AppTextStyles.captionL,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  "Learn how to boost your credit rating with our expert tips.",
+                                  style: AppTextStyles.caption,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
