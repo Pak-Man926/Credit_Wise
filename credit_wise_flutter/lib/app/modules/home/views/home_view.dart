@@ -23,12 +23,9 @@ class HomeView extends GetView<HomeController> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text("Welcome back, David",
-                      style: AppTextStyles.headingXL),
-                ),
+                Text("Welcome back, David", style: AppTextStyles.headingXL),
                 mediumSpaceSize,
                 HomeFeedWidget(
                   headlineText: "Credit Score",
@@ -46,7 +43,11 @@ class HomeView extends GetView<HomeController> {
                   image: "assets/recommendation_view_background.png",
                   creditScore: 2,
                   buttonLabel: "View Offers",
-                )
+                ),
+                mediumSpaceSize,
+                const Text("Tips", style: AppTextStyles.headingXL),
+                mediumSpaceSize,
+                
               ],
             ),
           ),
