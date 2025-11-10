@@ -1,5 +1,7 @@
+import 'package:credit_wise_flutter/app/data/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../theme/app_text_styles.dart';
 import '../controllers/credit_score_controllers.dart';
 
 class CreditScoreView extends GetView<CreditScoreController> {
@@ -8,10 +10,16 @@ class CreditScoreView extends GetView<CreditScoreController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Your Credit Score')),
-      body: Center(
-        child: Obx(() => Text('Score: ${controller.score.value}',
-            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold))),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Credit Score", style: AppTextStyles.headingXL),
+      ),
+      body:Column(
+        children: [
+          Center(
+          child: ProfileImageWidget("assets/male_account_user.png"),
+          ),
+        ],
       ),
     );
   }
