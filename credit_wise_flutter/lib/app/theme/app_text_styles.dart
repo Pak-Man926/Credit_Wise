@@ -57,7 +57,13 @@ class AppTextStyles {
     color: AppColors.secondaryText,
     height: 1.4,
   );
-
+  static const TextStyle captionXL = TextStyle(
+    fontFamily: headingXLFontFamily,
+    fontSize: AppFontSizes.headingM,
+    fontWeight: FontWeight.w700,
+    color: AppColors.secondaryText,
+    height: 1.3,
+  );
   static const TextStyle caption = TextStyle(
     fontFamily: bodyFontFamily,
     fontSize: AppFontSizes.caption,
