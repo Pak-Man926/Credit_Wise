@@ -42,7 +42,7 @@ class CreditScoreView extends GetView<CreditScoreController> {
             Center(
               child: AspectRatio(
                 aspectRatio: 1.0,
-                 Text("To be cheched")
+                 child: Text("To be cheched")
                 // child: Container(
                 //     //color: Colors.blue,
                 //     margin: const EdgeInsets.all(20),
