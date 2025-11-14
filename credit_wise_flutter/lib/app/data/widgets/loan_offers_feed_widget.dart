@@ -58,7 +58,7 @@ class LoanOffersFeedWidget extends StatelessWidget {
                   mediumSpaceSize,
                   SizedBox(
                     height: 40,
-                    width: 150,
+                    width: 120,
                     child: ElevatedButton(
                       onPressed: onPressed,
                       style: ElevatedButton.styleFrom(
