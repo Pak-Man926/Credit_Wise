@@ -30,7 +30,7 @@ class LoanOffersFeedWidget extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: double.infinity,
-        height: 180,
+        height: 200,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -57,8 +57,8 @@ class LoanOffersFeedWidget extends StatelessWidget {
                   Text("$bottomlineText", style: AppTextStyles.bodySmall),
                   mediumSpaceSize,
                   SizedBox(
-                    height: 40,
-                    width: 120,
+                    height: 50,
+                    width: 150,
                     child: ElevatedButton(
                       onPressed: onPressed,
                       style: ElevatedButton.styleFrom(
