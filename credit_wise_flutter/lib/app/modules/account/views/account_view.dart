@@ -1,4 +1,5 @@
 import 'package:credit_wise_flutter/app/data/widgets/profile_image_widget.dart';
+import 'package:credit_wise_flutter/app/data/widgets/profile_selection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../theme/app_text_styles.dart';
@@ -33,6 +34,17 @@ class AccountView extends GetView<AccountController> {
               ),),
             mediumSpaceSize,
             const Text("Account & Settings", style: AppTextStyles.headingL),
+            smallSpaceSize,
+            // ListTile(
+            //   leading: const Icon(Icons.person_outline_rounded, size: 24,),
+            //   title: const Text("Personal Information", style: AppTextStyles.body),
+            //   trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 15,),
+            //   onTap: () {},
+            // ),
+            ProfileSelectionWidget(
+              leadingIcon: Icons.person_outline_outlined,
+              accountSelection: "Personal",
+            ),
           ],
         ),
       ),
