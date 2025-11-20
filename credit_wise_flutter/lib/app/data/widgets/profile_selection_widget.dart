@@ -1,3 +1,4 @@
+import "package:credit_wise_flutter/app/theme/app_colors.dart";
 import "package:flutter/material.dart";
 
 import "../../theme/app_text_styles.dart";
@@ -21,20 +22,27 @@ class ProfileSelectionWidget extends StatelessWidget {
       width: double.infinity,
       child: MaterialButton(
         onPressed: () {},
-        child: Row(children: [
-          SizedBox(
-            height: 24,
-            width: 24,
+        child: Row(
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.inputBackground,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            height: 40,
+            width: 40,
             child: Icon(
               leadingIcon,
-              size: 15,
+              size: 30,
             ),
           ),
+          const SizedBox(width: 15),
           Text("$accountSelection", style: AppTextStyles.body),
           const Spacer(),
           Icon(
             trailingIcon,
-            size: 15,
+            size: 20,
           ),
         ]),
       ),
