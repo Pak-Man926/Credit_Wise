@@ -11,7 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'user.dart' as _i3;
+import 'gender.dart' as _i3;
+import 'user.dart' as _i4;
+export 'gender.dart';
 export 'user.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
@@ -36,7 +38,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: 'nextval(\'auth_user_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'fisrtName',
+          name: 'firstName',
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',
@@ -72,6 +74,12 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String',
         ),
         _i2.ColumnDefinition(
+          name: 'gender',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'protocol:Gender',
+        ),
+        _i2.ColumnDefinition(
           name: 'createdAt',
           columnType: _i2.ColumnType.timestampWithoutTimeZone,
           isNullable: false,
@@ -105,11 +113,17 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i3.Users) {
-      return _i3.Users.fromJson(data) as T;
+    if (t == _i3.Gender) {
+      return _i3.Gender.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i3.Users?>()) {
-      return (data != null ? _i3.Users.fromJson(data) : null) as T;
+    if (t == _i4.Users) {
+      return _i4.Users.fromJson(data) as T;
+    }
+    if (t == _i1.getType<_i3.Gender?>()) {
+      return (data != null ? _i3.Gender.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i4.Users?>()) {
+      return (data != null ? _i4.Users.fromJson(data) : null) as T;
     }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
@@ -121,7 +135,10 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i3.Users) {
+    if (data is _i3.Gender) {
+      return 'Gender';
+    }
+    if (data is _i4.Users) {
       return 'Users';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -137,8 +154,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
+    if (dataClassName == 'Gender') {
+      return deserialize<_i3.Gender>(data['data']);
+    }
     if (dataClassName == 'Users') {
-      return deserialize<_i3.Users>(data['data']);
+      return deserialize<_i4.Users>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -156,8 +176,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i3.Users:
-        return _i3.Users.t;
+      case _i4.Users:
+        return _i4.Users.t;
     }
     return null;
   }

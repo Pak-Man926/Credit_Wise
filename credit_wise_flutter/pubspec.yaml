@@ -24,7 +24,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  serverpod_flutter: 2.9.1
+  serverpod_flutter: 2.9.2
   credit_wise_client:
     path: ../credit_wise_client
 
