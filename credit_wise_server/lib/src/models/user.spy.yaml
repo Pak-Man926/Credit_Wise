@@ -1,10 +1,11 @@
 class: Users
 table: auth_user
 fields:
-    fisrtName: String
+    firstName: String
     secondName: String
     lastName: String
     email: String
     phoneNumber: int
     password: String
+    gender: Gender
     createdAt: DateTime
