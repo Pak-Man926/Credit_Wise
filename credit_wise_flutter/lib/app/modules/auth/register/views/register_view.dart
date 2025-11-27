@@ -1,5 +1,4 @@
 import 'package:credit_wise_flutter/app/data/widgets/button_widget.dart';
-import 'package:credit_wise_flutter/app/data/widgets/drop_down_menu_widget.dart';
 import 'package:credit_wise_flutter/app/data/widgets/input_field_widget.dart';
 import 'package:credit_wise_flutter/app/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,44 @@ class RegistrationView extends GetView<RegistrationController> {
                 hintText: "Confirm your password:",
                 obscureText: true,
               ),
-              DropDownMenuWidget(hintText: "Select your gender:"),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: AppColors.inputBackground,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                      padding: const EdgeInsets.only(bottom: 2.0),
+                      child: DropdownButtonFormField(
+                          style: AppTextStyles.body,
+                          items: controller.genderOptions.map((String option) {
+                            return DropdownMenuItem<String>(
+                              value: option,
+                              child: Text(option),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            controller.updateGender(newValue);
+                          },
+                          hint: Text(
+                            "Select your gender",
+                            style: AppTextStyles.inputPlaceholder,
+                          ),
+                          dropdownColor: AppColors.inputBackground,
+                          iconEnabledColor: AppColors.accent,
+                          decoration: InputDecoration(
+                            //hintText: hintText,
+                            //hintStyle: ,
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            contentPadding: const EdgeInsets.all(16),
+                          ))),
+                ),
+              ),
               smallSpaceSize,
               CustomButton.primary(
                 text: "Register",
