@@ -4,6 +4,8 @@ class RegistrationController extends GetxController {
   // Logic for handling user input, validation, and API calls for sign-up
   var selectedGender = Rx<String?>(null);
 
+  List<String> genderOptions = ['Male', 'Female'];
+
   void updateGender(String? newGender) {
     selectedGender.value = newGender;
   }
