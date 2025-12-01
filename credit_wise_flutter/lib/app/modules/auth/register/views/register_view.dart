@@ -24,22 +24,35 @@ class RegistrationView extends GetView<RegistrationController> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              InputFieldWidget(hintText: "Enter your first name:"),
+              InputFieldWidget(
+                hintText: "Enter your first name:",
+                controller: controller.firstNameController,
+              ),
               smallSpaceSize,
-              InputFieldWidget(hintText: "Enter your Last name:"),
+              InputFieldWidget(
+                hintText: "Enter your Last name:",
+                controller: controller.lastNameController,
+              ),
               smallSpaceSize,
-              InputFieldWidget(hintText: "Enter your  email address:"),
+              InputFieldWidget(
+                  hintText: "Enter your  email address:",
+                  controller: controller.emailController),
               smallSpaceSize,
-              InputFieldWidget(hintText: "Enter your phone number:"),
+              InputFieldWidget(
+                hintText: "Enter your phone number:",
+                controller: controller.phoneNumberController,
+              ),
               smallSpaceSize,
               InputFieldWidget(
                 hintText: "Enter your password:",
                 obscureText: true,
+                controller: controller.passwordController,
               ),
               smallSpaceSize,
               InputFieldWidget(
                 hintText: "Confirm your password:",
                 obscureText: true,
+                controller: controller.confirmPasswordController,
               ),
               Padding(
                 padding:
@@ -82,7 +95,9 @@ class RegistrationView extends GetView<RegistrationController> {
               smallSpaceSize,
               CustomButton.primary(
                 text: "Register",
-                onPressed: () {},
+                onPressed: () {
+                  controller.registerUser();
+                },
               ),
               smallSpaceSize,
               Align(
