@@ -27,9 +27,14 @@ class LoginView extends GetView<LoginController> {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            InputFieldWidget(hintText: "Email or username"),
+            InputFieldWidget(
+              hintText: "Phone Number",
+              controller: controller.phoneNumberController,),
             smallSpaceSize,
-            InputFieldWidget(obscureText: true, hintText: "Password"),
+            InputFieldWidget(
+              obscureText: true,
+               hintText: "Password",
+               controller: controller.passwordController),
             smallSpaceSize,
             Align(
               alignment: Alignment.centerLeft,
