@@ -10,7 +10,53 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'protocol.dart' as _i2;
+import 'dart:async' as _i2;
+import 'package:credit_wise_client/src/protocol/gender.dart' as _i3;
+import 'protocol.dart' as _i4;
+
+/// {@category Endpoint}
+class EndpointAuth extends _i1.EndpointRef {
+  EndpointAuth(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'auth';
+
+  _i2.Future<bool> registerUser(
+    String firstName,
+    String secondName,
+    String lastName,
+    String email,
+    int phoneNumber,
+    _i3.Gender gender,
+    String password,
+  ) =>
+      caller.callServerEndpoint<bool>(
+        'auth',
+        'registerUser',
+        {
+          'firstName': firstName,
+          'secondName': secondName,
+          'lastName': lastName,
+          'email': email,
+          'phoneNumber': phoneNumber,
+          'gender': gender,
+          'password': password,
+        },
+      );
+
+  _i2.Future<bool> loginUser(
+    int phoneNumber,
+    String password,
+  ) =>
+      caller.callServerEndpoint<bool>(
+        'auth',
+        'loginUser',
+        {
+          'phoneNumber': phoneNumber,
+          'password': password,
+        },
+      );
+}
 
 class Client extends _i1.ServerpodClientShared {
   Client(
@@ -28,7 +74,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i2.Protocol(),
+          _i4.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -37,10 +83,14 @@ class Client extends _i1.ServerpodClientShared {
           onSucceededCall: onSucceededCall,
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
-        ) {}
+        ) {
+    auth = EndpointAuth(this);
+  }
+
+  late final EndpointAuth auth;
 
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {'auth': auth};
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};
