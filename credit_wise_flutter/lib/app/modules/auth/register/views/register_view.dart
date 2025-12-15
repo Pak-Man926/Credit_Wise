@@ -95,8 +95,8 @@ class RegistrationView extends GetView<RegistrationController> {
               smallSpaceSize,
               CustomButton.primary(
                 text: "Register",
-                onPressed: () {
-                  controller.registerUser();
+                onPressed: () async {
+                  controller.registerUser;
                 },
               ),
               smallSpaceSize,
