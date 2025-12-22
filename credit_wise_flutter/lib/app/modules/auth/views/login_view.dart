@@ -29,12 +29,13 @@ class LoginView extends GetView<LoginController> {
           children: [
             InputFieldWidget(
               hintText: "Phone Number",
-              controller: controller.phoneNumberController,),
+              controller: controller.phoneNumberController,
+            ),
             smallSpaceSize,
             InputFieldWidget(
-              obscureText: true,
-               hintText: "Password",
-               controller: controller.passwordController),
+                obscureText: true,
+                hintText: "Password",
+                controller: controller.passwordController),
             smallSpaceSize,
             Align(
               alignment: Alignment.centerLeft,
@@ -51,8 +52,8 @@ class LoginView extends GetView<LoginController> {
             mediumSpaceSize,
             CustomButton.primary(
               text: "Login",
-              onPressed: () {
-                Get.offAllNamed(Routes.HOME_VIEW);
+              onPressed: () async {
+                await controller.loginUser();
               },
             ),
             Expanded(
