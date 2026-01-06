@@ -9,11 +9,13 @@ class ProfileSelectionWidget extends StatelessWidget {
     required this.accountSelection,
     required this.leadingIcon,
     this.trailingIcon = Icons.arrow_forward_ios_rounded,
+    this.onPressed,
   });
 
   final String? accountSelection;
   final IconData? leadingIcon;
   final IconData? trailingIcon;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class ProfileSelectionWidget extends StatelessWidget {
       height: 40,
       width: double.infinity,
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
