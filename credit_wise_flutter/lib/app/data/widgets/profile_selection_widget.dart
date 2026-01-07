@@ -25,28 +25,28 @@ class ProfileSelectionWidget extends StatelessWidget {
       child: MaterialButton(
         onPressed: onPressed,
         child: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.inputBackground,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            height: 40,
-            width: 40,
-            child: Icon(
-              leadingIcon,
-              size: 30,
-            ),
-          ),
-          const SizedBox(width: 15),
-          Text("$accountSelection", style: AppTextStyles.body),
-          const Spacer(),
-          Icon(
-            trailingIcon,
-            size: 20,
-          ),
-        ]),
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.inputBackground,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                height: 40,
+                width: 40,
+                child: Icon(
+                  leadingIcon,
+                  size: 30,
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text("$accountSelection", style: AppTextStyles.body),
+              const Spacer(),
+              Icon(
+                trailingIcon,
+                size: 20,
+              ),
+            ]),
       ),
     );
   }

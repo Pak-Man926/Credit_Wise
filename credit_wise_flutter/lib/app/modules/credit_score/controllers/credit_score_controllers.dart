@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class CreditScoreController extends GetxController {
   // Reactive variable to hold the credit score value
-  final touchedIndex = (-1).obs; 
+  final touchedIndex = (-1).obs;
 
   // Function to set the touched index
   void setTouchedIndex(int index) {

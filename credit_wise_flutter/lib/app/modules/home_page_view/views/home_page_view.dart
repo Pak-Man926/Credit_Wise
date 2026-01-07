@@ -11,8 +11,8 @@ class HomePageView extends GetView<HomePageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-            () => controller.pages[controller.selectedIndex.value],
-          ),
+        () => controller.pages[controller.selectedIndex.value],
+      ),
       bottomNavigationBar: Obx(
         () => AppBottomNavigationBar(
             currentIndex: controller.selectedIndex.value,

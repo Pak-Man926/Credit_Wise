@@ -7,9 +7,9 @@ class AccountController extends GetxController {
   void logout() {
     // 1. Perform backend logout
     Get.log('Logging out user...');
-    
+
     // 2. Clear local storage (auth tokens, etc.)
-    
+
     // 3. Navigate back to the login page (and clear history)
     Get.offAllNamed(Routes.LOGIN);
   }

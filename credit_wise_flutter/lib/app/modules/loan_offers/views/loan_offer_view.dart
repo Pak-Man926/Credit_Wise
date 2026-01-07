@@ -26,7 +26,8 @@ class LoanOffersView extends GetView<LoanOffersController> {
               mediumSpaceSize,
               LoanOffersFeedWidget(
                 headlineText: "Sponsered",
-                bottomlineText: "Get a low rate on a home \n equity line of credit",
+                bottomlineText:
+                    "Get a low rate on a home \n equity line of credit",
                 onPressed: () {},
                 image: "assets/loan_recommendations_1.png",
                 midlineText: "Home Equity Line of Credit",

@@ -11,14 +11,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      top: false,
-      bottom: true,
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: App_Name,
-        initialRoute: AppPages.INITIAL,
-        getPages: AppPages.routes,
-        theme: appTheme,
-      ));
+        top: false,
+        bottom: true,
+        child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: App_Name,
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.routes,
+          theme: appTheme,
+        ));
   }
 }

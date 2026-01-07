@@ -9,12 +9,11 @@ ThemeData _buildAppTheme() {
 
   return baseTheme.copyWith(
     scaffoldBackgroundColor: AppColors.background,
-    colorScheme: baseTheme.colorScheme.copyWith( 
+    colorScheme: baseTheme.colorScheme.copyWith(
       primary: AppColors.accent,
       secondary: AppColors.accent,
       error: AppColors.error,
     ),
-
     textTheme: baseTheme.textTheme.copyWith(
       headlineLarge: AppTextStyles.headingXL,
       headlineMedium: AppTextStyles.headingL,
@@ -23,7 +22,6 @@ ThemeData _buildAppTheme() {
       bodyMedium: AppTextStyles.bodySmall,
       bodySmall: AppTextStyles.bodySmall,
     ),
-
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.accent,
@@ -34,21 +32,21 @@ ThemeData _buildAppTheme() {
         ),
       ),
     ),
-
     appBarTheme: AppBarThemeData(
       backgroundColor: AppColors.background,
       elevation: 0,
       centerTitle: true,
-      titleTextStyle: AppTextStyles.headingXL.copyWith(color: AppColors.primaryText),
+      titleTextStyle:
+          AppTextStyles.headingXL.copyWith(color: AppColors.primaryText),
       iconTheme: IconThemeData(color: AppColors.primaryText),
     ),
-
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.background,
-      selectedIconTheme: IconThemeData(color: AppColors.primaryText),
-      unselectedIconTheme: IconThemeData(color: AppColors.accent),
-      selectedLabelStyle: AppTextStyles.headingXL.copyWith(color: AppColors.primaryText),
-      unselectedLabelStyle: AppTextStyles.headingXL.copyWith(color: AppColors.accent)
-    ),
+        backgroundColor: AppColors.background,
+        selectedIconTheme: IconThemeData(color: AppColors.primaryText),
+        unselectedIconTheme: IconThemeData(color: AppColors.accent),
+        selectedLabelStyle:
+            AppTextStyles.headingXL.copyWith(color: AppColors.primaryText),
+        unselectedLabelStyle:
+            AppTextStyles.headingXL.copyWith(color: AppColors.accent)),
   );
 }

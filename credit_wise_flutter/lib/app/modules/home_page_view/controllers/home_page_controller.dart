@@ -7,7 +7,7 @@ import "../../home/views/home_view.dart";
 import "../../loan_offers/views/loan_offer_view.dart";
 
 class HomePageController extends GetxController {
-    var selectedIndex = 0.obs;
+  var selectedIndex = 0.obs;
 
   void onChange(int index) {
     selectedIndex.value = index;
@@ -19,7 +19,4 @@ class HomePageController extends GetxController {
     LoanOffersView(),
     AccountView()
   ];
-
-
-
 }

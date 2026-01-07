@@ -11,5 +11,4 @@ class OnboardingController extends GetxController {
     await prefs.setBool('is_first_time', false);
     Get.snackbar('Success', 'Onboarding completed!');
   }
-
 }

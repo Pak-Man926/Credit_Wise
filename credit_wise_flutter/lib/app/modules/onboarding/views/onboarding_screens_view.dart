@@ -101,7 +101,7 @@ class OnBoardingScreens extends GetView<OnboardingController> {
                 controller: pageController,
                 count: pages.length,
                 effect: WormEffect(
-                  activeDotColor:AppColors.accent,
+                  activeDotColor: AppColors.accent,
                   dotColor: const Color.fromARGB(255, 220, 226, 233),
                   dotHeight: 10,
                   dotWidth: 10,

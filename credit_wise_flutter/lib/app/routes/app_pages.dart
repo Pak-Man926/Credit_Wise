@@ -4,7 +4,6 @@ import 'package:credit_wise_flutter/app/modules/onboarding/bindings/onboarding_b
 import 'package:credit_wise_flutter/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:get/get.dart';
 
-
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/views/account_view.dart';
 import '../modules/auth/bindings/login_binding.dart';

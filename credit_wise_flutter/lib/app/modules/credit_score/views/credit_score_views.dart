@@ -40,57 +40,55 @@ class CreditScoreView extends GetView<CreditScoreController> {
             smallSpaceSize,
             const Text("720", style: AppTextStyles.headingXL),
             Center(
-              child: AspectRatio(
-                aspectRatio: 1.0,
-                 child: Text("To be checked")
-                // child: Container(
-                //     //color: Colors.blue,
-                //     margin: const EdgeInsets.all(20),
-                //     child: Obx(() {
-                //       return PieChart(
-                //         //duration: Duration(milliseconds: 2000),
-                //         PieChartData(
-                //           sections: [
-                //             PieChartSectionData(
-                //               titlePositionPercentageOffset: 0.5,
-                //               radius: controller.touchedIndex.value == 0 ? 60 : 50,
-                //               title: "Good",
-                //               titleStyle: AppTextStyles.body,
-                //               showTitle: true,
-                //               color: Colors.blue,
-                //               value: 80,
-                //             ),
-                //             PieChartSectionData(
-                //               titlePositionPercentageOffset: 0.5,
-                //               radius: controller.touchedIndex.value == 1 ? 60:40,
-                //               title: "Bad",
-                //               titleStyle: AppTextStyles.body,
-                //               showTitle: true,
-                //               color: Colors.red,
-                //               value: 20,
-                //             ),
-                //           ],
-                //           //centerSpaceRadius: 120,
-                //           sectionsSpace: 5,
-                //           startDegreeOffset: 120,
-                //           pieTouchData: PieTouchData(
-                //             touchCallback:
-                //                 (FlTouchEvent event, pieTouchResponse) {
-                //               if (!event.isInterestedForInteractions ||
-                //                   pieTouchResponse == null ||
-                //                   pieTouchResponse.touchedSection == null) {
-                //                 controller.touchedIndex.value = -1;
-                //                 return;
-                //               }
+              child: AspectRatio(aspectRatio: 1.0, child: Text("To be checked")
+                  // child: Container(
+                  //     //color: Colors.blue,
+                  //     margin: const EdgeInsets.all(20),
+                  //     child: Obx(() {
+                  //       return PieChart(
+                  //         //duration: Duration(milliseconds: 2000),
+                  //         PieChartData(
+                  //           sections: [
+                  //             PieChartSectionData(
+                  //               titlePositionPercentageOffset: 0.5,
+                  //               radius: controller.touchedIndex.value == 0 ? 60 : 50,
+                  //               title: "Good",
+                  //               titleStyle: AppTextStyles.body,
+                  //               showTitle: true,
+                  //               color: Colors.blue,
+                  //               value: 80,
+                  //             ),
+                  //             PieChartSectionData(
+                  //               titlePositionPercentageOffset: 0.5,
+                  //               radius: controller.touchedIndex.value == 1 ? 60:40,
+                  //               title: "Bad",
+                  //               titleStyle: AppTextStyles.body,
+                  //               showTitle: true,
+                  //               color: Colors.red,
+                  //               value: 20,
+                  //             ),
+                  //           ],
+                  //           //centerSpaceRadius: 120,
+                  //           sectionsSpace: 5,
+                  //           startDegreeOffset: 120,
+                  //           pieTouchData: PieTouchData(
+                  //             touchCallback:
+                  //                 (FlTouchEvent event, pieTouchResponse) {
+                  //               if (!event.isInterestedForInteractions ||
+                  //                   pieTouchResponse == null ||
+                  //                   pieTouchResponse.touchedSection == null) {
+                  //                 controller.touchedIndex.value = -1;
+                  //                 return;
+                  //               }
 
-                //               controller.touchedIndex.value = pieTouchResponse
-                //                   .touchedSection!.touchedSectionIndex;
-                //             },
-                //           ),
-                //         ),
-                //       );
-                //     })),
-              ),
+                  //               controller.touchedIndex.value = pieTouchResponse
+                  //                   .touchedSection!.touchedSectionIndex;
+                  //             },
+                  //           ),
+                  //         ),
+                  //       );
+                  //     })),
+                  ),
             ),
           ],
         ),
