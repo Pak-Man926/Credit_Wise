@@ -1,9 +1,9 @@
 # ML dependencies (one per line). Pin versions for reproducibility.
 # Note: TensorFlow 2.x includes Keras; omit standalone `keras` to avoid conflicts.
 
-pandas==1.5.3
-numpy==1.26.0
-scikit-learn==1.2.2
-matplotlib==3.8.0
-seaborn==0.12.2
-tensorflow==2.14.0
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+tensorflow
