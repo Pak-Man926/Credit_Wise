@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -22,7 +23,7 @@ class Endpoints extends _i1.EndpointDispatch {
           server,
           'auth',
           null,
-        )
+        ),
     };
     connectors['auth'] = _i1.EndpointConnector(
       name: 'auth',
@@ -67,20 +68,20 @@ class Endpoints extends _i1.EndpointDispatch {
               nullable: false,
             ),
           },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['auth'] as _i2.AuthEndpoint).registerUser(
-            session,
-            params['firstName'],
-            params['secondName'],
-            params['lastName'],
-            params['email'],
-            params['phoneNumber'],
-            params['gender'],
-            params['password'],
-          ),
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['auth'] as _i2.AuthEndpoint).registerUser(
+                session,
+                params['firstName'],
+                params['secondName'],
+                params['lastName'],
+                params['email'],
+                params['phoneNumber'],
+                params['gender'],
+                params['password'],
+              ),
         ),
         'loginUser': _i1.MethodConnector(
           name: 'loginUser',
@@ -96,15 +97,15 @@ class Endpoints extends _i1.EndpointDispatch {
               nullable: false,
             ),
           },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['auth'] as _i2.AuthEndpoint).loginUser(
-            session,
-            params['phoneNumber'],
-            params['password'],
-          ),
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['auth'] as _i2.AuthEndpoint).loginUser(
+                session,
+                params['phoneNumber'],
+                params['password'],
+              ),
         ),
       },
     );

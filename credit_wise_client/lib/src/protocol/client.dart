@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -29,61 +30,62 @@ class EndpointAuth extends _i1.EndpointRef {
     int phoneNumber,
     _i3.Gender gender,
     String password,
-  ) =>
-      caller.callServerEndpoint<bool>(
-        'auth',
-        'registerUser',
-        {
-          'firstName': firstName,
-          'secondName': secondName,
-          'lastName': lastName,
-          'email': email,
-          'phoneNumber': phoneNumber,
-          'gender': gender,
-          'password': password,
-        },
-      );
+  ) => caller.callServerEndpoint<bool>(
+    'auth',
+    'registerUser',
+    {
+      'firstName': firstName,
+      'secondName': secondName,
+      'lastName': lastName,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'gender': gender,
+      'password': password,
+    },
+  );
 
   _i2.Future<bool> loginUser(
     int phoneNumber,
     String password,
-  ) =>
-      caller.callServerEndpoint<bool>(
-        'auth',
-        'loginUser',
-        {
-          'phoneNumber': phoneNumber,
-          'password': password,
-        },
-      );
+  ) => caller.callServerEndpoint<bool>(
+    'auth',
+    'loginUser',
+    {
+      'phoneNumber': phoneNumber,
+      'password': password,
+    },
+  );
 }
 
 class Client extends _i1.ServerpodClientShared {
   Client(
     String host, {
     dynamic securityContext,
-    _i1.AuthenticationKeyManager? authenticationKeyManager,
+    @Deprecated(
+      'Use authKeyProvider instead. This will be removed in future releases.',
+    )
+    super.authenticationKeyManager,
     Duration? streamingConnectionTimeout,
     Duration? connectionTimeout,
     Function(
       _i1.MethodCallContext,
       Object,
       StackTrace,
-    )? onFailedCall,
+    )?
+    onFailedCall,
     Function(_i1.MethodCallContext)? onSucceededCall,
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
-          host,
-          _i4.Protocol(),
-          securityContext: securityContext,
-          authenticationKeyManager: authenticationKeyManager,
-          streamingConnectionTimeout: streamingConnectionTimeout,
-          connectionTimeout: connectionTimeout,
-          onFailedCall: onFailedCall,
-          onSucceededCall: onSucceededCall,
-          disconnectStreamsOnLostInternetConnection:
-              disconnectStreamsOnLostInternetConnection,
-        ) {
+         host,
+         _i4.Protocol(),
+         securityContext: securityContext,
+         streamingConnectionTimeout: streamingConnectionTimeout,
+         connectionTimeout: connectionTimeout,
+         onFailedCall: onFailedCall,
+         onSucceededCall: onSucceededCall,
+         disconnectStreamsOnLostInternetConnection:
+             disconnectStreamsOnLostInternetConnection,
+       ) {
     auth = EndpointAuth(this);
   }
 

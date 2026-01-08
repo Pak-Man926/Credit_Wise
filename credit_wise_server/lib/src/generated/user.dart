@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -46,9 +47,10 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       email: jsonSerialization['email'] as String,
       phoneNumber: jsonSerialization['phoneNumber'] as int,
       password: jsonSerialization['password'] as String,
-      gender: _i2.Gender.fromJson((jsonSerialization['gender'] as int)),
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      gender: _i2.Gender.fromJson((jsonSerialization['gender'] as String)),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -95,6 +97,7 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Users',
       if (id != null) 'id': id,
       'firstName': firstName,
       'secondName': secondName,
@@ -110,6 +113,7 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Users',
       if (id != null) 'id': id,
       'firstName': firstName,
       'secondName': secondName,
@@ -166,16 +170,16 @@ class _UsersImpl extends Users {
     required _i2.Gender gender,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          firstName: firstName,
-          secondName: secondName,
-          lastName: lastName,
-          email: email,
-          phoneNumber: phoneNumber,
-          password: password,
-          gender: gender,
-          createdAt: createdAt,
-        );
+         id: id,
+         firstName: firstName,
+         secondName: secondName,
+         lastName: lastName,
+         email: email,
+         phoneNumber: phoneNumber,
+         password: password,
+         gender: gender,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [Users]
   /// with some or all fields replaced by the given arguments.
@@ -206,8 +210,55 @@ class _UsersImpl extends Users {
   }
 }
 
+class UsersUpdateTable extends _i1.UpdateTable<UsersTable> {
+  UsersUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> firstName(String value) => _i1.ColumnValue(
+    table.firstName,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> secondName(String value) => _i1.ColumnValue(
+    table.secondName,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> lastName(String value) => _i1.ColumnValue(
+    table.lastName,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> email(String value) => _i1.ColumnValue(
+    table.email,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> phoneNumber(int value) => _i1.ColumnValue(
+    table.phoneNumber,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> password(String value) => _i1.ColumnValue(
+    table.password,
+    value,
+  );
+
+  _i1.ColumnValue<_i2.Gender, _i2.Gender> gender(_i2.Gender value) =>
+      _i1.ColumnValue(
+        table.gender,
+        value,
+      );
+
+  _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
+      _i1.ColumnValue(
+        table.createdAt,
+        value,
+      );
+}
+
 class UsersTable extends _i1.Table<int?> {
   UsersTable({super.tableRelation}) : super(tableName: 'auth_user') {
+    updateTable = UsersUpdateTable(this);
     firstName = _i1.ColumnString(
       'firstName',
       this,
@@ -235,13 +286,15 @@ class UsersTable extends _i1.Table<int?> {
     gender = _i1.ColumnEnum(
       'gender',
       this,
-      _i1.EnumSerialization.byIndex,
+      _i1.EnumSerialization.byName,
     );
     createdAt = _i1.ColumnDateTime(
       'createdAt',
       this,
     );
   }
+
+  late final UsersUpdateTable updateTable;
 
   late final _i1.ColumnString firstName;
 
@@ -261,16 +314,16 @@ class UsersTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        firstName,
-        secondName,
-        lastName,
-        email,
-        phoneNumber,
-        password,
-        gender,
-        createdAt,
-      ];
+    id,
+    firstName,
+    secondName,
+    lastName,
+    email,
+    phoneNumber,
+    password,
+    gender,
+    createdAt,
+  ];
 }
 
 class UsersInclude extends _i1.IncludeObject {
@@ -458,6 +511,46 @@ class UsersRepository {
     return session.db.updateRow<Users>(
       row,
       columns: columns?.call(Users.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Users] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Users?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<UsersUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Users>(
+      id,
+      columnValues: columnValues(Users.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Users]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Users>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<UsersUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<UsersTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<UsersTable>? orderBy,
+    _i1.OrderByListBuilder<UsersTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Users>(
+      columnValues: columnValues(Users.t.updateTable),
+      where: where(Users.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Users.t),
+      orderByList: orderByList?.call(Users.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }
