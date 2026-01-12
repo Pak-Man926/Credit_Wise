@@ -1,0 +1,40 @@
+{
+  "created_at": "2026-01-12T12:55:00.477970Z",
+  "credit_score": {
+    "artifact": "credit_score_pipeline_v1.joblib",
+    "features": [
+      "RevolvingUtilizationOfUnsecuredLines",
+      "age",
+      "NumberOfTime30-59DaysPastDueNotWorse",
+      "DebtRatio",
+      "MonthlyIncome",
+      "NumberOfOpenCreditLinesAndLoans",
+      "NumberOfTimes90DaysLate",
+      "NumberRealEstateLoansOrLines",
+      "NumberOfTime60-89DaysPastDueNotWorse",
+      "NumberOfDependents"
+    ],
+    "target": "SeriousDlqin2yrs",
+    "notes": "Predicts default risk probability. Map to simulated score/band in backend."
+  },
+  "loan_approval": {
+    "artifact": "loan_approval_pipeline_v1.joblib",
+    "numeric_features": [
+      "ApplicantIncome",
+      "CoapplicantIncome",
+      "LoanAmount",
+      "Loan_Amount_Term",
+      "Credit_History"
+    ],
+    "categorical_features": [
+      "Gender",
+      "Married",
+      "Dependents",
+      "Education",
+      "Self_Employed",
+      "Property_Area"
+    ],
+    "target": "Loan_Status(Y=1)",
+    "notes": "Predicts approval likelihood for loan request."
+  }
+}
