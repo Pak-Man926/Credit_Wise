@@ -1,0 +1,19 @@
+{
+  "created_at": "2026-01-12T15:52:40.451728Z",
+  "artifact": "credit_score_pipeline_v1.joblib",
+  "target": "SeriousDlqin2yrs",
+  "features": [
+    "RevolvingUtilizationOfUnsecuredLines",
+    "age",
+    "NumberOfTime30-59DaysPastDueNotWorse",
+    "DebtRatio",
+    "MonthlyIncome",
+    "NumberOfOpenCreditLinesAndLoans",
+    "NumberOfTimes90DaysLate",
+    "NumberRealEstateLoansOrLines",
+    "NumberOfTime60-89DaysPastDueNotWorse",
+    "NumberOfDependents"
+  ],
+  "output_meaning": "default_risk_probability",
+  "note": "This is a risk model; map probability to a simulated score/band in your backend."
+}
