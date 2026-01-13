@@ -47,6 +47,11 @@ class AnyPayload(BaseModel):
     # Keep it flexible for now; enforce strict schema later in Serverpod.
     data: Dict[str, Any]
 
+@app.get("/")
+def root():
+    return {"status": "ok", "service": "CreditWise ML Service"}
+
+
 @app.post("/credit-score")
 def credit_score(payload: AnyPayload):
     try:
