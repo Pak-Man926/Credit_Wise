@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Train loan approval model (Kaggle loan prediction style dataset).
+Train loan approval model.
 
 Input: loan_prediction.csv
 Output: joblib pipeline containing preprocessing + model.
