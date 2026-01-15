@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import "package:logger/logger.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   // Example state management using Rx (Reactive variables)
@@ -23,6 +24,8 @@ class LoginController extends GetxController {
   }
 
   Future<void> loginUser() async {
+    final prefs = await SharedPreferences.getInstance();
+
     logger.i("Preparing to log in user...");
 
     final phoneText = phoneNumberController.text.trim();
@@ -44,7 +47,6 @@ class LoginController extends GetxController {
     logger.d("Logging in User....");
 
     logger.i("Phone: $phoneText \n Password: $passwordText");
-    
 
     try {
       final result = await client.auth.loginUser(
@@ -58,6 +60,9 @@ class LoginController extends GetxController {
 
       if (result == true) {
         Get.snackbar("Login Successful", "Welcome back!");
+
+        await prefs.setInt("phoneNumber", phoneNumber);
+
         Get.offAllNamed(Routes.HOME_VIEW);
 
         logger.d("User logged in successfully.");
