@@ -3,11 +3,13 @@ import 'package:credit_wise_flutter/app/routes/app_routes.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import "package:logger/logger.dart";
 
 class LoginController extends GetxController {
   // Example state management using Rx (Reactive variables)
   //var isLoggedIn = false.obs;
   late final Client client;
+  var logger = Logger();
 
   final phoneNumberController = TextEditingController();
   final passwordController = TextEditingController();
@@ -15,27 +17,34 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    client = Client("http://10.0.2.2:8080/")
+    client = Client("http://localhost:8080/")
       ..connectivityMonitor = FlutterConnectivityMonitor();
     // Load stored login data if available
   }
 
   Future<void> loginUser() async {
+    logger.i("Preparing to log in user...");
+
     final phoneText = phoneNumberController.text.trim();
     final passwordText = passwordController.text.trim();
 
     if (phoneText.isEmpty || passwordText.isEmpty) {
       Get.snackbar("Error", "Please fill in all the fields!");
+      logger.w("Login failed: Missing phone number or password.");
       return;
     }
 
     final phoneNumber = int.tryParse(phoneText);
     if (phoneNumber == null) {
       Get.snackbar("Error", "Invalid phone number");
+      logger.w("Login failed: Phone number is not a valid integer.");
       return;
     }
 
-    debugPrint("Logging in User....");
+    logger.d("Logging in User....");
+
+    logger.i("Phone: $phoneText \n Password: $passwordText");
+    
 
     try {
       final result = await client.auth.loginUser(
@@ -43,18 +52,22 @@ class LoginController extends GetxController {
         passwordText,
       );
 
-      debugPrint("Login result: $result");
+      logger.d("Login result: $result");
 
-      debugPrint("Login details: $phoneNumber, \n $passwordText");
+      //debugPrint("Login details: $phoneNumber, \n $passwordText");
 
       if (result == true) {
         Get.snackbar("Login Successful", "Welcome back!");
         Get.offAllNamed(Routes.HOME_VIEW);
+
+        logger.d("User logged in successfully.");
       } else {
         Get.snackbar("Error", "Invalid Credentials");
+
+        logger.d("Login failed: Invalid credentials.");
       }
     } catch (e) {
-      debugPrint("Login error: $e");
+      logger.e("Login error", error: "$e");
       Get.snackbar("Error", "An error occurred during login");
     }
   }
@@ -64,6 +77,8 @@ class LoginController extends GetxController {
     // await StorageService.clearLoginData();
 
     Get.snackbar("Thank you!", "GoodBye!", snackPosition: SnackPosition.BOTTOM);
+
+    logger.i("Logging out user...");
 
     Get.offAllNamed(Routes.LOGIN);
   }

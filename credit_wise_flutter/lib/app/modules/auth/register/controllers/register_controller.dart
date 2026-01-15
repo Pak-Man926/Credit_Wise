@@ -1,12 +1,14 @@
 import 'package:credit_wise_client/credit_wise_client.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart'
     show FlutterConnectivityMonitor;
 import '../../../../routes/app_routes.dart';
 
 class RegistrationController extends GetxController {
   late final Client client;
+  var logger = Logger();
 
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -37,21 +39,15 @@ class RegistrationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    client = Client("http://10.0.2.2:8080/")
+    client = Client('http://localhost:8080/')
       ..connectivityMonitor = FlutterConnectivityMonitor();
   }
 
   Future<void> registerUser() async {
-    debugPrint("Trying to registering User.....");
+    logger.d("Trying to registering User.....");
 
-    debugPrint("First name: '${firstNameController.text}'");
-    debugPrint("Last name: '${lastNameController.text}'");
-    debugPrint("Email: '${emailController.text}'");
-    debugPrint("Phone: '${phoneNumberController.text}'");
-    debugPrint("Password: '${passwordController.text}'");
-    debugPrint("Confirm: '${confirmPasswordController.text}'");
-    debugPrint("Gender raw: '${selectedGender.value}'");
-    debugPrint("Gender enum: $genderEnum");
+    logger.i("First name: '${firstNameController.text}' \n Last name: '${lastNameController.text}' \n Email: '${emailController.text}' \n Phone: '${phoneNumberController.text}' \n Password: '${passwordController.text}' \n Confirm: '${confirmPasswordController.text}' \n Gender raw: '${selectedGender.value}' \n Gender enum: $genderEnum");
+  
 
     final phoneText = phoneNumberController.text.trim();
 
@@ -63,20 +59,27 @@ class RegistrationController extends GetxController {
         confirmPasswordController.text.isEmpty ||
         genderEnum == null) {
       Get.snackbar("Error", "Please fill in all fields");
+
+      logger.w("Registration failed: Missing required fields.");
+
       return;
     }
 
     if (passwordController.text != confirmPasswordController.text) {
       Get.snackbar("Error", "Passwords do not match");
+
+      logger.w("Registration failed: Passwords do not match.");
       return;
     }
 
     final phoneNumber = int.tryParse(phoneText);
     if (phoneNumber == null) {
       Get.snackbar("Error", "Invalid phone number");
+      logger.w("Registration failed: Invalid phone number!");
       return;
     }
 
+    logger.d("All validations passed. Proceeding with registration...");
     try {
       final success = await client.auth.registerUser(
         firstNameController.text.trim(),
@@ -90,12 +93,14 @@ class RegistrationController extends GetxController {
 
       if (success) {
         Get.snackbar("Success", "Account created successfully");
+        logger.d("User registered successfully.");
         Get.offAllNamed(Routes.LOGIN);
       } else {
         Get.snackbar("Error", "User already exists");
       }
     } catch (e) {
-      debugPrint("Registration error: $e");
+      logger.e("Registration error:", error: "$e");
+
       Get.snackbar("Error", "Registration failed");
     }
   }

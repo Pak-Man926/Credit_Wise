@@ -1,16 +1,18 @@
 import 'package:get/get.dart';
 import '../../../routes/app_routes.dart';
+import "package:logger/logger.dart";
 
 class AccountController extends GetxController {
-  var userEmail = 'david@example.com'.obs;
+  var logger = Logger();
 
-  void logout() {
-    // 1. Perform backend logout
-    Get.log('Logging out user...');
+  Future<void> logout() async {
+    // loggedInUser.value = null;
+    // await StorageService.clearLoginData();
 
-    // 2. Clear local storage (auth tokens, etc.)
+    Get.snackbar("Thank you!", "GoodBye!", snackPosition: SnackPosition.BOTTOM);
 
-    // 3. Navigate back to the login page (and clear history)
+    logger.i("Logging out user...");
+
     Get.offAllNamed(Routes.LOGIN);
   }
 }
