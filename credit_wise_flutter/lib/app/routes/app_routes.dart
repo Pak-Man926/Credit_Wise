@@ -14,4 +14,9 @@ abstract class Routes {
   static const CREDIT_SCORE = '/credit-score'; // NEW
   static const LOAN_OFFERS = '/loan-offers'; // NEW
   static const ACCOUNT = '/account'; // NEW (e.g., User Profile, Settings)
+  static const PREFERENCES = '/account/preferences';
+  static const PERSONAL = '/account/personal';
+  static const SUPPORT = '/account/support';
+  static const NOTIFICATIONS = '/account/notifications';
+  static const PRIVACY = '/account/privacy';
 }

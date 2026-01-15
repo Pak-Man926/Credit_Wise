@@ -1,6 +1,7 @@
 import 'package:credit_wise_flutter/app/data/widgets/button_widget.dart';
 import 'package:credit_wise_flutter/app/data/widgets/profile_image_widget.dart';
 import 'package:credit_wise_flutter/app/data/widgets/profile_selection_widget.dart';
+import 'package:credit_wise_flutter/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../theme/app_text_styles.dart';
@@ -38,13 +39,14 @@ class AccountView extends GetView<AccountController> {
             ProfileSelectionWidget(
               leadingIcon: Icons.person_outline_outlined,
               accountSelection: "Personal",
-              onPressed: () {},
+              onPressed: () => Get.toNamed(Routes.PERSONAL),
             ),
             mediumSpaceSize,
             ProfileSelectionWidget(
-                leadingIcon: Icons.star_border_outlined,
-                accountSelection: "Preferences",
-                onPressed: () {}),
+              leadingIcon: Icons.star_border_outlined,
+              accountSelection: "Preferences",
+              onPressed: () => Get.toNamed(Routes.PREFERENCES),
+            ),
             mediumSpaceSize,
             ProfileSelectionWidget(
                 leadingIcon: Icons.insert_link_outlined,
@@ -54,17 +56,17 @@ class AccountView extends GetView<AccountController> {
             ProfileSelectionWidget(
                 accountSelection: "Support",
                 leadingIcon: Icons.contact_support_outlined,
-                onPressed: () {}),
+                onPressed: () => Get.toNamed(Routes.SUPPORT)),
             mediumSpaceSize,
             ProfileSelectionWidget(
                 leadingIcon: Icons.security_outlined,
                 accountSelection: "Privacy & Security",
-                onPressed: () {}),
+                onPressed: () => Get.toNamed(Routes.SUPPORT)),
             mediumSpaceSize,
             ProfileSelectionWidget(
                 accountSelection: "Notifications",
                 leadingIcon: Icons.notifications_outlined,
-                onPressed: () {}),
+                onPressed: () => Get.toNamed(Routes.NOTIFICATIONS)),
             largeSpaceSize,
             CustomButton(
               text: "Sign Out",
