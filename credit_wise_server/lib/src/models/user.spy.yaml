@@ -7,5 +7,5 @@ fields:
     email: String
     phoneNumber: int
     password: String
-    gender: Gender
+    gender: String
     createdAt: DateTime
