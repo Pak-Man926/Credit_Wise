@@ -19,4 +19,6 @@ abstract class Routes {
   static const SUPPORT = '/account/support';
   static const NOTIFICATIONS = '/account/notifications';
   static const PRIVACY = '/account/privacy';
+  static const CREDIT_PREFERENCE = '/account/preferences/credit-preference';
+  static const LOAN_PREFERENCE = '/account/preferences/loan-preference';
 }

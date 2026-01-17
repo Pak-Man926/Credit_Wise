@@ -3,12 +3,16 @@ import 'package:get/get.dart';
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/notifications/bindings/notifications_binding.dart';
 import '../modules/account/notifications/views/notifications_view.dart';
-import '../modules/account/profile/bindings/profile_binding.dart';
-import '../modules/account/profile/views/profile_view.dart';
 import '../modules/account/preferences/bindings/preferences_binding.dart';
+import '../modules/account/preferences/credit_preference/bindings/credit_preference_binding.dart';
+import '../modules/account/preferences/credit_preference/views/credit_preference_view.dart';
+import '../modules/account/preferences/loan_preference/bindings/loan_preference_binding.dart';
+import '../modules/account/preferences/loan_preference/views/loan_preference_view.dart';
 import '../modules/account/preferences/views/preferences_view.dart';
 import '../modules/account/privacy/bindings/privacy_binding.dart';
 import '../modules/account/privacy/views/privacy_view.dart';
+import '../modules/account/profile/bindings/profile_binding.dart';
+import '../modules/account/profile/views/profile_view.dart';
 import '../modules/account/support/bindings/support_binding.dart';
 import '../modules/account/support/views/support_view.dart';
 import '../modules/account/views/account_view.dart';
@@ -103,6 +107,16 @@ class AppPages {
       name: Routes.PRIVACY,
       page: () => const PrivacyView(),
       binding: PrivacyBinding(),
+    ),
+    GetPage(
+      name: Routes.CREDIT_PREFERENCE,
+      page: () => const CreditPreferenceView(),
+      binding: CreditPreferenceBinding(),
+    ),
+    GetPage(
+      name: Routes.LOAN_PREFERENCE,
+      page: () => const LoanPreferenceView(),
+      binding: LoanPreferenceBinding(),
     ),
   ];
 }
