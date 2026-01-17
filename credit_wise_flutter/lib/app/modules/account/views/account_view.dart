@@ -38,8 +38,8 @@ class AccountView extends GetView<AccountController> {
             smallSpaceSize,
             ProfileSelectionWidget(
               leadingIcon: Icons.person_outline_outlined,
-              accountSelection: "Personal",
-              onPressed: () => Get.toNamed(Routes.PERSONAL),
+              accountSelection: "Profile & Finances",
+              onPressed: () => Get.toNamed(Routes.PROFILE),
             ),
             mediumSpaceSize,
             ProfileSelectionWidget(
