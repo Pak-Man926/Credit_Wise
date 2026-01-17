@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/notifications/bindings/notifications_binding.dart';
 import '../modules/account/notifications/views/notifications_view.dart';
-import '../modules/account/personal/bindings/personal_binding.dart';
-import '../modules/account/personal/views/personal_view.dart';
+import '../modules/account/profile/bindings/profile_binding.dart';
+import '../modules/account/profile/views/profile_view.dart';
 import '../modules/account/preferences/bindings/preferences_binding.dart';
 import '../modules/account/preferences/views/preferences_view.dart';
 import '../modules/account/privacy/bindings/privacy_binding.dart';
@@ -85,9 +85,9 @@ class AppPages {
       binding: PreferencesBinding(),
     ),
     GetPage(
-      name: Routes.PERSONAL,
-      page: () => const PersonalView(),
-      binding: PersonalBinding(),
+      name: Routes.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
     GetPage(
       name: Routes.SUPPORT,
