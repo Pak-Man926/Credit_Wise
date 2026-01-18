@@ -15,7 +15,8 @@ class RegistrationView extends GetView<RegistrationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Account'),
+        title: const Text('Create Account', style: AppTextStyles.headingL),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -64,36 +65,40 @@ class RegistrationView extends GetView<RegistrationController> {
 
               /// Gender Dropdown
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
                 child: Container(
                   height: 60,
                   decoration: BoxDecoration(
                     color: AppColors.inputBackground,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Obx(() => DropdownButtonFormField<String>(
-                        value: controller.selectedGender.value,
-                        items: controller.genderOptions
-                            .map(
-                              (option) => DropdownMenuItem(
-                                value: option,
-                                child: Text(option),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: controller.updateGender,
-                        hint: Text(
-                          "Select your gender",
-                          style: AppTextStyles.inputPlaceholder,
-                        ),
-                        dropdownColor: AppColors.inputBackground,
-                        iconEnabledColor: AppColors.accent,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(16),
-                        ),
-                      )),
+                  child: Obx(
+                    () => DropdownButtonFormField<String>(
+                      value: controller.selectedGender.value,
+                      items: controller.genderOptions
+                          .map(
+                            (option) => DropdownMenuItem(
+                              value: option,
+                              child: Text(option),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: controller.updateGender,
+                      hint: Text(
+                        "Select your gender",
+                        style: AppTextStyles.inputPlaceholder,
+                      ),
+                      dropdownColor: AppColors.inputBackground,
+                      iconEnabledColor: AppColors.accent,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(16),
+                      ),
+                    ),
+                  ),
                 ),
               ),
 
