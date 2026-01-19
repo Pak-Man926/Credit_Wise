@@ -21,23 +21,30 @@ class DropDownWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
-      value: value == "" ? null : value, // Handle empty state
-      iconEnabledColor: selectedColor,
-      style: AppTextStyles.bodySmall.copyWith(color: selectedColor),
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: AppTextStyles.inputPlaceholder,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12.0,
-          vertical: 16.0,
-        ),
+    return Container(
+      //height: 80,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: AppColors.inputBackground),
       ),
-      items: items.map((String item) {
-        return DropdownMenuItem<String>(value: item, child: Text(item));
-      }).toList(),
-      onChanged: onChanged,
+      child: DropdownButtonFormField<String>(
+        value: value == "" ? null : value, // Handle empty state
+        iconEnabledColor: selectedColor,
+        style: AppTextStyles.bodySmall.copyWith(color: selectedColor),
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: AppTextStyles.inputPlaceholder,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12.0,
+            vertical: 16.0,
+          ),
+        ),
+        items: items.map((String item) {
+          return DropdownMenuItem<String>(value: item, child: Text(item));
+        }).toList(),
+        onChanged: onChanged,
+      ),
     );
   }
 }
