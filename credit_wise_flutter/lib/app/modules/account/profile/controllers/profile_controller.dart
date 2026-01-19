@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  //TODO: Implement PersonalController
+  var selection = "".obs;
 
-  final count = 0.obs;
+  void selectedOption(String? value)
+  {
+    selection.value = value ?? "";
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +23,4 @@ class ProfileController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }

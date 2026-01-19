@@ -18,70 +18,95 @@ class ProfileView extends GetView<ProfileController> {
         title: const Text('Profile & Finances', style: AppTextStyles.headingL),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(12.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text("Age", style: AppTextStyles.body),
-          smallSpaceSize,
-          InputFieldWidget(hintText: "Enter your age"),
-          smallSpaceSize,
-          const Text("Number of Dependants", style: AppTextStyles.body),
-          smallSpaceSize,
-          InputFieldWidget(hintText: "E.g 2"),
-          smallSpaceSize,
-          const Text("Monthly Income", style: AppTextStyles.body),
-          smallSpaceSize,
-          InputFieldWidget(hintText: "E.g 30000"),
-          smallSpaceSize,
-          const Text(
-              "How much do you pay per month for existing loans/credit? \n (Includes loan repayments, credit cards, overdrafts)",
-              style: AppTextStyles.body),
-          smallSpaceSize,
-          InputFieldWidget(hintText: "If none, enter 0."),
-          smallSpaceSize,
-          const Text("Do you have a second income contributor(e.g Spouse)?",
-              style: AppTextStyles.body),
-          smallSpaceSize,
-          Row(
-              //mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                    width: 150,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: AppColors.inputBackground,
-                      border: Border.all(color: AppColors.inputBackground),
-                      borderRadius: BorderRadius.circular(8.0),
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Age", style: AppTextStyles.body),
+              smallSpaceSize,
+              InputFieldWidget(hintText: "Enter your age"),
+              smallSpaceSize,
+              const Text("Number of Dependants", style: AppTextStyles.body),
+              smallSpaceSize,
+              InputFieldWidget(hintText: "E.g 2"),
+              smallSpaceSize,
+              const Text("Monthly Income", style: AppTextStyles.body),
+              smallSpaceSize,
+              InputFieldWidget(hintText: "E.g 30000"),
+              smallSpaceSize,
+              const Text(
+                "How much do you pay per month for existing loans/credit? \n (Includes loan repayments, credit cards, overdrafts)",
+                style: AppTextStyles.body,
+              ),
+              smallSpaceSize,
+              InputFieldWidget(hintText: "If none, enter 0."),
+              smallSpaceSize,
+              const Text(
+                "Do you have a second income contributor(e.g Spouse)?",
+                style: AppTextStyles.body,
+              ),
+              smallSpaceSize,
+              Row(
+                children: [
+                  // --- YES OPTION ---
+                  Expanded(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: AppColors.inputBackground,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Obx(
+                        () => RadioListTile<String>(
+                          title: const Text("Yes", style: AppTextStyles.body),
+                          value: "Yes", // Unique value for this tile
+                          groupValue: controller.selection.value, // Current state
+                          onChanged: (value) => controller.selectedOption(value),
+                          activeColor: AppColors.primaryText,
+                        ),
+                      ),
                     ),
-                    child: RadioListTile(
-                      value: "Yes",
-                      title: const Text("Yes", style: AppTextStyles.body),
-                      //selected: true,
-                      selectedTileColor: AppColors.primaryText,
-                    )),
-                SizedBox(
-                  width: 5,
-                ),
-                Container(
-                    width: 150,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: AppColors.inputBackground,
-                      border: Border.all(color: AppColors.inputBackground),
-                      borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  const SizedBox(width: 10),
+                  // --- NO OPTION ---
+                  Expanded(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: AppColors.inputBackground,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Obx(
+                        () => RadioListTile<String>(
+                          title: const Text("No", style: AppTextStyles.body),
+                          value: "No", // Unique value for this tile
+                          groupValue: controller.selection.value, // Current state
+                          onChanged: (value) => controller.selectedOption(value),
+                          activeColor: AppColors.primaryText,
+                        ),
+                      ),
                     ),
-                    child: RadioListTile(
-                      value: "No",
-                      title: const Text("No", style: AppTextStyles.body),
-                      toggleable: true,
-                    )),
-              ]),
-          mediumSpaceSize,
-          CustomButton.primary(
-            text: "Submit",
-            onPressed: () {},
+                  ),
+                ],
+              ),
+              smallSpaceSize,
+              Obx(
+                () => controller.selection.value == "Yes"
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child:
+                            InputFieldWidget(hintText: "Kindly input your contributor's income e.g 30,000`",), // This appears only if "Yes" is picked
+                      )
+                    : const SizedBox.shrink(), // Returns nothing if "No" or empty
+              ),
+              mediumSpaceSize,
+              CustomButton.primary(text: "Submit", onPressed: () {}),
+            ],
           ),
-        ]),
+        ),
       ),
     );
   }
