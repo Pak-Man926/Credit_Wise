@@ -1,0 +1,8 @@
+class: LoanPreference
+table: loan_preference
+fields:
+    userId: int, relation(parent = auth_user)
+    loanAmount: double
+    repaymentPeriod: int
+    repaymentHistory: double
+    employmentType: String

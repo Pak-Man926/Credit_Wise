@@ -5,6 +5,5 @@ fields:
     age: int
     dependants: int
     monthlyIncome: double
-    debt_ratio: double
-    contributor_income: double
-    
+    debtRatio: double
+    contributorIncome: double
