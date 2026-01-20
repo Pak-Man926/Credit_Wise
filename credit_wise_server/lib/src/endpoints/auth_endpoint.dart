@@ -2,7 +2,6 @@ import "dart:async";
 
 import "package:bcrypt/bcrypt.dart";
 import "package:serverpod/serverpod.dart";
-import "../generated/gender.dart";
 import "../generated/user.dart";
 
 class AuthEndpoint extends Endpoint {
@@ -13,7 +12,7 @@ class AuthEndpoint extends Endpoint {
     String lastName,
     String email,
     int phoneNumber,
-    Gender gender,
+    String gender,
     String password,
   ) async {
     var existingUser = await Users.db.findFirstRow(
