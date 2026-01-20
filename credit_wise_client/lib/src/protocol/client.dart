@@ -12,8 +12,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:credit_wise_client/src/protocol/gender.dart' as _i3;
-import 'protocol.dart' as _i4;
+import 'protocol.dart' as _i3;
 
 /// {@category Endpoint}
 class EndpointAuth extends _i1.EndpointRef {
@@ -28,7 +27,7 @@ class EndpointAuth extends _i1.EndpointRef {
     String lastName,
     String email,
     int phoneNumber,
-    _i3.Gender gender,
+    String gender,
     String password,
   ) => caller.callServerEndpoint<bool>(
     'auth',
@@ -77,7 +76,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
          host,
-         _i4.Protocol(),
+         _i3.Protocol(),
          securityContext: securityContext,
          streamingConnectionTimeout: streamingConnectionTimeout,
          connectionTimeout: connectionTimeout,

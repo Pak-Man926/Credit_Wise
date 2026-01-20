@@ -12,9 +12,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'gender.dart' as _i3;
-import 'user.dart' as _i4;
-export 'gender.dart';
+import 'credit_preference.dart' as _i3;
+import 'loan_preference.dart' as _i4;
+import 'profile_data.dart' as _i5;
+import 'user.dart' as _i6;
+export 'credit_preference.dart';
+export 'loan_preference.dart';
+export 'profile_data.dart';
 export 'user.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
@@ -78,7 +82,7 @@ class Protocol extends _i1.SerializationManagerServer {
           name: 'gender',
           columnType: _i2.ColumnType.text,
           isNullable: false,
-          dartType: 'protocol:Gender',
+          dartType: 'String',
         ),
         _i2.ColumnDefinition(
           name: 'createdAt',
@@ -91,6 +95,238 @@ class Protocol extends _i1.SerializationManagerServer {
       indexes: [
         _i2.IndexDefinition(
           indexName: 'auth_user_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            ),
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        ),
+        _i2.IndexDefinition(
+          indexName: 'phone_number_unique',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'phoneNumber',
+            ),
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: false,
+        ),
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'credit_preference',
+      dartName: 'CreditPreference',
+      schema: 'public',
+      module: 'credit_wise',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'credit_preference_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'userId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'creditUsage',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'latePaymentHistory',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'openCreditLines',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'credit_preference_fk_0',
+          columns: ['userId'],
+          referenceTable: 'auth_user',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'credit_preference_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            ),
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        ),
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'loan_preference',
+      dartName: 'LoanPreference',
+      schema: 'public',
+      module: 'credit_wise',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'loan_preference_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'userId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'loanAmount',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'repaymentPeriod',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'repaymentHistory',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'employmentType',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+      ],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'loan_preference_fk_0',
+          columns: ['userId'],
+          referenceTable: 'auth_user',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'loan_preference_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            ),
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        ),
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'profile_data',
+      dartName: 'ProfileData',
+      schema: 'public',
+      module: 'credit_wise',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'profile_data_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'userId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'age',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'dependants',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'monthlyIncome',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'debtRatio',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'contributorIncome',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+      ],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'profile_data_fk_0',
+          columns: ['userId'],
+          referenceTable: 'auth_user',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'profile_data_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -135,17 +371,29 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
 
-    if (t == _i3.Gender) {
-      return _i3.Gender.fromJson(data) as T;
+    if (t == _i3.CreditPreference) {
+      return _i3.CreditPreference.fromJson(data) as T;
     }
-    if (t == _i4.Users) {
-      return _i4.Users.fromJson(data) as T;
+    if (t == _i4.LoanPreference) {
+      return _i4.LoanPreference.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i3.Gender?>()) {
-      return (data != null ? _i3.Gender.fromJson(data) : null) as T;
+    if (t == _i5.ProfileData) {
+      return _i5.ProfileData.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i4.Users?>()) {
-      return (data != null ? _i4.Users.fromJson(data) : null) as T;
+    if (t == _i6.Users) {
+      return _i6.Users.fromJson(data) as T;
+    }
+    if (t == _i1.getType<_i3.CreditPreference?>()) {
+      return (data != null ? _i3.CreditPreference.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i4.LoanPreference?>()) {
+      return (data != null ? _i4.LoanPreference.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i5.ProfileData?>()) {
+      return (data != null ? _i5.ProfileData.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i6.Users?>()) {
+      return (data != null ? _i6.Users.fromJson(data) : null) as T;
     }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
@@ -155,8 +403,10 @@ class Protocol extends _i1.SerializationManagerServer {
 
   static String? getClassNameForType(Type type) {
     return switch (type) {
-      _i3.Gender => 'Gender',
-      _i4.Users => 'Users',
+      _i3.CreditPreference => 'CreditPreference',
+      _i4.LoanPreference => 'LoanPreference',
+      _i5.ProfileData => 'ProfileData',
+      _i6.Users => 'Users',
       _ => null,
     };
   }
@@ -171,9 +421,13 @@ class Protocol extends _i1.SerializationManagerServer {
     }
 
     switch (data) {
-      case _i3.Gender():
-        return 'Gender';
-      case _i4.Users():
+      case _i3.CreditPreference():
+        return 'CreditPreference';
+      case _i4.LoanPreference():
+        return 'LoanPreference';
+      case _i5.ProfileData():
+        return 'ProfileData';
+      case _i6.Users():
         return 'Users';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -189,11 +443,17 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
-    if (dataClassName == 'Gender') {
-      return deserialize<_i3.Gender>(data['data']);
+    if (dataClassName == 'CreditPreference') {
+      return deserialize<_i3.CreditPreference>(data['data']);
+    }
+    if (dataClassName == 'LoanPreference') {
+      return deserialize<_i4.LoanPreference>(data['data']);
+    }
+    if (dataClassName == 'ProfileData') {
+      return deserialize<_i5.ProfileData>(data['data']);
     }
     if (dataClassName == 'Users') {
-      return deserialize<_i4.Users>(data['data']);
+      return deserialize<_i6.Users>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -211,8 +471,14 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i4.Users:
-        return _i4.Users.t;
+      case _i3.CreditPreference:
+        return _i3.CreditPreference.t;
+      case _i4.LoanPreference:
+        return _i4.LoanPreference.t;
+      case _i5.ProfileData:
+        return _i5.ProfileData.t;
+      case _i6.Users:
+        return _i6.Users.t;
     }
     return null;
   }

@@ -11,9 +11,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'gender.dart' as _i2;
-import 'user.dart' as _i3;
-export 'gender.dart';
+import 'credit_preference.dart' as _i2;
+import 'loan_preference.dart' as _i3;
+import 'profile_data.dart' as _i4;
+import 'user.dart' as _i5;
+export 'credit_preference.dart';
+export 'loan_preference.dart';
+export 'profile_data.dart';
 export 'user.dart';
 export 'client.dart';
 
@@ -51,25 +55,39 @@ class Protocol extends _i1.SerializationManager {
       }
     }
 
-    if (t == _i2.Gender) {
-      return _i2.Gender.fromJson(data) as T;
+    if (t == _i2.CreditPreference) {
+      return _i2.CreditPreference.fromJson(data) as T;
     }
-    if (t == _i3.Users) {
-      return _i3.Users.fromJson(data) as T;
+    if (t == _i3.LoanPreference) {
+      return _i3.LoanPreference.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i2.Gender?>()) {
-      return (data != null ? _i2.Gender.fromJson(data) : null) as T;
+    if (t == _i4.ProfileData) {
+      return _i4.ProfileData.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i3.Users?>()) {
-      return (data != null ? _i3.Users.fromJson(data) : null) as T;
+    if (t == _i5.Users) {
+      return _i5.Users.fromJson(data) as T;
+    }
+    if (t == _i1.getType<_i2.CreditPreference?>()) {
+      return (data != null ? _i2.CreditPreference.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i3.LoanPreference?>()) {
+      return (data != null ? _i3.LoanPreference.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i4.ProfileData?>()) {
+      return (data != null ? _i4.ProfileData.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i5.Users?>()) {
+      return (data != null ? _i5.Users.fromJson(data) : null) as T;
     }
     return super.deserialize<T>(data, t);
   }
 
   static String? getClassNameForType(Type type) {
     return switch (type) {
-      _i2.Gender => 'Gender',
-      _i3.Users => 'Users',
+      _i2.CreditPreference => 'CreditPreference',
+      _i3.LoanPreference => 'LoanPreference',
+      _i4.ProfileData => 'ProfileData',
+      _i5.Users => 'Users',
       _ => null,
     };
   }
@@ -84,9 +102,13 @@ class Protocol extends _i1.SerializationManager {
     }
 
     switch (data) {
-      case _i2.Gender():
-        return 'Gender';
-      case _i3.Users():
+      case _i2.CreditPreference():
+        return 'CreditPreference';
+      case _i3.LoanPreference():
+        return 'LoanPreference';
+      case _i4.ProfileData():
+        return 'ProfileData';
+      case _i5.Users():
         return 'Users';
     }
     return null;
@@ -98,11 +120,17 @@ class Protocol extends _i1.SerializationManager {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
-    if (dataClassName == 'Gender') {
-      return deserialize<_i2.Gender>(data['data']);
+    if (dataClassName == 'CreditPreference') {
+      return deserialize<_i2.CreditPreference>(data['data']);
+    }
+    if (dataClassName == 'LoanPreference') {
+      return deserialize<_i3.LoanPreference>(data['data']);
+    }
+    if (dataClassName == 'ProfileData') {
+      return deserialize<_i4.ProfileData>(data['data']);
     }
     if (dataClassName == 'Users') {
-      return deserialize<_i3.Users>(data['data']);
+      return deserialize<_i5.Users>(data['data']);
     }
     return super.deserializeByClassName(data);
   }

@@ -11,7 +11,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import 'gender.dart' as _i2;
 
 abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   Users._({
@@ -34,7 +33,7 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     required String email,
     required int phoneNumber,
     required String password,
-    required _i2.Gender gender,
+    required String gender,
     required DateTime createdAt,
   }) = _UsersImpl;
 
@@ -47,7 +46,7 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       email: jsonSerialization['email'] as String,
       phoneNumber: jsonSerialization['phoneNumber'] as int,
       password: jsonSerialization['password'] as String,
-      gender: _i2.Gender.fromJson((jsonSerialization['gender'] as String)),
+      gender: jsonSerialization['gender'] as String,
       createdAt: _i1.DateTimeJsonExtension.fromJson(
         jsonSerialization['createdAt'],
       ),
@@ -73,7 +72,7 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
 
   String password;
 
-  _i2.Gender gender;
+  String gender;
 
   DateTime createdAt;
 
@@ -91,7 +90,7 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     String? email,
     int? phoneNumber,
     String? password,
-    _i2.Gender? gender,
+    String? gender,
     DateTime? createdAt,
   });
   @override
@@ -105,7 +104,7 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       'email': email,
       'phoneNumber': phoneNumber,
       'password': password,
-      'gender': gender.toJson(),
+      'gender': gender,
       'createdAt': createdAt.toJson(),
     };
   }
@@ -121,7 +120,7 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       'email': email,
       'phoneNumber': phoneNumber,
       'password': password,
-      'gender': gender.toJson(),
+      'gender': gender,
       'createdAt': createdAt.toJson(),
     };
   }
@@ -167,7 +166,7 @@ class _UsersImpl extends Users {
     required String email,
     required int phoneNumber,
     required String password,
-    required _i2.Gender gender,
+    required String gender,
     required DateTime createdAt,
   }) : super._(
          id: id,
@@ -193,7 +192,7 @@ class _UsersImpl extends Users {
     String? email,
     int? phoneNumber,
     String? password,
-    _i2.Gender? gender,
+    String? gender,
     DateTime? createdAt,
   }) {
     return Users(
@@ -243,11 +242,10 @@ class UsersUpdateTable extends _i1.UpdateTable<UsersTable> {
     value,
   );
 
-  _i1.ColumnValue<_i2.Gender, _i2.Gender> gender(_i2.Gender value) =>
-      _i1.ColumnValue(
-        table.gender,
-        value,
-      );
+  _i1.ColumnValue<String, String> gender(String value) => _i1.ColumnValue(
+    table.gender,
+    value,
+  );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -283,10 +281,9 @@ class UsersTable extends _i1.Table<int?> {
       'password',
       this,
     );
-    gender = _i1.ColumnEnum(
+    gender = _i1.ColumnString(
       'gender',
       this,
-      _i1.EnumSerialization.byName,
     );
     createdAt = _i1.ColumnDateTime(
       'createdAt',
@@ -308,7 +305,7 @@ class UsersTable extends _i1.Table<int?> {
 
   late final _i1.ColumnString password;
 
-  late final _i1.ColumnEnum<_i2.Gender> gender;
+  late final _i1.ColumnString gender;
 
   late final _i1.ColumnDateTime createdAt;
 

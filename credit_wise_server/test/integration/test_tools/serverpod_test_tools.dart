@@ -14,7 +14,6 @@
 import 'package:serverpod_test/serverpod_test.dart' as _i1;
 import 'package:serverpod/serverpod.dart' as _i2;
 import 'dart:async' as _i3;
-import 'package:credit_wise_server/src/generated/gender.dart' as _i4;
 import 'package:credit_wise_server/src/generated/protocol.dart';
 import 'package:credit_wise_server/src/generated/endpoints.dart';
 export 'package:serverpod_test/serverpod_test_public_exports.dart';
@@ -156,7 +155,7 @@ class _AuthEndpoint {
     String lastName,
     String email,
     int phoneNumber,
-    _i4.Gender gender,
+    String gender,
     String password,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
