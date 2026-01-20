@@ -3,4 +3,8 @@ table: profile_data
 fields:
     userId: int, relation(parent=auth_user)
     age: int
+    dependants: int
+    monthlyIncome: double
+    debt_ratio: double
+    contributor_income: double
     
