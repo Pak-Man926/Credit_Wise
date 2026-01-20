@@ -1,0 +1,6 @@
+class: ProfileData
+table: profile_data
+fields:
+    userId: int, relation(parent=auth_user)
+    age: int
+    
