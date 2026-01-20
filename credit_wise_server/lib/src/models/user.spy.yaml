@@ -9,3 +9,7 @@ fields:
     password: String
     gender: String
     createdAt: DateTime
+indexes:
+  phone_number_unique:
+    fields: phoneNumber
+    unique: true
