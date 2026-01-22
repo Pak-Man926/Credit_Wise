@@ -2,3 +2,6 @@ type: server
 
 client_package_path: ../credit_wise_client
 server_test_tools_path: test/integration/test_tools
+flutter_package_path: ../credit_wise_flutter
+serverpod_auth:
+  nickname: auth

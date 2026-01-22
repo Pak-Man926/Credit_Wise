@@ -1,3 +1,9 @@
 auth:
   - registerUser:
   - loginUser:
+credit:
+  - createCreditPreference:
+loan:
+  - createLoanPreference:
+profile:
+  - createProfileData:

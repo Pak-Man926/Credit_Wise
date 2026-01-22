@@ -443,26 +443,26 @@ packages:
     dependency: transitive
     description:
       name: serverpod_client
-      sha256: "45e13aef227cc850555cac4222f1b0348576981169785bf31fc909c4484fce79"
+      sha256: "4add5cba3fd6f13d05f12928bff09752efc9096e83d0a8c7d67b4f036634f2b1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.1"
+    version: "3.2.3"
   serverpod_flutter:
     dependency: "direct main"
     description:
       name: serverpod_flutter
-      sha256: "508dde2b2db75702946c73dac39b1e555a64e7b7b9ee93b00c12b17e8ecd5a7f"
+      sha256: "7d63b5b2b648bb03d3a49687d2dbcc1713bb4245cb832dc334d984c7d7e54e02"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.1"
+    version: "3.2.3"
   serverpod_serialization:
     dependency: transitive
     description:
       name: serverpod_serialization
-      sha256: "2e4256563cb716765ea5af4fdfd3a19e976eb53df9419b77e0cce3b65ca3cecb"
+      sha256: "69d0b721c4b7d50b53861681e1c7d385a3def0be9a52e89fd3bd0c704fce0d37"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.1"
+    version: "3.2.3"
   shared_preferences:
     dependency: "direct main"
     description:
