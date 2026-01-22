@@ -21,33 +21,42 @@ class RegistrationController extends GetxController {
 
   final List<String> genderOptions = ['Male', 'Female'];
 
-  void updateGender(String? value) {
-    selectedGender.value = value;
-  }
-
-  Gender? get genderEnum {
-    switch (selectedGender.value) {
-      case 'Male':
-        return Gender.MALE;
-      case 'Female':
-        return Gender.FEMALE;
-      default:
-        return null;
-    }
-  }
-
   @override
   void onInit() {
     super.onInit();
     client = Client('http://localhost:8080/')
       ..connectivityMonitor = FlutterConnectivityMonitor();
+
+    logger.d("Registration Controller Initialized");
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    logger.d("Registration UI is now visible to the user");
+  }
+
+  @override
+  void onClose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    phoneNumberController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.onClose();
+  }
+
+  void updateGender(String? value) {
+    selectedGender.value = value;
   }
 
   Future<void> registerUser() async {
     logger.d("Trying to registering User.....");
 
-    logger.i("First name: '${firstNameController.text}' \n Last name: '${lastNameController.text}' \n Email: '${emailController.text}' \n Phone: '${phoneNumberController.text}' \n Password: '${passwordController.text}' \n Confirm: '${confirmPasswordController.text}' \n Gender raw: '${selectedGender.value}' \n Gender enum: $genderEnum");
-  
+    logger.i(
+      "First name: '${firstNameController.text}' \n Last name: '${lastNameController.text}' \n Email: '${emailController.text}' \n Phone: '${phoneNumberController.text}' \n Password: '${passwordController.text}' \n Confirm: '${confirmPasswordController.text}' \n Gender raw: '${selectedGender.value}'",
+    );
 
     final phoneText = phoneNumberController.text.trim();
 
@@ -57,7 +66,7 @@ class RegistrationController extends GetxController {
         phoneText.isEmpty ||
         passwordController.text.isEmpty ||
         confirmPasswordController.text.isEmpty ||
-        genderEnum == null) {
+        selectedGender.value == null) {
       Get.snackbar("Error", "Please fill in all fields");
 
       logger.w("Registration failed: Missing required fields.");
@@ -87,7 +96,7 @@ class RegistrationController extends GetxController {
         lastNameController.text.trim(),
         emailController.text.trim(),
         phoneNumber,
-        genderEnum!,
+        selectedGender.value!,
         passwordController.text,
       );
 
