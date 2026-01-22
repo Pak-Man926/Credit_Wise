@@ -122,6 +122,12 @@ void withServerpod(
 
 class TestEndpoints {
   late final _AuthEndpoint auth;
+
+  late final _CreditEndpoint credit;
+
+  late final _LoanEndpoint loan;
+
+  late final _ProfileEndpoint profile;
 }
 
 class _InternalTestEndpoints extends TestEndpoints
@@ -132,6 +138,18 @@ class _InternalTestEndpoints extends TestEndpoints
     _i2.EndpointDispatch endpoints,
   ) {
     auth = _AuthEndpoint(
+      endpoints,
+      serializationManager,
+    );
+    credit = _CreditEndpoint(
+      endpoints,
+      serializationManager,
+    );
+    loan = _LoanEndpoint(
+      endpoints,
+      serializationManager,
+    );
+    profile = _ProfileEndpoint(
       endpoints,
       serializationManager,
     );
@@ -221,6 +239,162 @@ class _AuthEndpoint {
                   _localCallContext.arguments,
                 )
                 as _i3.Future<bool>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+}
+
+class _CreditEndpoint {
+  _CreditEndpoint(
+    this._endpointDispatch,
+    this._serializationManager,
+  );
+
+  final _i2.EndpointDispatch _endpointDispatch;
+
+  final _i2.SerializationManager _serializationManager;
+
+  _i3.Future<void> createCreditPreference(
+    _i1.TestSessionBuilder sessionBuilder,
+    int userId,
+    double creditUsage,
+    double latePaymentHistory,
+    int openCreditLines,
+  ) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'credit',
+            method: 'createCreditPreference',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'credit',
+          methodName: 'createCreditPreference',
+          parameters: _i1.testObjectToJson({
+            'userId': userId,
+            'creditUsage': creditUsage,
+            'latePaymentHistory': latePaymentHistory,
+            'openCreditLines': openCreditLines,
+          }),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _i3.Future<void>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+}
+
+class _LoanEndpoint {
+  _LoanEndpoint(
+    this._endpointDispatch,
+    this._serializationManager,
+  );
+
+  final _i2.EndpointDispatch _endpointDispatch;
+
+  final _i2.SerializationManager _serializationManager;
+
+  _i3.Future<void> createLoanPreference(
+    _i1.TestSessionBuilder sessionBuilder,
+    int userId,
+    double loanAmount,
+    int repaymentPeriod,
+    double repaymentHistory,
+    String employmentType,
+  ) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'loan',
+            method: 'createLoanPreference',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'loan',
+          methodName: 'createLoanPreference',
+          parameters: _i1.testObjectToJson({
+            'userId': userId,
+            'loanAmount': loanAmount,
+            'repaymentPeriod': repaymentPeriod,
+            'repaymentHistory': repaymentHistory,
+            'employmentType': employmentType,
+          }),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _i3.Future<void>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+}
+
+class _ProfileEndpoint {
+  _ProfileEndpoint(
+    this._endpointDispatch,
+    this._serializationManager,
+  );
+
+  final _i2.EndpointDispatch _endpointDispatch;
+
+  final _i2.SerializationManager _serializationManager;
+
+  _i3.Future<void> createProfileData(
+    _i1.TestSessionBuilder sessionBuilder,
+    int userId,
+    int age,
+    int dependants,
+    double monthlyIncome,
+    double debtRatio,
+    double contributorIncome,
+  ) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'profile',
+            method: 'createProfileData',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'profile',
+          methodName: 'createProfileData',
+          parameters: _i1.testObjectToJson({
+            'userId': userId,
+            'age': age,
+            'dependants': dependants,
+            'monthlyIncome': monthlyIncome,
+            'debtRatio': debtRatio,
+            'contributorIncome': contributorIncome,
+          }),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _i3.Future<void>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();

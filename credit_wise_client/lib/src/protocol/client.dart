@@ -12,7 +12,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'protocol.dart' as _i3;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
+import 'protocol.dart' as _i4;
 
 /// {@category Endpoint}
 class EndpointAuth extends _i1.EndpointRef {
@@ -56,6 +57,92 @@ class EndpointAuth extends _i1.EndpointRef {
   );
 }
 
+/// {@category Endpoint}
+class EndpointCredit extends _i1.EndpointRef {
+  EndpointCredit(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'credit';
+
+  _i2.Future<void> createCreditPreference(
+    int userId,
+    double creditUsage,
+    double latePaymentHistory,
+    int openCreditLines,
+  ) => caller.callServerEndpoint<void>(
+    'credit',
+    'createCreditPreference',
+    {
+      'userId': userId,
+      'creditUsage': creditUsage,
+      'latePaymentHistory': latePaymentHistory,
+      'openCreditLines': openCreditLines,
+    },
+  );
+}
+
+/// {@category Endpoint}
+class EndpointLoan extends _i1.EndpointRef {
+  EndpointLoan(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'loan';
+
+  _i2.Future<void> createLoanPreference(
+    int userId,
+    double loanAmount,
+    int repaymentPeriod,
+    double repaymentHistory,
+    String employmentType,
+  ) => caller.callServerEndpoint<void>(
+    'loan',
+    'createLoanPreference',
+    {
+      'userId': userId,
+      'loanAmount': loanAmount,
+      'repaymentPeriod': repaymentPeriod,
+      'repaymentHistory': repaymentHistory,
+      'employmentType': employmentType,
+    },
+  );
+}
+
+/// {@category Endpoint}
+class EndpointProfile extends _i1.EndpointRef {
+  EndpointProfile(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'profile';
+
+  _i2.Future<void> createProfileData(
+    int userId,
+    int age,
+    int dependants,
+    double monthlyIncome,
+    double debtRatio,
+    double contributorIncome,
+  ) => caller.callServerEndpoint<void>(
+    'profile',
+    'createProfileData',
+    {
+      'userId': userId,
+      'age': age,
+      'dependants': dependants,
+      'monthlyIncome': monthlyIncome,
+      'debtRatio': debtRatio,
+      'contributorIncome': contributorIncome,
+    },
+  );
+}
+
+class Modules {
+  Modules(Client client) {
+    auth = _i3.Caller(client);
+  }
+
+  late final _i3.Caller auth;
+}
+
 class Client extends _i1.ServerpodClientShared {
   Client(
     String host, {
@@ -76,7 +163,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
          host,
-         _i3.Protocol(),
+         _i4.Protocol(),
          securityContext: securityContext,
          streamingConnectionTimeout: streamingConnectionTimeout,
          connectionTimeout: connectionTimeout,
@@ -86,13 +173,32 @@ class Client extends _i1.ServerpodClientShared {
              disconnectStreamsOnLostInternetConnection,
        ) {
     auth = EndpointAuth(this);
+    credit = EndpointCredit(this);
+    loan = EndpointLoan(this);
+    profile = EndpointProfile(this);
+    modules = Modules(this);
   }
 
   late final EndpointAuth auth;
 
-  @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'auth': auth};
+  late final EndpointCredit credit;
+
+  late final EndpointLoan loan;
+
+  late final EndpointProfile profile;
+
+  late final Modules modules;
 
   @override
-  Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {
+    'auth': auth,
+    'credit': credit,
+    'loan': loan,
+    'profile': profile,
+  };
+
+  @override
+  Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {
+    'auth': modules.auth,
+  };
 }

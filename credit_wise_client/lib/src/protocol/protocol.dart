@@ -15,6 +15,7 @@ import 'credit_preference.dart' as _i2;
 import 'loan_preference.dart' as _i3;
 import 'profile_data.dart' as _i4;
 import 'user.dart' as _i5;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i6;
 export 'credit_preference.dart';
 export 'loan_preference.dart';
 export 'profile_data.dart';
@@ -79,6 +80,9 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i5.Users?>()) {
       return (data != null ? _i5.Users.fromJson(data) : null) as T;
     }
+    try {
+      return _i6.Protocol().deserialize<T>(data, t);
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
 
@@ -111,6 +115,10 @@ class Protocol extends _i1.SerializationManager {
       case _i5.Users():
         return 'Users';
     }
+    className = _i6.Protocol().getClassNameForObject(data);
+    if (className != null) {
+      return 'serverpod_auth.$className';
+    }
     return null;
   }
 
@@ -132,6 +140,10 @@ class Protocol extends _i1.SerializationManager {
     if (dataClassName == 'Users') {
       return deserialize<_i5.Users>(data['data']);
     }
+    if (dataClassName.startsWith('serverpod_auth.')) {
+      data['className'] = dataClassName.substring(15);
+      return _i6.Protocol().deserializeByClassName(data);
+    }
     return super.deserializeByClassName(data);
   }
 
@@ -144,6 +156,9 @@ class Protocol extends _i1.SerializationManager {
     if (record == null) {
       return null;
     }
+    try {
+      return _i6.Protocol().mapRecordToJson(record);
+    } catch (_) {}
     throw Exception('Unsupported record type ${record.runtimeType}');
   }
 }

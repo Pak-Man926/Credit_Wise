@@ -15,7 +15,7 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 abstract class LoanPreference implements _i1.SerializableModel {
   LoanPreference._({
     this.id,
-    required this.userId,
+    this.userId,
     required this.loanAmount,
     required this.repaymentPeriod,
     required this.repaymentHistory,
@@ -24,7 +24,7 @@ abstract class LoanPreference implements _i1.SerializableModel {
 
   factory LoanPreference({
     int? id,
-    required int userId,
+    int? userId,
     required double loanAmount,
     required int repaymentPeriod,
     required double repaymentHistory,
@@ -34,7 +34,7 @@ abstract class LoanPreference implements _i1.SerializableModel {
   factory LoanPreference.fromJson(Map<String, dynamic> jsonSerialization) {
     return LoanPreference(
       id: jsonSerialization['id'] as int?,
-      userId: jsonSerialization['userId'] as int,
+      userId: jsonSerialization['userId'] as int?,
       loanAmount: (jsonSerialization['loanAmount'] as num).toDouble(),
       repaymentPeriod: jsonSerialization['repaymentPeriod'] as int,
       repaymentHistory: (jsonSerialization['repaymentHistory'] as num)
@@ -48,7 +48,7 @@ abstract class LoanPreference implements _i1.SerializableModel {
   /// the id will be null.
   int? id;
 
-  int userId;
+  int? userId;
 
   double loanAmount;
 
@@ -74,7 +74,7 @@ abstract class LoanPreference implements _i1.SerializableModel {
     return {
       '__className__': 'LoanPreference',
       if (id != null) 'id': id,
-      'userId': userId,
+      if (userId != null) 'userId': userId,
       'loanAmount': loanAmount,
       'repaymentPeriod': repaymentPeriod,
       'repaymentHistory': repaymentHistory,
@@ -93,7 +93,7 @@ class _Undefined {}
 class _LoanPreferenceImpl extends LoanPreference {
   _LoanPreferenceImpl({
     int? id,
-    required int userId,
+    int? userId,
     required double loanAmount,
     required int repaymentPeriod,
     required double repaymentHistory,
@@ -113,7 +113,7 @@ class _LoanPreferenceImpl extends LoanPreference {
   @override
   LoanPreference copyWith({
     Object? id = _Undefined,
-    int? userId,
+    Object? userId = _Undefined,
     double? loanAmount,
     int? repaymentPeriod,
     double? repaymentHistory,
@@ -121,7 +121,7 @@ class _LoanPreferenceImpl extends LoanPreference {
   }) {
     return LoanPreference(
       id: id is int? ? id : this.id,
-      userId: userId ?? this.userId,
+      userId: userId is int? ? userId : this.userId,
       loanAmount: loanAmount ?? this.loanAmount,
       repaymentPeriod: repaymentPeriod ?? this.repaymentPeriod,
       repaymentHistory: repaymentHistory ?? this.repaymentHistory,
