@@ -1,6 +1,7 @@
 class: Users
 table: auth_user
 fields:
+    userId: int, relation(parent=serverpod_user_info)
     firstName: String
     secondName: String
     lastName: String
