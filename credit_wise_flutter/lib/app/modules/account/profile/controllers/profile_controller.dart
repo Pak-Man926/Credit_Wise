@@ -2,10 +2,12 @@ import 'package:credit_wise_client/credit_wise_client.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 class ProfileController extends GetxController {
   late final Client client;
+  late final SessionManager sessionManager;
 
   var logger = Logger();
 
@@ -21,8 +23,8 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
 
-    client = Client('http://localhost:8080/')
-      ..connectivityMonitor = FlutterConnectivityMonitor();
+    client = Get.find<Client>();
+    sessionManager = Get.find<SessionManager>();
 
     logger.d("Profile Controller Initialized");
   }
@@ -68,12 +70,10 @@ class ProfileController extends GetxController {
       logger.w("Profile Data is Incomplete");
 
       return;
-
     } else {
       logger.d("All Profile Data fields are filled. Proceeding...");
-      try{
+      try {
         await client.profile.createProfileData(
-          2,
           int.parse(ageController.text.trim()),
           int.parse(dependantsController.text.trim()),
           double.parse(incomeController.text.trim()),

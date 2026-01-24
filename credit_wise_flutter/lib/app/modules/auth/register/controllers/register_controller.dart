@@ -1,13 +1,16 @@
 import 'package:credit_wise_client/credit_wise_client.dart';
+import 'package:credit_wise_flutter/app/utils/constants.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart'
     show FlutterConnectivityMonitor;
 import '../../../../routes/app_routes.dart';
 
 class RegistrationController extends GetxController {
   late final Client client;
+  late final SessionManager sessionManager;
   var logger = Logger();
 
   final firstNameController = TextEditingController();
@@ -24,8 +27,9 @@ class RegistrationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    client = Client('http://localhost:8080/')
-      ..connectivityMonitor = FlutterConnectivityMonitor();
+
+    client = Get.find<Client>();
+    sessionManager = Get.find<SessionManager>();
 
     logger.d("Registration Controller Initialized");
   }

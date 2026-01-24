@@ -2,14 +2,17 @@ import 'package:credit_wise_client/credit_wise_client.dart';
 import 'package:credit_wise_flutter/app/routes/app_routes.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:serverpod_auth_client/serverpod_auth_client.dart';
+import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import "package:logger/logger.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../utils/constants.dart';
+
 class LoginController extends GetxController {
-  // Example state management using Rx (Reactive variables)
-  //var isLoggedIn = false.obs;
   late final Client client;
+  late final SessionManager sessionManager;
   var logger = Logger();
 
   final phoneNumberController = TextEditingController();
@@ -18,9 +21,22 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    client = Client("http://localhost:8080/")
-      ..connectivityMonitor = FlutterConnectivityMonitor();
-    // Load stored login data if available
+    client = Get.find<Client>();
+    sessionManager = Get.find<SessionManager>();
+    logger.d("Login Controller Initialized");
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    logger.d("Login UI is now visible to the user");
+  }
+
+  @override
+  void onClose() {
+    phoneNumberController.dispose();
+    passwordController.dispose();
+    super.onClose();
   }
 
   Future<void> loginUser() async {
@@ -29,7 +45,7 @@ class LoginController extends GetxController {
     logger.i("Preparing to log in user...");
 
     final phoneText = phoneNumberController.text.trim();
-    final passwordText = passwordController.text.trim();
+    final passwordText = passwordController.text;
 
     if (phoneText.isEmpty || passwordText.isEmpty) {
       Get.snackbar("Error", "Please fill in all the fields!");
@@ -48,32 +64,27 @@ class LoginController extends GetxController {
 
     logger.i("Phone: $phoneText \n Password: $passwordText");
 
-    try {
-      final result = await client.auth.loginUser(
-        phoneNumber,
-        passwordText,
-      );
+     try {
+      // Call your AuthEndpoint.loginUser, which returns AuthenticationResponse
+      final AuthenticationResponse response =
+          await client.auth.loginUser(phoneNumber, passwordText);
 
-      logger.d("Login result: $result");
+      if (response.success) {
+        // Register signed-in user in SessionManager
+        await sessionManager.registerSignedInUser(
+          response.userInfo!,
+          response.keyId!,
+          response.key!,
+        ); 
 
-      //debugPrint("Login details: $phoneNumber, \n $passwordText");
-
-      if (result == true) {
-        Get.snackbar("Login Successful", "Welcome back!");
-
-        await prefs.setInt("phoneNumber", phoneNumber);
-
-        Get.offAllNamed(Routes.HOME_VIEW);
-
-        logger.d("User logged in successfully.");
+        Get.snackbar("Success", "Logged in successfully");
+        Get.offAllNamed(Routes.HOME_VIEW); // or wherever
       } else {
-        Get.snackbar("Error", "Invalid Credentials");
-
-        logger.d("Login failed: Invalid credentials.");
+        Get.snackbar("Error", "Invalid credentials");
       }
     } catch (e) {
-      logger.e("Login error", error: "$e");
-      Get.snackbar("Error", "An error occurred during login");
+      logger.e("Login error:", error: "$e");
+      Get.snackbar("Error", "Login failed");
     }
   }
 
