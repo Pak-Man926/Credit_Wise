@@ -15,7 +15,7 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 abstract class CreditPreference implements _i1.SerializableModel {
   CreditPreference._({
     this.id,
-    this.userId,
+    required this.userId,
     required this.creditUsage,
     required this.latePaymentHistory,
     required this.openCreditLines,
@@ -23,7 +23,7 @@ abstract class CreditPreference implements _i1.SerializableModel {
 
   factory CreditPreference({
     int? id,
-    int? userId,
+    required int userId,
     required double creditUsage,
     required double latePaymentHistory,
     required int openCreditLines,
@@ -32,7 +32,7 @@ abstract class CreditPreference implements _i1.SerializableModel {
   factory CreditPreference.fromJson(Map<String, dynamic> jsonSerialization) {
     return CreditPreference(
       id: jsonSerialization['id'] as int?,
-      userId: jsonSerialization['userId'] as int?,
+      userId: jsonSerialization['userId'] as int,
       creditUsage: (jsonSerialization['creditUsage'] as num).toDouble(),
       latePaymentHistory: (jsonSerialization['latePaymentHistory'] as num)
           .toDouble(),
@@ -45,7 +45,7 @@ abstract class CreditPreference implements _i1.SerializableModel {
   /// the id will be null.
   int? id;
 
-  int? userId;
+  int userId;
 
   double creditUsage;
 
@@ -68,7 +68,7 @@ abstract class CreditPreference implements _i1.SerializableModel {
     return {
       '__className__': 'CreditPreference',
       if (id != null) 'id': id,
-      if (userId != null) 'userId': userId,
+      'userId': userId,
       'creditUsage': creditUsage,
       'latePaymentHistory': latePaymentHistory,
       'openCreditLines': openCreditLines,
@@ -86,7 +86,7 @@ class _Undefined {}
 class _CreditPreferenceImpl extends CreditPreference {
   _CreditPreferenceImpl({
     int? id,
-    int? userId,
+    required int userId,
     required double creditUsage,
     required double latePaymentHistory,
     required int openCreditLines,
@@ -104,14 +104,14 @@ class _CreditPreferenceImpl extends CreditPreference {
   @override
   CreditPreference copyWith({
     Object? id = _Undefined,
-    Object? userId = _Undefined,
+    int? userId,
     double? creditUsage,
     double? latePaymentHistory,
     int? openCreditLines,
   }) {
     return CreditPreference(
       id: id is int? ? id : this.id,
-      userId: userId is int? ? userId : this.userId,
+      userId: userId ?? this.userId,
       creditUsage: creditUsage ?? this.creditUsage,
       latePaymentHistory: latePaymentHistory ?? this.latePaymentHistory,
       openCreditLines: openCreditLines ?? this.openCreditLines,

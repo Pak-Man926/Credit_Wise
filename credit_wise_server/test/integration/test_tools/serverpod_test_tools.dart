@@ -14,6 +14,7 @@
 import 'package:serverpod_test/serverpod_test.dart' as _i1;
 import 'package:serverpod/serverpod.dart' as _i2;
 import 'dart:async' as _i3;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i4;
 import 'package:credit_wise_server/src/generated/protocol.dart';
 import 'package:credit_wise_server/src/generated/endpoints.dart';
 export 'package:serverpod_test/serverpod_test_public_exports.dart';
@@ -211,7 +212,7 @@ class _AuthEndpoint {
     });
   }
 
-  _i3.Future<bool> loginUser(
+  _i3.Future<_i4.AuthenticationResponse> loginUser(
     _i1.TestSessionBuilder sessionBuilder,
     int phoneNumber,
     String password,
@@ -238,7 +239,7 @@ class _AuthEndpoint {
                   _localUniqueSession,
                   _localCallContext.arguments,
                 )
-                as _i3.Future<bool>);
+                as _i3.Future<_i4.AuthenticationResponse>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -259,7 +260,6 @@ class _CreditEndpoint {
 
   _i3.Future<void> createCreditPreference(
     _i1.TestSessionBuilder sessionBuilder,
-    int userId,
     double creditUsage,
     double latePaymentHistory,
     int openCreditLines,
@@ -276,7 +276,6 @@ class _CreditEndpoint {
           endpointPath: 'credit',
           methodName: 'createCreditPreference',
           parameters: _i1.testObjectToJson({
-            'userId': userId,
             'creditUsage': creditUsage,
             'latePaymentHistory': latePaymentHistory,
             'openCreditLines': openCreditLines,
@@ -309,7 +308,6 @@ class _LoanEndpoint {
 
   _i3.Future<void> createLoanPreference(
     _i1.TestSessionBuilder sessionBuilder,
-    int userId,
     double loanAmount,
     int repaymentPeriod,
     double repaymentHistory,
@@ -327,7 +325,6 @@ class _LoanEndpoint {
           endpointPath: 'loan',
           methodName: 'createLoanPreference',
           parameters: _i1.testObjectToJson({
-            'userId': userId,
             'loanAmount': loanAmount,
             'repaymentPeriod': repaymentPeriod,
             'repaymentHistory': repaymentHistory,
@@ -361,7 +358,6 @@ class _ProfileEndpoint {
 
   _i3.Future<void> createProfileData(
     _i1.TestSessionBuilder sessionBuilder,
-    int userId,
     int age,
     int dependants,
     double monthlyIncome,
@@ -380,7 +376,6 @@ class _ProfileEndpoint {
           endpointPath: 'profile',
           methodName: 'createProfileData',
           parameters: _i1.testObjectToJson({
-            'userId': userId,
             'age': age,
             'dependants': dependants,
             'monthlyIncome': monthlyIncome,

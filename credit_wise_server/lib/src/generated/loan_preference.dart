@@ -16,7 +16,7 @@ abstract class LoanPreference
     implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   LoanPreference._({
     this.id,
-    this.userId,
+    required this.userId,
     required this.loanAmount,
     required this.repaymentPeriod,
     required this.repaymentHistory,
@@ -25,7 +25,7 @@ abstract class LoanPreference
 
   factory LoanPreference({
     int? id,
-    int? userId,
+    required int userId,
     required double loanAmount,
     required int repaymentPeriod,
     required double repaymentHistory,
@@ -35,7 +35,7 @@ abstract class LoanPreference
   factory LoanPreference.fromJson(Map<String, dynamic> jsonSerialization) {
     return LoanPreference(
       id: jsonSerialization['id'] as int?,
-      userId: jsonSerialization['userId'] as int?,
+      userId: jsonSerialization['userId'] as int,
       loanAmount: (jsonSerialization['loanAmount'] as num).toDouble(),
       repaymentPeriod: jsonSerialization['repaymentPeriod'] as int,
       repaymentHistory: (jsonSerialization['repaymentHistory'] as num)
@@ -51,7 +51,7 @@ abstract class LoanPreference
   @override
   int? id;
 
-  int? userId;
+  int userId;
 
   double loanAmount;
 
@@ -80,7 +80,7 @@ abstract class LoanPreference
     return {
       '__className__': 'LoanPreference',
       if (id != null) 'id': id,
-      if (userId != null) 'userId': userId,
+      'userId': userId,
       'loanAmount': loanAmount,
       'repaymentPeriod': repaymentPeriod,
       'repaymentHistory': repaymentHistory,
@@ -93,7 +93,7 @@ abstract class LoanPreference
     return {
       '__className__': 'LoanPreference',
       if (id != null) 'id': id,
-      if (userId != null) 'userId': userId,
+      'userId': userId,
       'loanAmount': loanAmount,
       'repaymentPeriod': repaymentPeriod,
       'repaymentHistory': repaymentHistory,
@@ -136,7 +136,7 @@ class _Undefined {}
 class _LoanPreferenceImpl extends LoanPreference {
   _LoanPreferenceImpl({
     int? id,
-    int? userId,
+    required int userId,
     required double loanAmount,
     required int repaymentPeriod,
     required double repaymentHistory,
@@ -156,7 +156,7 @@ class _LoanPreferenceImpl extends LoanPreference {
   @override
   LoanPreference copyWith({
     Object? id = _Undefined,
-    Object? userId = _Undefined,
+    int? userId,
     double? loanAmount,
     int? repaymentPeriod,
     double? repaymentHistory,
@@ -164,7 +164,7 @@ class _LoanPreferenceImpl extends LoanPreference {
   }) {
     return LoanPreference(
       id: id is int? ? id : this.id,
-      userId: userId is int? ? userId : this.userId,
+      userId: userId ?? this.userId,
       loanAmount: loanAmount ?? this.loanAmount,
       repaymentPeriod: repaymentPeriod ?? this.repaymentPeriod,
       repaymentHistory: repaymentHistory ?? this.repaymentHistory,
@@ -176,7 +176,7 @@ class _LoanPreferenceImpl extends LoanPreference {
 class LoanPreferenceUpdateTable extends _i1.UpdateTable<LoanPreferenceTable> {
   LoanPreferenceUpdateTable(super.table);
 
-  _i1.ColumnValue<int, int> userId(int? value) => _i1.ColumnValue(
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
     table.userId,
     value,
   );

@@ -8,13 +8,18 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 // ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: unnecessary_null_comparison
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i2;
+import 'package:credit_wise_server/src/generated/protocol.dart' as _i3;
 
 abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   Users._({
     this.id,
+    required this.userInfoId,
+    this.userInfo,
     required this.firstName,
     required this.secondName,
     required this.lastName,
@@ -27,6 +32,8 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
 
   factory Users({
     int? id,
+    required int userInfoId,
+    _i2.UserInfo? userInfo,
     required String firstName,
     required String secondName,
     required String lastName,
@@ -40,6 +47,12 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   factory Users.fromJson(Map<String, dynamic> jsonSerialization) {
     return Users(
       id: jsonSerialization['id'] as int?,
+      userInfoId: jsonSerialization['userInfoId'] as int,
+      userInfo: jsonSerialization['userInfo'] == null
+          ? null
+          : _i3.Protocol().deserialize<_i2.UserInfo>(
+              jsonSerialization['userInfo'],
+            ),
       firstName: jsonSerialization['firstName'] as String,
       secondName: jsonSerialization['secondName'] as String,
       lastName: jsonSerialization['lastName'] as String,
@@ -59,6 +72,10 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
 
   @override
   int? id;
+
+  int userInfoId;
+
+  _i2.UserInfo? userInfo;
 
   String firstName;
 
@@ -84,6 +101,8 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @_i1.useResult
   Users copyWith({
     int? id,
+    int? userInfoId,
+    _i2.UserInfo? userInfo,
     String? firstName,
     String? secondName,
     String? lastName,
@@ -98,6 +117,8 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     return {
       '__className__': 'Users',
       if (id != null) 'id': id,
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJson(),
       'firstName': firstName,
       'secondName': secondName,
       'lastName': lastName,
@@ -114,6 +135,8 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     return {
       '__className__': 'Users',
       if (id != null) 'id': id,
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJsonForProtocol(),
       'firstName': firstName,
       'secondName': secondName,
       'lastName': lastName,
@@ -125,8 +148,8 @@ abstract class Users implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     };
   }
 
-  static UsersInclude include() {
-    return UsersInclude._();
+  static UsersInclude include({_i2.UserInfoInclude? userInfo}) {
+    return UsersInclude._(userInfo: userInfo);
   }
 
   static UsersIncludeList includeList({
@@ -160,6 +183,8 @@ class _Undefined {}
 class _UsersImpl extends Users {
   _UsersImpl({
     int? id,
+    required int userInfoId,
+    _i2.UserInfo? userInfo,
     required String firstName,
     required String secondName,
     required String lastName,
@@ -170,6 +195,8 @@ class _UsersImpl extends Users {
     required DateTime createdAt,
   }) : super._(
          id: id,
+         userInfoId: userInfoId,
+         userInfo: userInfo,
          firstName: firstName,
          secondName: secondName,
          lastName: lastName,
@@ -186,6 +213,8 @@ class _UsersImpl extends Users {
   @override
   Users copyWith({
     Object? id = _Undefined,
+    int? userInfoId,
+    Object? userInfo = _Undefined,
     String? firstName,
     String? secondName,
     String? lastName,
@@ -197,6 +226,10 @@ class _UsersImpl extends Users {
   }) {
     return Users(
       id: id is int? ? id : this.id,
+      userInfoId: userInfoId ?? this.userInfoId,
+      userInfo: userInfo is _i2.UserInfo?
+          ? userInfo
+          : this.userInfo?.copyWith(),
       firstName: firstName ?? this.firstName,
       secondName: secondName ?? this.secondName,
       lastName: lastName ?? this.lastName,
@@ -211,6 +244,11 @@ class _UsersImpl extends Users {
 
 class UsersUpdateTable extends _i1.UpdateTable<UsersTable> {
   UsersUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userInfoId(int value) => _i1.ColumnValue(
+    table.userInfoId,
+    value,
+  );
 
   _i1.ColumnValue<String, String> firstName(String value) => _i1.ColumnValue(
     table.firstName,
@@ -257,6 +295,10 @@ class UsersUpdateTable extends _i1.UpdateTable<UsersTable> {
 class UsersTable extends _i1.Table<int?> {
   UsersTable({super.tableRelation}) : super(tableName: 'auth_user') {
     updateTable = UsersUpdateTable(this);
+    userInfoId = _i1.ColumnInt(
+      'userInfoId',
+      this,
+    );
     firstName = _i1.ColumnString(
       'firstName',
       this,
@@ -293,6 +335,10 @@ class UsersTable extends _i1.Table<int?> {
 
   late final UsersUpdateTable updateTable;
 
+  late final _i1.ColumnInt userInfoId;
+
+  _i2.UserInfoTable? _userInfo;
+
   late final _i1.ColumnString firstName;
 
   late final _i1.ColumnString secondName;
@@ -309,9 +355,23 @@ class UsersTable extends _i1.Table<int?> {
 
   late final _i1.ColumnDateTime createdAt;
 
+  _i2.UserInfoTable get userInfo {
+    if (_userInfo != null) return _userInfo!;
+    _userInfo = _i1.createRelationTable(
+      relationFieldName: 'userInfo',
+      field: Users.t.userInfoId,
+      foreignField: _i2.UserInfo.t.id,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.UserInfoTable(tableRelation: foreignTableRelation),
+    );
+    return _userInfo!;
+  }
+
   @override
   List<_i1.Column> get columns => [
     id,
+    userInfoId,
     firstName,
     secondName,
     lastName,
@@ -321,13 +381,25 @@ class UsersTable extends _i1.Table<int?> {
     gender,
     createdAt,
   ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'userInfo') {
+      return userInfo;
+    }
+    return null;
+  }
 }
 
 class UsersInclude extends _i1.IncludeObject {
-  UsersInclude._();
+  UsersInclude._({_i2.UserInfoInclude? userInfo}) {
+    _userInfo = userInfo;
+  }
+
+  _i2.UserInfoInclude? _userInfo;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'userInfo': _userInfo};
 
   @override
   _i1.Table<int?> get table => Users.t;
@@ -355,6 +427,8 @@ class UsersIncludeList extends _i1.IncludeList {
 
 class UsersRepository {
   const UsersRepository._();
+
+  final attachRow = const UsersAttachRowRepository._();
 
   /// Returns a list of [Users]s matching the given query parameters.
   ///
@@ -387,6 +461,7 @@ class UsersRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<UsersTable>? orderByList,
     _i1.Transaction? transaction,
+    UsersInclude? include,
   }) async {
     return session.db.find<Users>(
       where: where?.call(Users.t),
@@ -396,6 +471,7 @@ class UsersRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -424,6 +500,7 @@ class UsersRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<UsersTable>? orderByList,
     _i1.Transaction? transaction,
+    UsersInclude? include,
   }) async {
     return session.db.findFirstRow<Users>(
       where: where?.call(Users.t),
@@ -432,6 +509,7 @@ class UsersRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -440,10 +518,12 @@ class UsersRepository {
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
+    UsersInclude? include,
   }) async {
     return session.db.findById<Users>(
       id,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -601,6 +681,33 @@ class UsersRepository {
     return session.db.count<Users>(
       where: where?.call(Users.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+}
+
+class UsersAttachRowRepository {
+  const UsersAttachRowRepository._();
+
+  /// Creates a relation between the given [Users] and [UserInfo]
+  /// by setting the [Users]'s foreign key `userInfoId` to refer to the [UserInfo].
+  Future<void> userInfo(
+    _i1.Session session,
+    Users users,
+    _i2.UserInfo userInfo, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (users.id == null) {
+      throw ArgumentError.notNull('users.id');
+    }
+    if (userInfo.id == null) {
+      throw ArgumentError.notNull('userInfo.id');
+    }
+
+    var $users = users.copyWith(userInfoId: userInfo.id);
+    await session.db.updateRow<Users>(
+      $users,
+      columns: [Users.t.userInfoId],
       transaction: transaction,
     );
   }

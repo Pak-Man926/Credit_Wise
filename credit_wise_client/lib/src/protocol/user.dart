@@ -11,10 +11,14 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i2;
+import 'package:credit_wise_client/src/protocol/protocol.dart' as _i3;
 
 abstract class Users implements _i1.SerializableModel {
   Users._({
     this.id,
+    required this.userInfoId,
+    this.userInfo,
     required this.firstName,
     required this.secondName,
     required this.lastName,
@@ -27,6 +31,8 @@ abstract class Users implements _i1.SerializableModel {
 
   factory Users({
     int? id,
+    required int userInfoId,
+    _i2.UserInfo? userInfo,
     required String firstName,
     required String secondName,
     required String lastName,
@@ -40,6 +46,12 @@ abstract class Users implements _i1.SerializableModel {
   factory Users.fromJson(Map<String, dynamic> jsonSerialization) {
     return Users(
       id: jsonSerialization['id'] as int?,
+      userInfoId: jsonSerialization['userInfoId'] as int,
+      userInfo: jsonSerialization['userInfo'] == null
+          ? null
+          : _i3.Protocol().deserialize<_i2.UserInfo>(
+              jsonSerialization['userInfo'],
+            ),
       firstName: jsonSerialization['firstName'] as String,
       secondName: jsonSerialization['secondName'] as String,
       lastName: jsonSerialization['lastName'] as String,
@@ -57,6 +69,10 @@ abstract class Users implements _i1.SerializableModel {
   /// database or if it has been fetched from the database. Otherwise,
   /// the id will be null.
   int? id;
+
+  int userInfoId;
+
+  _i2.UserInfo? userInfo;
 
   String firstName;
 
@@ -79,6 +95,8 @@ abstract class Users implements _i1.SerializableModel {
   @_i1.useResult
   Users copyWith({
     int? id,
+    int? userInfoId,
+    _i2.UserInfo? userInfo,
     String? firstName,
     String? secondName,
     String? lastName,
@@ -93,6 +111,8 @@ abstract class Users implements _i1.SerializableModel {
     return {
       '__className__': 'Users',
       if (id != null) 'id': id,
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJson(),
       'firstName': firstName,
       'secondName': secondName,
       'lastName': lastName,
@@ -115,6 +135,8 @@ class _Undefined {}
 class _UsersImpl extends Users {
   _UsersImpl({
     int? id,
+    required int userInfoId,
+    _i2.UserInfo? userInfo,
     required String firstName,
     required String secondName,
     required String lastName,
@@ -125,6 +147,8 @@ class _UsersImpl extends Users {
     required DateTime createdAt,
   }) : super._(
          id: id,
+         userInfoId: userInfoId,
+         userInfo: userInfo,
          firstName: firstName,
          secondName: secondName,
          lastName: lastName,
@@ -141,6 +165,8 @@ class _UsersImpl extends Users {
   @override
   Users copyWith({
     Object? id = _Undefined,
+    int? userInfoId,
+    Object? userInfo = _Undefined,
     String? firstName,
     String? secondName,
     String? lastName,
@@ -152,6 +178,10 @@ class _UsersImpl extends Users {
   }) {
     return Users(
       id: id is int? ? id : this.id,
+      userInfoId: userInfoId ?? this.userInfoId,
+      userInfo: userInfo is _i2.UserInfo?
+          ? userInfo
+          : this.userInfo?.copyWith(),
       firstName: firstName ?? this.firstName,
       secondName: secondName ?? this.secondName,
       lastName: lastName ?? this.lastName,

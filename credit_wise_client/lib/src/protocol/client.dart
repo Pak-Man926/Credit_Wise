@@ -44,10 +44,10 @@ class EndpointAuth extends _i1.EndpointRef {
     },
   );
 
-  _i2.Future<bool> loginUser(
+  _i2.Future<_i3.AuthenticationResponse> loginUser(
     int phoneNumber,
     String password,
-  ) => caller.callServerEndpoint<bool>(
+  ) => caller.callServerEndpoint<_i3.AuthenticationResponse>(
     'auth',
     'loginUser',
     {
@@ -65,7 +65,6 @@ class EndpointCredit extends _i1.EndpointRef {
   String get name => 'credit';
 
   _i2.Future<void> createCreditPreference(
-    int userId,
     double creditUsage,
     double latePaymentHistory,
     int openCreditLines,
@@ -73,7 +72,6 @@ class EndpointCredit extends _i1.EndpointRef {
     'credit',
     'createCreditPreference',
     {
-      'userId': userId,
       'creditUsage': creditUsage,
       'latePaymentHistory': latePaymentHistory,
       'openCreditLines': openCreditLines,
@@ -89,7 +87,6 @@ class EndpointLoan extends _i1.EndpointRef {
   String get name => 'loan';
 
   _i2.Future<void> createLoanPreference(
-    int userId,
     double loanAmount,
     int repaymentPeriod,
     double repaymentHistory,
@@ -98,7 +95,6 @@ class EndpointLoan extends _i1.EndpointRef {
     'loan',
     'createLoanPreference',
     {
-      'userId': userId,
       'loanAmount': loanAmount,
       'repaymentPeriod': repaymentPeriod,
       'repaymentHistory': repaymentHistory,
@@ -115,7 +111,6 @@ class EndpointProfile extends _i1.EndpointRef {
   String get name => 'profile';
 
   _i2.Future<void> createProfileData(
-    int userId,
     int age,
     int dependants,
     double monthlyIncome,
@@ -125,7 +120,6 @@ class EndpointProfile extends _i1.EndpointRef {
     'profile',
     'createProfileData',
     {
-      'userId': userId,
       'age': age,
       'dependants': dependants,
       'monthlyIncome': monthlyIncome,

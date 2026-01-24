@@ -137,11 +137,6 @@ class Endpoints extends _i1.EndpointDispatch {
         'createCreditPreference': _i1.MethodConnector(
           name: 'createCreditPreference',
           params: {
-            'userId': _i1.ParameterDescription(
-              name: 'userId',
-              type: _i1.getType<int>(),
-              nullable: false,
-            ),
             'creditUsage': _i1.ParameterDescription(
               name: 'creditUsage',
               type: _i1.getType<double>(),
@@ -165,7 +160,6 @@ class Endpoints extends _i1.EndpointDispatch {
               ) async => (endpoints['credit'] as _i3.CreditEndpoint)
                   .createCreditPreference(
                     session,
-                    params['userId'],
                     params['creditUsage'],
                     params['latePaymentHistory'],
                     params['openCreditLines'],
@@ -180,11 +174,6 @@ class Endpoints extends _i1.EndpointDispatch {
         'createLoanPreference': _i1.MethodConnector(
           name: 'createLoanPreference',
           params: {
-            'userId': _i1.ParameterDescription(
-              name: 'userId',
-              type: _i1.getType<int>(),
-              nullable: false,
-            ),
             'loanAmount': _i1.ParameterDescription(
               name: 'loanAmount',
               type: _i1.getType<double>(),
@@ -213,7 +202,6 @@ class Endpoints extends _i1.EndpointDispatch {
               ) async =>
                   (endpoints['loan'] as _i4.LoanEndpoint).createLoanPreference(
                     session,
-                    params['userId'],
                     params['loanAmount'],
                     params['repaymentPeriod'],
                     params['repaymentHistory'],
@@ -229,11 +217,6 @@ class Endpoints extends _i1.EndpointDispatch {
         'createProfileData': _i1.MethodConnector(
           name: 'createProfileData',
           params: {
-            'userId': _i1.ParameterDescription(
-              name: 'userId',
-              type: _i1.getType<int>(),
-              nullable: false,
-            ),
             'age': _i1.ParameterDescription(
               name: 'age',
               type: _i1.getType<int>(),
@@ -267,7 +250,6 @@ class Endpoints extends _i1.EndpointDispatch {
               ) async => (endpoints['profile'] as _i5.ProfileEndpoint)
                   .createProfileData(
                     session,
-                    params['userId'],
                     params['age'],
                     params['dependants'],
                     params['monthlyIncome'],
