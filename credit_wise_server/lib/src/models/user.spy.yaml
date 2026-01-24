@@ -1,16 +1,19 @@
 class: Users
 table: auth_user
 fields:
-    userId: int, relation(parent=serverpod_user_info)
-    firstName: String
-    secondName: String
-    lastName: String
-    email: String
-    phoneNumber: int
-    password: String
-    gender: String
-    createdAt: DateTime
+  userInfo: module:auth:UserInfo?, relation
+  firstName: String
+  secondName: String
+  lastName: String
+  email: String
+  phoneNumber: int
+  password: String
+  gender: String
+  createdAt: DateTime
 indexes:
   phone_number_unique:
     fields: phoneNumber
+    unique: true
+  user_info_id_unique:
+    fields: userInfoId
     unique: true

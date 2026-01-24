@@ -17,27 +17,50 @@ class AuthEndpoint extends Endpoint {
     String gender,
     String password,
   ) async {
-    var existingUser = await app.Users.db.findFirstRow(
+    // 1. Check if a domain user already exists by phone
+    final existingUser = await app.Users.db.findFirstRow(
       session,
       where: (t) => t.phoneNumber.equals(phoneNumber),
     );
-
     if (existingUser != null) {
       return false; // User already exists
     }
-    // Create a new user
 
+    // 2. Hash password
     final hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-    final user = app.Users(
-        firstName: firstName,
-        secondName: secondName,
-        lastName: lastName,
-        phoneNumber: phoneNumber,
+    // 3. Find or create auth.UserInfo (auth identity)
+    const authMethod = 'phonePassword';
+
+    // Use phone as unique identifier
+    auth.UserInfo? userInfo =
+        await auth.Users.findUserByIdentifier(session, phoneNumber.toString());
+
+    if (userInfo == null) {
+      userInfo = auth.UserInfo(
+        userIdentifier: phoneNumber.toString(),
+        userName: '$firstName $lastName',
         email: email,
-        password: hashedPassword,
-        gender: gender,
-        createdAt: DateTime.now());
+        blocked: false,
+        created: DateTime.now().toUtc(),
+        scopeNames: [],
+      );
+      userInfo = await auth.Users.createUser(session, userInfo, authMethod);
+    }
+
+    // 4. Create your domain user linked to UserInfo
+    final user = app.Users(
+      userInfoId: userInfo!.id!,
+      userInfo: userInfo, // sets userInfoId internally
+      firstName: firstName,
+      secondName: secondName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      password: hashedPassword,
+      gender: gender,
+      createdAt: DateTime.now(),
+    );
 
     await app.Users.db.insertRow(session, user);
 
