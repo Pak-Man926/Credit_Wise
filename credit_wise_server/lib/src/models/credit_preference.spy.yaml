@@ -1,7 +1,9 @@
 class: CreditPreference
 table: credit_preference
-fields: 
-    userId: int, relation(parent=auth_user)
-    creditUsage: double
-    latePaymentHistory: double
-    openCreditLines: int
+fields:
+  userId: int, relation(parent=auth_user)
+  creditUsage: double
+  latePayment3059: int
+  latePayment6089: int
+  latePayment90: int
+  openCreditLines: int
