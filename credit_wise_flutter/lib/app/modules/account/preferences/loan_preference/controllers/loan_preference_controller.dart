@@ -1,4 +1,5 @@
 import 'package:credit_wise_client/credit_wise_client.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
@@ -10,8 +11,10 @@ class LoanPreferenceController extends GetxController {
   var logger = Logger();
 
   // Variables for user selections
-  var loanAmount = 0.obs;
-  var loanTerm = 0.obs;
+  final loanAmountController = TextEditingController();
+  final loanTermController = TextEditingController();
+
+
   var repaymentHistory = "".obs;
   var employmentLevel = "".obs;
 
@@ -49,17 +52,19 @@ class LoanPreferenceController extends GetxController {
 
   @override
   void onClose() {
+    loanAmountController.dispose();
+    loanTermController.dispose();
     super.onClose();
   }
 
   // Methods to set values
-  void setLoanAmount(int value) {
-    loanAmount.value = value;
-  }
+  // void setLoanAmount(int value) {
+  //   loanAmount.value = value;
+  // }
 
-  void setLoanTerm(int value) {
-    loanTerm.value = value;
-  }
+  // void setLoanTerm(int value) {
+  //   loanTerm.value = value;
+  // }
 
   void setPaymentHistory(String? value) {
     repaymentHistory.value = value ?? "";
@@ -101,8 +106,8 @@ class LoanPreferenceController extends GetxController {
 
     // Prepare the payload for backend submission
     var payload = {
-      "loanAmount": loanAmount.value,
-      "loanTerm": loanTerm.value,
+      "loanAmount": loanAmountController.text,
+      "loanTerm": loanTermController.text,
       "creditHistory": creditHistory,
       "selfEmployed": isSelfEmployed,
     };
@@ -112,8 +117,8 @@ class LoanPreferenceController extends GetxController {
     // Placeholder for the API submission, replace with actual API call
     try {
       await client.loan.createLoanPreference(
-        double.parse(loanAmount.value.toString()),
-        loanTerm.value,
+        double.parse(loanAmountController.text),
+        int.parse(loanTermController.text),
         creditHistory,
         isSelfEmployed ? "Self-employed" : "Employed",
       );

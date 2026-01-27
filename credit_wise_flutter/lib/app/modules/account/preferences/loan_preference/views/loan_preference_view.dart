@@ -33,14 +33,20 @@ class LoanPreferenceView extends GetView<LoanPreferenceController> {
               style: AppTextStyles.body,
             ),
             smallSpaceSize,
-            InputFieldWidget(hintText: "e.g 30,000"),
+            InputFieldWidget(
+              hintText: "e.g 30,000",
+              controller: controller.loanAmountController,
+            ),
             mediumSpaceSize,
             const Text(
               "How long do you intend to take to repay the loan?",
               style: AppTextStyles.body,
             ),
             smallSpaceSize,
-            InputFieldWidget(hintText: "e.g 12 months"),
+            InputFieldWidget(
+              hintText: "e.g 12 months",
+              controller: controller.loanTermController,
+            ),
             smallSpaceSize,
             const Text(
               "Have you borrowed before and repaid successfully?",
@@ -70,7 +76,10 @@ class LoanPreferenceView extends GetView<LoanPreferenceController> {
               ),
             ),
             largeSpaceSize,
-            CustomButton.primary(text: "Submit", onPressed: () {}),
+            CustomButton.primary(
+              text: "Submit",
+              onPressed: () => controller.submitLoanPreferences(),
+            ),
           ],
         ),
       ),
