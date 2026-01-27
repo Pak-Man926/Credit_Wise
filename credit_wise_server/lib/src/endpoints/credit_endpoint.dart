@@ -12,7 +12,9 @@ class CreditEndpoint extends Endpoint {
   Future<void> createCreditPreference(
     Session session,
     double creditUsage,
-    double latePaymentHistory,
+    int latePayment30_59,
+    int latePayment60_89,
+    int latePayment90,
     int openCreditLines,
   ) async {
     // Get the authenticated user's ID
@@ -42,7 +44,9 @@ class CreditEndpoint extends Endpoint {
     if (creditPreferenceData != null) {
       creditPreferenceData
         ..creditUsage = creditUsage
-        ..latePaymentHistory = latePaymentHistory
+        ..latePayment3059 = latePayment30_59
+        ..latePayment6089 = latePayment60_89
+        ..latePayment90 = latePayment90
         ..openCreditLines = openCreditLines;
 
       await CreditPreference.db.updateRow(session, creditPreferenceData);
@@ -50,7 +54,9 @@ class CreditEndpoint extends Endpoint {
       final newCreditPreferenceData = CreditPreference(
         userId: appUserId,
         creditUsage: creditUsage,
-        latePaymentHistory: latePaymentHistory,
+        latePayment3059: latePayment30_59,
+        latePayment6089: latePayment60_89,
+        latePayment90: latePayment90,
         openCreditLines: openCreditLines,
       );
       await CreditPreference.db.insertRow(session, newCreditPreferenceData);
