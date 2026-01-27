@@ -17,7 +17,9 @@ abstract class CreditPreference implements _i1.SerializableModel {
     this.id,
     required this.userId,
     required this.creditUsage,
-    required this.latePaymentHistory,
+    required this.latePayment3059,
+    required this.latePayment6089,
+    required this.latePayment90,
     required this.openCreditLines,
   });
 
@@ -25,7 +27,9 @@ abstract class CreditPreference implements _i1.SerializableModel {
     int? id,
     required int userId,
     required double creditUsage,
-    required double latePaymentHistory,
+    required int latePayment3059,
+    required int latePayment6089,
+    required int latePayment90,
     required int openCreditLines,
   }) = _CreditPreferenceImpl;
 
@@ -34,8 +38,9 @@ abstract class CreditPreference implements _i1.SerializableModel {
       id: jsonSerialization['id'] as int?,
       userId: jsonSerialization['userId'] as int,
       creditUsage: (jsonSerialization['creditUsage'] as num).toDouble(),
-      latePaymentHistory: (jsonSerialization['latePaymentHistory'] as num)
-          .toDouble(),
+      latePayment3059: jsonSerialization['latePayment3059'] as int,
+      latePayment6089: jsonSerialization['latePayment6089'] as int,
+      latePayment90: jsonSerialization['latePayment90'] as int,
       openCreditLines: jsonSerialization['openCreditLines'] as int,
     );
   }
@@ -49,7 +54,11 @@ abstract class CreditPreference implements _i1.SerializableModel {
 
   double creditUsage;
 
-  double latePaymentHistory;
+  int latePayment3059;
+
+  int latePayment6089;
+
+  int latePayment90;
 
   int openCreditLines;
 
@@ -60,7 +69,9 @@ abstract class CreditPreference implements _i1.SerializableModel {
     int? id,
     int? userId,
     double? creditUsage,
-    double? latePaymentHistory,
+    int? latePayment3059,
+    int? latePayment6089,
+    int? latePayment90,
     int? openCreditLines,
   });
   @override
@@ -70,7 +81,9 @@ abstract class CreditPreference implements _i1.SerializableModel {
       if (id != null) 'id': id,
       'userId': userId,
       'creditUsage': creditUsage,
-      'latePaymentHistory': latePaymentHistory,
+      'latePayment3059': latePayment3059,
+      'latePayment6089': latePayment6089,
+      'latePayment90': latePayment90,
       'openCreditLines': openCreditLines,
     };
   }
@@ -88,13 +101,17 @@ class _CreditPreferenceImpl extends CreditPreference {
     int? id,
     required int userId,
     required double creditUsage,
-    required double latePaymentHistory,
+    required int latePayment3059,
+    required int latePayment6089,
+    required int latePayment90,
     required int openCreditLines,
   }) : super._(
          id: id,
          userId: userId,
          creditUsage: creditUsage,
-         latePaymentHistory: latePaymentHistory,
+         latePayment3059: latePayment3059,
+         latePayment6089: latePayment6089,
+         latePayment90: latePayment90,
          openCreditLines: openCreditLines,
        );
 
@@ -106,14 +123,18 @@ class _CreditPreferenceImpl extends CreditPreference {
     Object? id = _Undefined,
     int? userId,
     double? creditUsage,
-    double? latePaymentHistory,
+    int? latePayment3059,
+    int? latePayment6089,
+    int? latePayment90,
     int? openCreditLines,
   }) {
     return CreditPreference(
       id: id is int? ? id : this.id,
       userId: userId ?? this.userId,
       creditUsage: creditUsage ?? this.creditUsage,
-      latePaymentHistory: latePaymentHistory ?? this.latePaymentHistory,
+      latePayment3059: latePayment3059 ?? this.latePayment3059,
+      latePayment6089: latePayment6089 ?? this.latePayment6089,
+      latePayment90: latePayment90 ?? this.latePayment90,
       openCreditLines: openCreditLines ?? this.openCreditLines,
     );
   }

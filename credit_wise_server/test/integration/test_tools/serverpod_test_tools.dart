@@ -261,7 +261,9 @@ class _CreditEndpoint {
   _i3.Future<void> createCreditPreference(
     _i1.TestSessionBuilder sessionBuilder,
     double creditUsage,
-    double latePaymentHistory,
+    int latePayment30_59,
+    int latePayment60_89,
+    int latePayment90,
     int openCreditLines,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
@@ -277,7 +279,9 @@ class _CreditEndpoint {
           methodName: 'createCreditPreference',
           parameters: _i1.testObjectToJson({
             'creditUsage': creditUsage,
-            'latePaymentHistory': latePaymentHistory,
+            'latePayment30_59': latePayment30_59,
+            'latePayment60_89': latePayment60_89,
+            'latePayment90': latePayment90,
             'openCreditLines': openCreditLines,
           }),
           serializationManager: _serializationManager,

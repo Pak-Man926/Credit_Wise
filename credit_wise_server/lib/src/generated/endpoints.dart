@@ -142,9 +142,19 @@ class Endpoints extends _i1.EndpointDispatch {
               type: _i1.getType<double>(),
               nullable: false,
             ),
-            'latePaymentHistory': _i1.ParameterDescription(
-              name: 'latePaymentHistory',
-              type: _i1.getType<double>(),
+            'latePayment30_59': _i1.ParameterDescription(
+              name: 'latePayment30_59',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'latePayment60_89': _i1.ParameterDescription(
+              name: 'latePayment60_89',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'latePayment90': _i1.ParameterDescription(
+              name: 'latePayment90',
+              type: _i1.getType<int>(),
               nullable: false,
             ),
             'openCreditLines': _i1.ParameterDescription(
@@ -161,7 +171,9 @@ class Endpoints extends _i1.EndpointDispatch {
                   .createCreditPreference(
                     session,
                     params['creditUsage'],
-                    params['latePaymentHistory'],
+                    params['latePayment30_59'],
+                    params['latePayment60_89'],
+                    params['latePayment90'],
                     params['openCreditLines'],
                   ),
         ),

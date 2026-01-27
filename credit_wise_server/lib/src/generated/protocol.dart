@@ -179,10 +179,22 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'double',
         ),
         _i2.ColumnDefinition(
-          name: 'latePaymentHistory',
-          columnType: _i2.ColumnType.doublePrecision,
+          name: 'latePayment3059',
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
-          dartType: 'double',
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'latePayment6089',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'latePayment90',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'openCreditLines',

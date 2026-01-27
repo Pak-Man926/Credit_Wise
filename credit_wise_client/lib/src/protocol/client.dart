@@ -66,14 +66,18 @@ class EndpointCredit extends _i1.EndpointRef {
 
   _i2.Future<void> createCreditPreference(
     double creditUsage,
-    double latePaymentHistory,
+    int latePayment30_59,
+    int latePayment60_89,
+    int latePayment90,
     int openCreditLines,
   ) => caller.callServerEndpoint<void>(
     'credit',
     'createCreditPreference',
     {
       'creditUsage': creditUsage,
-      'latePaymentHistory': latePaymentHistory,
+      'latePayment30_59': latePayment30_59,
+      'latePayment60_89': latePayment60_89,
+      'latePayment90': latePayment90,
       'openCreditLines': openCreditLines,
     },
   );

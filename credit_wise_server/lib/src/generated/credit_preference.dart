@@ -18,7 +18,9 @@ abstract class CreditPreference
     this.id,
     required this.userId,
     required this.creditUsage,
-    required this.latePaymentHistory,
+    required this.latePayment3059,
+    required this.latePayment6089,
+    required this.latePayment90,
     required this.openCreditLines,
   });
 
@@ -26,7 +28,9 @@ abstract class CreditPreference
     int? id,
     required int userId,
     required double creditUsage,
-    required double latePaymentHistory,
+    required int latePayment3059,
+    required int latePayment6089,
+    required int latePayment90,
     required int openCreditLines,
   }) = _CreditPreferenceImpl;
 
@@ -35,8 +39,9 @@ abstract class CreditPreference
       id: jsonSerialization['id'] as int?,
       userId: jsonSerialization['userId'] as int,
       creditUsage: (jsonSerialization['creditUsage'] as num).toDouble(),
-      latePaymentHistory: (jsonSerialization['latePaymentHistory'] as num)
-          .toDouble(),
+      latePayment3059: jsonSerialization['latePayment3059'] as int,
+      latePayment6089: jsonSerialization['latePayment6089'] as int,
+      latePayment90: jsonSerialization['latePayment90'] as int,
       openCreditLines: jsonSerialization['openCreditLines'] as int,
     );
   }
@@ -52,7 +57,11 @@ abstract class CreditPreference
 
   double creditUsage;
 
-  double latePaymentHistory;
+  int latePayment3059;
+
+  int latePayment6089;
+
+  int latePayment90;
 
   int openCreditLines;
 
@@ -66,7 +75,9 @@ abstract class CreditPreference
     int? id,
     int? userId,
     double? creditUsage,
-    double? latePaymentHistory,
+    int? latePayment3059,
+    int? latePayment6089,
+    int? latePayment90,
     int? openCreditLines,
   });
   @override
@@ -76,7 +87,9 @@ abstract class CreditPreference
       if (id != null) 'id': id,
       'userId': userId,
       'creditUsage': creditUsage,
-      'latePaymentHistory': latePaymentHistory,
+      'latePayment3059': latePayment3059,
+      'latePayment6089': latePayment6089,
+      'latePayment90': latePayment90,
       'openCreditLines': openCreditLines,
     };
   }
@@ -88,7 +101,9 @@ abstract class CreditPreference
       if (id != null) 'id': id,
       'userId': userId,
       'creditUsage': creditUsage,
-      'latePaymentHistory': latePaymentHistory,
+      'latePayment3059': latePayment3059,
+      'latePayment6089': latePayment6089,
+      'latePayment90': latePayment90,
       'openCreditLines': openCreditLines,
     };
   }
@@ -130,13 +145,17 @@ class _CreditPreferenceImpl extends CreditPreference {
     int? id,
     required int userId,
     required double creditUsage,
-    required double latePaymentHistory,
+    required int latePayment3059,
+    required int latePayment6089,
+    required int latePayment90,
     required int openCreditLines,
   }) : super._(
          id: id,
          userId: userId,
          creditUsage: creditUsage,
-         latePaymentHistory: latePaymentHistory,
+         latePayment3059: latePayment3059,
+         latePayment6089: latePayment6089,
+         latePayment90: latePayment90,
          openCreditLines: openCreditLines,
        );
 
@@ -148,14 +167,18 @@ class _CreditPreferenceImpl extends CreditPreference {
     Object? id = _Undefined,
     int? userId,
     double? creditUsage,
-    double? latePaymentHistory,
+    int? latePayment3059,
+    int? latePayment6089,
+    int? latePayment90,
     int? openCreditLines,
   }) {
     return CreditPreference(
       id: id is int? ? id : this.id,
       userId: userId ?? this.userId,
       creditUsage: creditUsage ?? this.creditUsage,
-      latePaymentHistory: latePaymentHistory ?? this.latePaymentHistory,
+      latePayment3059: latePayment3059 ?? this.latePayment3059,
+      latePayment6089: latePayment6089 ?? this.latePayment6089,
+      latePayment90: latePayment90 ?? this.latePayment90,
       openCreditLines: openCreditLines ?? this.openCreditLines,
     );
   }
@@ -175,11 +198,20 @@ class CreditPreferenceUpdateTable
     value,
   );
 
-  _i1.ColumnValue<double, double> latePaymentHistory(double value) =>
-      _i1.ColumnValue(
-        table.latePaymentHistory,
-        value,
-      );
+  _i1.ColumnValue<int, int> latePayment3059(int value) => _i1.ColumnValue(
+    table.latePayment3059,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> latePayment6089(int value) => _i1.ColumnValue(
+    table.latePayment6089,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> latePayment90(int value) => _i1.ColumnValue(
+    table.latePayment90,
+    value,
+  );
 
   _i1.ColumnValue<int, int> openCreditLines(int value) => _i1.ColumnValue(
     table.openCreditLines,
@@ -199,8 +231,16 @@ class CreditPreferenceTable extends _i1.Table<int?> {
       'creditUsage',
       this,
     );
-    latePaymentHistory = _i1.ColumnDouble(
-      'latePaymentHistory',
+    latePayment3059 = _i1.ColumnInt(
+      'latePayment3059',
+      this,
+    );
+    latePayment6089 = _i1.ColumnInt(
+      'latePayment6089',
+      this,
+    );
+    latePayment90 = _i1.ColumnInt(
+      'latePayment90',
       this,
     );
     openCreditLines = _i1.ColumnInt(
@@ -215,7 +255,11 @@ class CreditPreferenceTable extends _i1.Table<int?> {
 
   late final _i1.ColumnDouble creditUsage;
 
-  late final _i1.ColumnDouble latePaymentHistory;
+  late final _i1.ColumnInt latePayment3059;
+
+  late final _i1.ColumnInt latePayment6089;
+
+  late final _i1.ColumnInt latePayment90;
 
   late final _i1.ColumnInt openCreditLines;
 
@@ -224,7 +268,9 @@ class CreditPreferenceTable extends _i1.Table<int?> {
     id,
     userId,
     creditUsage,
-    latePaymentHistory,
+    latePayment3059,
+    latePayment6089,
+    latePayment90,
     openCreditLines,
   ];
 }
