@@ -64,7 +64,10 @@ class CreditPreferenceView extends GetView<CreditPreferenceController> {
               ),
             ),
             largeSpaceSize,
-            CustomButton.primary(text: "Submit", onPressed: () {}),
+            CustomButton.primary(
+              text: "Submit",
+              onPressed: () => controller.submitCreditPreferences(),
+            ),
           ],
         ),
       ),
