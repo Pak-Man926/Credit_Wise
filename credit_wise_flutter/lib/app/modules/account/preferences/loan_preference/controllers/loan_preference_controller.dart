@@ -14,7 +14,6 @@ class LoanPreferenceController extends GetxController {
   final loanAmountController = TextEditingController();
   final loanTermController = TextEditingController();
 
-
   var repaymentHistory = "".obs;
   var employmentLevel = "".obs;
 
@@ -98,10 +97,15 @@ class LoanPreferenceController extends GetxController {
     }
 
     // Map employment level to Self_Employed
-    bool isSelfEmployed = false;
+    bool isEmployed;
+
     if (employmentLevel.value == "Self-employed/ Business" ||
-        employmentLevel.value == "Freelance/ Gig worker") {
-      isSelfEmployed = true;
+        employmentLevel.value == "Freelance/ Gig worker" ||
+        employmentLevel.value == "Full time employed" ||
+        employmentLevel.value == "Contract/ Casual") {
+      isEmployed = true;
+    } else {
+      isEmployed = false;
     }
 
     // Prepare the payload for backend submission
@@ -109,7 +113,7 @@ class LoanPreferenceController extends GetxController {
       "loanAmount": loanAmountController.text,
       "loanTerm": loanTermController.text,
       "creditHistory": creditHistory,
-      "selfEmployed": isSelfEmployed,
+      "selfEmployed": isEmployed,
     };
 
     logger.d("Payload ready for submission: $payload");
@@ -120,11 +124,15 @@ class LoanPreferenceController extends GetxController {
         double.parse(loanAmountController.text),
         int.parse(loanTermController.text),
         creditHistory,
-        isSelfEmployed ? "Self-employed" : "Employed",
+        isEmployed ? "Self-employed" : "Employed",
       );
 
       logger.d("Loan preferences submitted successfully");
       Get.snackbar("Success", "Loan preferences submitted successfully");
+
+      Future.delayed(Duration(seconds: 3), () {
+        Get.back();
+      });
     } catch (e) {
       logger.e("Error submitting loan preferences: $e");
       Get.snackbar("Error", "Failed to register loan preferences");

@@ -87,6 +87,10 @@ class ProfileController extends GetxController {
         logger.i("Profile Data Registered Successfully");
 
         Get.snackbar("Success", "Profile Data Registered Successfully");
+
+        Future.delayed(Duration(seconds: 3), () {
+          Get.back();
+        });
       } catch (e) {
         logger.e("Error registering profile data: $e");
         Get.snackbar("Error", "Failed to register profile data");
