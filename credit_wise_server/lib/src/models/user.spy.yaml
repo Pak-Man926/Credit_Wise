@@ -10,6 +10,12 @@ fields:
   password: String
   gender: String
   createdAt: DateTime
+
+  # # Relations to your own tables:
+  # profile: ProfileData?, relation
+  # credit: CreditPreference?, relation
+  # loan: LoanPreference?, relation
+
 indexes:
   phone_number_unique:
     fields: phoneNumber

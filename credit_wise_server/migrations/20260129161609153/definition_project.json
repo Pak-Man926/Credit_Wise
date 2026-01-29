@@ -1,0 +1,592 @@
+{
+  "__className__": "serverpod.DatabaseDefinition",
+  "moduleName": "credit_wise",
+  "tables": [
+    {
+      "__className__": "serverpod.TableDefinition",
+      "name": "auth_user",
+      "dartName": "Users",
+      "module": "credit_wise",
+      "schema": "public",
+      "columns": [
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "id",
+          "columnType": 6,
+          "isNullable": false,
+          "columnDefault": "nextval('auth_user_id_seq'::regclass)",
+          "dartType": "int?"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "userInfoId",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "firstName",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "secondName",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "lastName",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "email",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "phoneNumber",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "password",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "gender",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "createdAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
+        }
+      ],
+      "foreignKeys": [
+        {
+          "__className__": "serverpod.ForeignKeyDefinition",
+          "constraintName": "auth_user_fk_0",
+          "columns": [
+            "userInfoId"
+          ],
+          "referenceTable": "serverpod_user_info",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        }
+      ],
+      "indexes": [
+        {
+          "__className__": "serverpod.IndexDefinition",
+          "indexName": "auth_user_pkey",
+          "elements": [
+            {
+              "__className__": "serverpod.IndexElementDefinition",
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        },
+        {
+          "__className__": "serverpod.IndexDefinition",
+          "indexName": "phone_number_unique",
+          "elements": [
+            {
+              "__className__": "serverpod.IndexElementDefinition",
+              "type": 0,
+              "definition": "phoneNumber"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": false
+        },
+        {
+          "__className__": "serverpod.IndexDefinition",
+          "indexName": "user_info_id_unique",
+          "elements": [
+            {
+              "__className__": "serverpod.IndexElementDefinition",
+              "type": 0,
+              "definition": "userInfoId"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": false
+        }
+      ],
+      "managed": true
+    },
+    {
+      "__className__": "serverpod.TableDefinition",
+      "name": "credit_prediction",
+      "dartName": "CreditPrediction",
+      "module": "credit_wise",
+      "schema": "public",
+      "columns": [
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "id",
+          "columnType": 6,
+          "isNullable": false,
+          "columnDefault": "nextval('credit_prediction_id_seq'::regclass)",
+          "dartType": "int?"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "userId",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "riskProbability",
+          "columnType": 3,
+          "isNullable": false,
+          "dartType": "double"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "simulatedScore",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "scoreBand",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "createdAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
+        }
+      ],
+      "foreignKeys": [
+        {
+          "__className__": "serverpod.ForeignKeyDefinition",
+          "constraintName": "credit_prediction_fk_0",
+          "columns": [
+            "userId"
+          ],
+          "referenceTable": "auth_user",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        }
+      ],
+      "indexes": [
+        {
+          "__className__": "serverpod.IndexDefinition",
+          "indexName": "credit_prediction_pkey",
+          "elements": [
+            {
+              "__className__": "serverpod.IndexElementDefinition",
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        }
+      ],
+      "managed": true
+    },
+    {
+      "__className__": "serverpod.TableDefinition",
+      "name": "credit_preference",
+      "dartName": "CreditPreference",
+      "module": "credit_wise",
+      "schema": "public",
+      "columns": [
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "id",
+          "columnType": 6,
+          "isNullable": false,
+          "columnDefault": "nextval('credit_preference_id_seq'::regclass)",
+          "dartType": "int?"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "userId",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "creditUsage",
+          "columnType": 3,
+          "isNullable": false,
+          "dartType": "double"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "latePayment3059",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "latePayment6089",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "latePayment90",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "openCreditLines",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        }
+      ],
+      "foreignKeys": [
+        {
+          "__className__": "serverpod.ForeignKeyDefinition",
+          "constraintName": "credit_preference_fk_0",
+          "columns": [
+            "userId"
+          ],
+          "referenceTable": "auth_user",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        }
+      ],
+      "indexes": [
+        {
+          "__className__": "serverpod.IndexDefinition",
+          "indexName": "credit_preference_pkey",
+          "elements": [
+            {
+              "__className__": "serverpod.IndexElementDefinition",
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        }
+      ],
+      "managed": true
+    },
+    {
+      "__className__": "serverpod.TableDefinition",
+      "name": "loan_prediction",
+      "dartName": "LoanPrediction",
+      "module": "credit_wise",
+      "schema": "public",
+      "columns": [
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "id",
+          "columnType": 6,
+          "isNullable": false,
+          "columnDefault": "nextval('loan_prediction_id_seq'::regclass)",
+          "dartType": "int?"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "userId",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "approvalProbability",
+          "columnType": 3,
+          "isNullable": false,
+          "dartType": "double"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "approvalBand",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "createdAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
+        }
+      ],
+      "foreignKeys": [
+        {
+          "__className__": "serverpod.ForeignKeyDefinition",
+          "constraintName": "loan_prediction_fk_0",
+          "columns": [
+            "userId"
+          ],
+          "referenceTable": "auth_user",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        }
+      ],
+      "indexes": [
+        {
+          "__className__": "serverpod.IndexDefinition",
+          "indexName": "loan_prediction_pkey",
+          "elements": [
+            {
+              "__className__": "serverpod.IndexElementDefinition",
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        }
+      ],
+      "managed": true
+    },
+    {
+      "__className__": "serverpod.TableDefinition",
+      "name": "loan_preference",
+      "dartName": "LoanPreference",
+      "module": "credit_wise",
+      "schema": "public",
+      "columns": [
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "id",
+          "columnType": 6,
+          "isNullable": false,
+          "columnDefault": "nextval('loan_preference_id_seq'::regclass)",
+          "dartType": "int?"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "userId",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "loanAmount",
+          "columnType": 3,
+          "isNullable": false,
+          "dartType": "double"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "repaymentPeriod",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "repaymentHistory",
+          "columnType": 3,
+          "isNullable": false,
+          "dartType": "double"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "employmentType",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        }
+      ],
+      "foreignKeys": [
+        {
+          "__className__": "serverpod.ForeignKeyDefinition",
+          "constraintName": "loan_preference_fk_0",
+          "columns": [
+            "userId"
+          ],
+          "referenceTable": "auth_user",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        }
+      ],
+      "indexes": [
+        {
+          "__className__": "serverpod.IndexDefinition",
+          "indexName": "loan_preference_pkey",
+          "elements": [
+            {
+              "__className__": "serverpod.IndexElementDefinition",
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        }
+      ],
+      "managed": true
+    },
+    {
+      "__className__": "serverpod.TableDefinition",
+      "name": "profile_data",
+      "dartName": "ProfileData",
+      "module": "credit_wise",
+      "schema": "public",
+      "columns": [
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "id",
+          "columnType": 6,
+          "isNullable": false,
+          "columnDefault": "nextval('profile_data_id_seq'::regclass)",
+          "dartType": "int?"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "userId",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "age",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "dependants",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "monthlyIncome",
+          "columnType": 3,
+          "isNullable": false,
+          "dartType": "double"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "debtRatio",
+          "columnType": 3,
+          "isNullable": false,
+          "dartType": "double"
+        },
+        {
+          "__className__": "serverpod.ColumnDefinition",
+          "name": "contributorIncome",
+          "columnType": 3,
+          "isNullable": false,
+          "dartType": "double"
+        }
+      ],
+      "foreignKeys": [
+        {
+          "__className__": "serverpod.ForeignKeyDefinition",
+          "constraintName": "profile_data_fk_0",
+          "columns": [
+            "userId"
+          ],
+          "referenceTable": "auth_user",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        }
+      ],
+      "indexes": [
+        {
+          "__className__": "serverpod.IndexDefinition",
+          "indexName": "profile_data_pkey",
+          "elements": [
+            {
+              "__className__": "serverpod.IndexElementDefinition",
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        }
+      ],
+      "managed": true
+    }
+  ],
+  "installedModules": [
+    {
+      "__className__": "serverpod.DatabaseMigrationVersion",
+      "module": "serverpod",
+      "version": "20251208110333922-v3-0-0"
+    },
+    {
+      "__className__": "serverpod.DatabaseMigrationVersion",
+      "module": "serverpod_auth",
+      "version": "20250825102351908-v3-0-0"
+    }
+  ],
+  "migrationApiVersion": 1
+}
