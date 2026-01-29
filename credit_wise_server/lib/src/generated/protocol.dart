@@ -13,11 +13,15 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
-import 'credit_preference.dart' as _i4;
-import 'loan_preference.dart' as _i5;
-import 'profile_data.dart' as _i6;
-import 'user.dart' as _i7;
+import 'credit_prediction.dart' as _i4;
+import 'credit_preference.dart' as _i5;
+import 'loan_prediction.dart' as _i6;
+import 'loan_preference.dart' as _i7;
+import 'profile_data.dart' as _i8;
+import 'user.dart' as _i9;
+export 'credit_prediction.dart';
 export 'credit_preference.dart';
+export 'loan_prediction.dart';
 export 'loan_preference.dart';
 export 'profile_data.dart';
 export 'user.dart';
@@ -154,6 +158,79 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
+      name: 'credit_prediction',
+      dartName: 'CreditPrediction',
+      schema: 'public',
+      module: 'credit_wise',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'credit_prediction_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'userId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'riskProbability',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'simulatedScore',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'scoreBand',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'createdAt',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+        ),
+      ],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'credit_prediction_fk_0',
+          columns: ['userId'],
+          referenceTable: 'auth_user',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'credit_prediction_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            ),
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        ),
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
       name: 'credit_preference',
       dartName: 'CreditPreference',
       schema: 'public',
@@ -218,6 +295,73 @@ class Protocol extends _i1.SerializationManagerServer {
       indexes: [
         _i2.IndexDefinition(
           indexName: 'credit_preference_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            ),
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        ),
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'loan_prediction',
+      dartName: 'LoanPrediction',
+      schema: 'public',
+      module: 'credit_wise',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'loan_prediction_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'userId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'approvalProbability',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'approvalBand',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'createdAt',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+        ),
+      ],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'loan_prediction_fk_0',
+          columns: ['userId'],
+          referenceTable: 'auth_user',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'loan_prediction_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -415,29 +559,41 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
 
-    if (t == _i4.CreditPreference) {
-      return _i4.CreditPreference.fromJson(data) as T;
+    if (t == _i4.CreditPrediction) {
+      return _i4.CreditPrediction.fromJson(data) as T;
     }
-    if (t == _i5.LoanPreference) {
-      return _i5.LoanPreference.fromJson(data) as T;
+    if (t == _i5.CreditPreference) {
+      return _i5.CreditPreference.fromJson(data) as T;
     }
-    if (t == _i6.ProfileData) {
-      return _i6.ProfileData.fromJson(data) as T;
+    if (t == _i6.LoanPrediction) {
+      return _i6.LoanPrediction.fromJson(data) as T;
     }
-    if (t == _i7.Users) {
-      return _i7.Users.fromJson(data) as T;
+    if (t == _i7.LoanPreference) {
+      return _i7.LoanPreference.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i4.CreditPreference?>()) {
-      return (data != null ? _i4.CreditPreference.fromJson(data) : null) as T;
+    if (t == _i8.ProfileData) {
+      return _i8.ProfileData.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i5.LoanPreference?>()) {
-      return (data != null ? _i5.LoanPreference.fromJson(data) : null) as T;
+    if (t == _i9.Users) {
+      return _i9.Users.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i6.ProfileData?>()) {
-      return (data != null ? _i6.ProfileData.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i4.CreditPrediction?>()) {
+      return (data != null ? _i4.CreditPrediction.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i7.Users?>()) {
-      return (data != null ? _i7.Users.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i5.CreditPreference?>()) {
+      return (data != null ? _i5.CreditPreference.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i6.LoanPrediction?>()) {
+      return (data != null ? _i6.LoanPrediction.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i7.LoanPreference?>()) {
+      return (data != null ? _i7.LoanPreference.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i8.ProfileData?>()) {
+      return (data != null ? _i8.ProfileData.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i9.Users?>()) {
+      return (data != null ? _i9.Users.fromJson(data) : null) as T;
     }
     try {
       return _i3.Protocol().deserialize<T>(data, t);
@@ -450,10 +606,12 @@ class Protocol extends _i1.SerializationManagerServer {
 
   static String? getClassNameForType(Type type) {
     return switch (type) {
-      _i4.CreditPreference => 'CreditPreference',
-      _i5.LoanPreference => 'LoanPreference',
-      _i6.ProfileData => 'ProfileData',
-      _i7.Users => 'Users',
+      _i4.CreditPrediction => 'CreditPrediction',
+      _i5.CreditPreference => 'CreditPreference',
+      _i6.LoanPrediction => 'LoanPrediction',
+      _i7.LoanPreference => 'LoanPreference',
+      _i8.ProfileData => 'ProfileData',
+      _i9.Users => 'Users',
       _ => null,
     };
   }
@@ -468,13 +626,17 @@ class Protocol extends _i1.SerializationManagerServer {
     }
 
     switch (data) {
-      case _i4.CreditPreference():
+      case _i4.CreditPrediction():
+        return 'CreditPrediction';
+      case _i5.CreditPreference():
         return 'CreditPreference';
-      case _i5.LoanPreference():
+      case _i6.LoanPrediction():
+        return 'LoanPrediction';
+      case _i7.LoanPreference():
         return 'LoanPreference';
-      case _i6.ProfileData():
+      case _i8.ProfileData():
         return 'ProfileData';
-      case _i7.Users():
+      case _i9.Users():
         return 'Users';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -494,17 +656,23 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
+    if (dataClassName == 'CreditPrediction') {
+      return deserialize<_i4.CreditPrediction>(data['data']);
+    }
     if (dataClassName == 'CreditPreference') {
-      return deserialize<_i4.CreditPreference>(data['data']);
+      return deserialize<_i5.CreditPreference>(data['data']);
+    }
+    if (dataClassName == 'LoanPrediction') {
+      return deserialize<_i6.LoanPrediction>(data['data']);
     }
     if (dataClassName == 'LoanPreference') {
-      return deserialize<_i5.LoanPreference>(data['data']);
+      return deserialize<_i7.LoanPreference>(data['data']);
     }
     if (dataClassName == 'ProfileData') {
-      return deserialize<_i6.ProfileData>(data['data']);
+      return deserialize<_i8.ProfileData>(data['data']);
     }
     if (dataClassName == 'Users') {
-      return deserialize<_i7.Users>(data['data']);
+      return deserialize<_i9.Users>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -532,14 +700,18 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i4.CreditPreference:
-        return _i4.CreditPreference.t;
-      case _i5.LoanPreference:
-        return _i5.LoanPreference.t;
-      case _i6.ProfileData:
-        return _i6.ProfileData.t;
-      case _i7.Users:
-        return _i7.Users.t;
+      case _i4.CreditPrediction:
+        return _i4.CreditPrediction.t;
+      case _i5.CreditPreference:
+        return _i5.CreditPreference.t;
+      case _i6.LoanPrediction:
+        return _i6.LoanPrediction.t;
+      case _i7.LoanPreference:
+        return _i7.LoanPreference.t;
+      case _i8.ProfileData:
+        return _i8.ProfileData.t;
+      case _i9.Users:
+        return _i9.Users.t;
     }
     return null;
   }

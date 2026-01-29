@@ -13,7 +13,8 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
-import 'protocol.dart' as _i4;
+import 'package:credit_wise_client/src/protocol/credit_prediction.dart' as _i4;
+import 'protocol.dart' as _i5;
 
 /// {@category Endpoint}
 class EndpointAuth extends _i1.EndpointRef {
@@ -81,6 +82,21 @@ class EndpointCredit extends _i1.EndpointRef {
       'openCreditLines': openCreditLines,
     },
   );
+}
+
+/// {@category Endpoint}
+class EndpointPrediction extends _i1.EndpointRef {
+  EndpointPrediction(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'prediction';
+
+  _i2.Future<_i4.CreditPrediction?> getCreditScore() =>
+      caller.callServerEndpoint<_i4.CreditPrediction?>(
+        'prediction',
+        'getCreditScore',
+        {},
+      );
 }
 
 /// {@category Endpoint}
@@ -161,7 +177,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
          host,
-         _i4.Protocol(),
+         _i5.Protocol(),
          securityContext: securityContext,
          streamingConnectionTimeout: streamingConnectionTimeout,
          connectionTimeout: connectionTimeout,
@@ -172,6 +188,7 @@ class Client extends _i1.ServerpodClientShared {
        ) {
     auth = EndpointAuth(this);
     credit = EndpointCredit(this);
+    prediction = EndpointPrediction(this);
     loan = EndpointLoan(this);
     profile = EndpointProfile(this);
     modules = Modules(this);
@@ -180,6 +197,8 @@ class Client extends _i1.ServerpodClientShared {
   late final EndpointAuth auth;
 
   late final EndpointCredit credit;
+
+  late final EndpointPrediction prediction;
 
   late final EndpointLoan loan;
 
@@ -191,6 +210,7 @@ class Client extends _i1.ServerpodClientShared {
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
     'auth': auth,
     'credit': credit,
+    'prediction': prediction,
     'loan': loan,
     'profile': profile,
   };

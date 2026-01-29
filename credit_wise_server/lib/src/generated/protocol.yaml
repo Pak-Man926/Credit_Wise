@@ -3,6 +3,8 @@ auth:
   - loginUser:
 credit:
   - createCreditPreference:
+prediction:
+  - getCreditScore:
 loan:
   - createLoanPreference:
 profile:

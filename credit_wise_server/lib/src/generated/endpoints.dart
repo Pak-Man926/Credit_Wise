@@ -13,9 +13,10 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/auth_endpoint.dart' as _i2;
 import '../endpoints/credit_endpoint.dart' as _i3;
-import '../endpoints/loan_endpoint.dart' as _i4;
-import '../endpoints/profile_endpoint.dart' as _i5;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i6;
+import '../endpoints/credit_prediction_endpoint.dart' as _i4;
+import '../endpoints/loan_endpoint.dart' as _i5;
+import '../endpoints/profile_endpoint.dart' as _i6;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i7;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -33,13 +34,19 @@ class Endpoints extends _i1.EndpointDispatch {
           'credit',
           null,
         ),
-      'loan': _i4.LoanEndpoint()
+      'prediction': _i4.PredictionEndpoint()
+        ..initialize(
+          server,
+          'prediction',
+          null,
+        ),
+      'loan': _i5.LoanEndpoint()
         ..initialize(
           server,
           'loan',
           null,
         ),
-      'profile': _i5.ProfileEndpoint()
+      'profile': _i6.ProfileEndpoint()
         ..initialize(
           server,
           'profile',
@@ -179,6 +186,22 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
+    connectors['prediction'] = _i1.EndpointConnector(
+      name: 'prediction',
+      endpoint: endpoints['prediction']!,
+      methodConnectors: {
+        'getCreditScore': _i1.MethodConnector(
+          name: 'getCreditScore',
+          params: {},
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['prediction'] as _i4.PredictionEndpoint)
+                  .getCreditScore(session),
+        ),
+      },
+    );
     connectors['loan'] = _i1.EndpointConnector(
       name: 'loan',
       endpoint: endpoints['loan']!,
@@ -212,7 +235,7 @@ class Endpoints extends _i1.EndpointDispatch {
                 _i1.Session session,
                 Map<String, dynamic> params,
               ) async =>
-                  (endpoints['loan'] as _i4.LoanEndpoint).createLoanPreference(
+                  (endpoints['loan'] as _i5.LoanEndpoint).createLoanPreference(
                     session,
                     params['loanAmount'],
                     params['repaymentPeriod'],
@@ -259,7 +282,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (
                 _i1.Session session,
                 Map<String, dynamic> params,
-              ) async => (endpoints['profile'] as _i5.ProfileEndpoint)
+              ) async => (endpoints['profile'] as _i6.ProfileEndpoint)
                   .createProfileData(
                     session,
                     params['age'],
@@ -271,6 +294,6 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    modules['serverpod_auth'] = _i6.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i7.Endpoints()..initializeEndpoints(server);
   }
 }
