@@ -15,8 +15,9 @@ import '../endpoints/auth_endpoint.dart' as _i2;
 import '../endpoints/credit_endpoint.dart' as _i3;
 import '../endpoints/credit_prediction_endpoint.dart' as _i4;
 import '../endpoints/loan_endpoint.dart' as _i5;
-import '../endpoints/profile_endpoint.dart' as _i6;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i7;
+import '../endpoints/loan_prediction_endpoint.dart' as _i6;
+import '../endpoints/profile_endpoint.dart' as _i7;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i8;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -46,7 +47,13 @@ class Endpoints extends _i1.EndpointDispatch {
           'loan',
           null,
         ),
-      'profile': _i6.ProfileEndpoint()
+      'loanPrediction': _i6.LoanPredictionEndpoint()
+        ..initialize(
+          server,
+          'loanPrediction',
+          null,
+        ),
+      'profile': _i7.ProfileEndpoint()
         ..initialize(
           server,
           'profile',
@@ -245,6 +252,23 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
+    connectors['loanPrediction'] = _i1.EndpointConnector(
+      name: 'loanPrediction',
+      endpoint: endpoints['loanPrediction']!,
+      methodConnectors: {
+        'getLoanPrediction': _i1.MethodConnector(
+          name: 'getLoanPrediction',
+          params: {},
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async =>
+                  (endpoints['loanPrediction'] as _i6.LoanPredictionEndpoint)
+                      .getLoanPrediction(session),
+        ),
+      },
+    );
     connectors['profile'] = _i1.EndpointConnector(
       name: 'profile',
       endpoint: endpoints['profile']!,
@@ -282,7 +306,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (
                 _i1.Session session,
                 Map<String, dynamic> params,
-              ) async => (endpoints['profile'] as _i6.ProfileEndpoint)
+              ) async => (endpoints['profile'] as _i7.ProfileEndpoint)
                   .createProfileData(
                     session,
                     params['age'],
@@ -294,6 +318,6 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    modules['serverpod_auth'] = _i7.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i8.Endpoints()..initializeEndpoints(server);
   }
 }

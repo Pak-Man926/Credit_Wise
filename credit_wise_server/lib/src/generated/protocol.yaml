@@ -7,5 +7,7 @@ prediction:
   - getCreditScore:
 loan:
   - createLoanPreference:
+loanPrediction:
+  - getLoanPrediction:
 profile:
   - createProfileData:

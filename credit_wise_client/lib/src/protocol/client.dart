@@ -14,7 +14,8 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
 import 'package:credit_wise_client/src/protocol/credit_prediction.dart' as _i4;
-import 'protocol.dart' as _i5;
+import 'package:credit_wise_client/src/protocol/loan_prediction.dart' as _i5;
+import 'protocol.dart' as _i6;
 
 /// {@category Endpoint}
 class EndpointAuth extends _i1.EndpointRef {
@@ -124,6 +125,21 @@ class EndpointLoan extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointLoanPrediction extends _i1.EndpointRef {
+  EndpointLoanPrediction(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'loanPrediction';
+
+  _i2.Future<_i5.LoanPrediction?> getLoanPrediction() =>
+      caller.callServerEndpoint<_i5.LoanPrediction?>(
+        'loanPrediction',
+        'getLoanPrediction',
+        {},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointProfile extends _i1.EndpointRef {
   EndpointProfile(_i1.EndpointCaller caller) : super(caller);
 
@@ -177,7 +193,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
          host,
-         _i5.Protocol(),
+         _i6.Protocol(),
          securityContext: securityContext,
          streamingConnectionTimeout: streamingConnectionTimeout,
          connectionTimeout: connectionTimeout,
@@ -190,6 +206,7 @@ class Client extends _i1.ServerpodClientShared {
     credit = EndpointCredit(this);
     prediction = EndpointPrediction(this);
     loan = EndpointLoan(this);
+    loanPrediction = EndpointLoanPrediction(this);
     profile = EndpointProfile(this);
     modules = Modules(this);
   }
@@ -202,6 +219,8 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointLoan loan;
 
+  late final EndpointLoanPrediction loanPrediction;
+
   late final EndpointProfile profile;
 
   late final Modules modules;
@@ -212,6 +231,7 @@ class Client extends _i1.ServerpodClientShared {
     'credit': credit,
     'prediction': prediction,
     'loan': loan,
+    'loanPrediction': loanPrediction,
     'profile': profile,
   };
 
