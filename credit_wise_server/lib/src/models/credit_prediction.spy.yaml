@@ -1,0 +1,8 @@
+class: CreditPrediction
+table: credit_prediction
+fields:
+    userId: int, relation(parent = auth_user)
+    riskProbability: double
+    simulatedScore: int
+    scoreBand: String
+    createdAt: DateTime

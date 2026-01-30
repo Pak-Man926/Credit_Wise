@@ -7,3 +7,5 @@ fields:
     monthlyIncome: double
     debtRatio: double
     contributorIncome: double
+
+    #user: Users?, relation(name=auth_user)

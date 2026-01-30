@@ -1,0 +1,7 @@
+class: LoanPrediction
+table: loan_prediction
+fields: 
+    userId: int, relation(parent = auth_user)
+    approvalProbability: double
+    approvalBand: String
+    createdAt: DateTime
