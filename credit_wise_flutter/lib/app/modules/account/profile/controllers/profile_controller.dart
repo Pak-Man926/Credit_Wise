@@ -88,7 +88,7 @@ class ProfileController extends GetxController {
 
         Get.snackbar("Success", "Profile Data Registered Successfully");
 
-        Future.delayed(Duration(seconds: 3), () {
+        Future.delayed(Duration(seconds: 4), () {
           Get.back();
         });
       } catch (e) {
