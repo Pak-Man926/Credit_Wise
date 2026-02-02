@@ -64,10 +64,12 @@ class LoginController extends GetxController {
 
     logger.i("Phone: $phoneText \n Password: $passwordText");
 
-     try {
+    try {
       // Call your AuthEndpoint.loginUser, which returns AuthenticationResponse
-      final AuthenticationResponse response =
-          await client.auth.loginUser(phoneNumber, passwordText);
+      final AuthenticationResponse response = await client.auth.loginUser(
+        phoneNumber,
+        passwordText,
+      );
 
       if (response.success) {
         // Register signed-in user in SessionManager
@@ -75,10 +77,10 @@ class LoginController extends GetxController {
           response.userInfo!,
           response.keyId!,
           response.key!,
-        ); 
+        );
 
         Get.snackbar("Success", "Logged in successfully");
-        Get.offAllNamed(Routes.HOME_VIEW); // or wherever
+        Get.offAllNamed(Routes.HOME_VIEW); 
       } else {
         Get.snackbar("Error", "Invalid credentials");
       }
@@ -88,14 +90,14 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> logout() async {
-    // loggedInUser.value = null;
-    // await StorageService.clearLoginData();
+  // Future<void> logout() async {
+  //   // loggedInUser.value = null;
+  //   // await StorageService.clearLoginData();
 
-    Get.snackbar("Thank you!", "GoodBye!", snackPosition: SnackPosition.BOTTOM);
+  //   Get.snackbar("Thank you!", "GoodBye!", snackPosition: SnackPosition.BOTTOM);
 
-    logger.i("Logging out user...");
+  //   logger.i("Logging out user...");
 
-    Get.offAllNamed(Routes.LOGIN);
-  }
+  //   Get.offAllNamed(Routes.LOGIN);
+  // }
 }

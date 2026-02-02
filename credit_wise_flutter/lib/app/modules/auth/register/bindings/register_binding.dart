@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../controllers/login_controller.dart';
 import '../controllers/register_controller.dart';
 
 class RegistrationBinding extends Bindings {
@@ -6,6 +7,8 @@ class RegistrationBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<RegistrationController>(
       () => RegistrationController(),
+      fenix: true,
     );
+    Get.lazyPut<LoginController>(() => LoginController(), fenix: false);
   }
 }
