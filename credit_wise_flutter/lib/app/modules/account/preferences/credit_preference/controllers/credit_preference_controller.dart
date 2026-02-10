@@ -179,7 +179,7 @@ class CreditPreferenceController extends GetxController {
       logger.d("Credit preferences submitted successfully");
       Get.snackbar("Success", "Credit Preferences submitted successfully");
 
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(Duration(seconds: 4), () {
         Get.back();
       });
     } catch (e) {

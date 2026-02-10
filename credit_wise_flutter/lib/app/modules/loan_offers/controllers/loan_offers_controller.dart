@@ -14,6 +14,12 @@ class LoanOffersController extends GetxController {
   var isError = false.obs;
   var message = "".obs; // Error/Info message
 
+  /// Approval probability as a percentage (0–100)
+  double get displayProbability => approvalProbability.value * 100;
+
+  /// Whether the loan is considered approved (>= 50% probability)
+  bool get isApproved => approvalProbability.value >= 0.5;
+
   @override
   void onInit() {
     client = Get.find<Client>();
@@ -52,7 +58,8 @@ class LoanOffersController extends GetxController {
         }
       } else {
         isError.value = true;
-        message.value = "No data received from the server.";
+        message.value =
+            "No data received. Please ensure your profile and loan preferences are filled in.";
       }
     } catch (e) {
       logger.e("Could not reach the server: $e");

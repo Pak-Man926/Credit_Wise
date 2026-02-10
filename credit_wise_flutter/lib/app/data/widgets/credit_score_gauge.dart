@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CreditScoreGauge extends StatelessWidget {
   final double score; // Simulated score (e.g., 606)
   final String scoreBand; // "A" to "E"
-  final double riskProbability; // Risk percentage (e.g., 44%)
+  final double riskProbability; // Risk percentage (e.g., 0.44)
 
   CreditScoreGauge({
     required this.score,
@@ -16,7 +16,7 @@ class CreditScoreGauge extends StatelessWidget {
     return Center(
       child: CustomPaint(
         size: Size(300, 300),
-        painter: GaugePainter(score, scoreBand),
+        painter: GaugePainter(score, scoreBand, riskProbability),
       ),
     );
   }
@@ -25,70 +25,102 @@ class CreditScoreGauge extends StatelessWidget {
 class GaugePainter extends CustomPainter {
   final double score;
   final String scoreBand;
+  final double riskProbability;
 
-  GaugePainter(this.score, this.scoreBand);
+  GaugePainter(this.score, this.scoreBand, this.riskProbability);
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = Colors.grey.withOpacity(0.3)
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = size.width / 2;
+
+    // Background ring
+    Paint bgPaint = Paint()
+      ..color = Colors.grey.withOpacity(0.15)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 20;
+      ..strokeWidth = 22;
+
+    canvas.drawCircle(center, radius, bgPaint);
+
+    // Score arc with gradient
+    double angle = (score / 850) * 3.14;
+    final bandColor = _getScoreBandColor(scoreBand);
 
     Paint scorePaint = Paint()
-      ..color = _getScoreBandColor(scoreBand)
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 20;
+      ..strokeWidth = 22;
 
-    double angle = (score / 850) * 3.14; // Scale score to the gauge
+    // Create a gradient effect by using a shader
+    final gradientRect = Rect.fromCircle(center: center, radius: radius);
+    scorePaint.shader = SweepGradient(
+      startAngle: -3.14 / 2,
+      endAngle: -3.14 / 2 + angle,
+      colors: [
+        bandColor.withOpacity(0.5),
+        bandColor,
+      ],
+      stops: const [0.0, 1.0],
+    ).createShader(gradientRect);
 
-    // Draw outer circle (gauge background)
-    canvas.drawCircle(
-      Offset(size.width / 2, size.height / 2),
-      size.width / 2,
-      paint,
-    );
-
-    // Draw the gauge (based on score)
     canvas.drawArc(
-      Rect.fromCircle(
-        center: Offset(size.width / 2, size.height / 2),
-        radius: size.width / 2,
-      ),
-      -3.14 /
-          2, // Start angle (rotate so the needle starts at the 9 o'clock position)
-      angle, // Ending angle based on the score
+      Rect.fromCircle(center: center, radius: radius),
+      -3.14 / 2,
+      angle,
       false,
       scorePaint,
     );
 
-    // Draw score label in the center
-    TextPainter textPainter = TextPainter(
+    // Score number in center (integer, no decimals)
+    TextPainter scoreTp = TextPainter(
       text: TextSpan(
-        text: '$score',
+        text: '${score.toInt()}',
         style: TextStyle(
           color: Colors.black,
-          fontSize: 36,
+          fontSize: 40,
           fontWeight: FontWeight.bold,
         ),
       ),
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
     );
-    textPainter.layout();
-    textPainter.paint(
+    scoreTp.layout();
+    scoreTp.paint(
       canvas,
       Offset(
-        size.width / 2 - textPainter.width / 2,
-        size.height / 2 - textPainter.height / 2,
+        center.dx - scoreTp.width / 2,
+        center.dy - scoreTp.height / 2 - 12,
+      ),
+    );
+
+    // Score band label below the score
+    TextPainter bandTp = TextPainter(
+      text: TextSpan(
+        text: 'Band $scoreBand',
+        style: TextStyle(
+          color: bandColor,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      textAlign: TextAlign.center,
+      textDirection: TextDirection.ltr,
+    );
+    bandTp.layout();
+    bandTp.paint(
+      canvas,
+      Offset(
+        center.dx - bandTp.width / 2,
+        center.dy + scoreTp.height / 2 - 8,
       ),
     );
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
+  bool shouldRepaint(covariant GaugePainter oldDelegate) {
+    return oldDelegate.score != score ||
+        oldDelegate.scoreBand != scoreBand ||
+        oldDelegate.riskProbability != riskProbability;
   }
 
   Color _getScoreBandColor(String band) {
@@ -98,7 +130,7 @@ class GaugePainter extends CustomPainter {
       case 'B':
         return Colors.lightGreen;
       case 'C':
-        return Colors.yellow;
+        return Colors.yellow.shade700;
       case 'D':
         return Colors.orange;
       case 'E':

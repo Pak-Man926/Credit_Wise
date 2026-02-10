@@ -25,24 +25,31 @@ class HomeView extends GetView<HomeController> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Welcome back, David",
-                    style: AppTextStyles.headingXL),
+                Obx(() {
+                  final firstName = controller.userProfile.value?.firstName ?? 'User';
+                  return Text("Welcome back, $firstName",
+                      style: AppTextStyles.headingXL);
+                }),
                 mediumSpaceSize,
-                HomeFeedWidget(
-                  headlineText: "Credit Score",
-                  bottomlineText: "Good",
-                  onPressed: () => Get.toNamed(Routes.CREDIT_SCORE),
-                  image: "assets/view_score_background_image.png",
-                  creditScore: 720,
-                  buttonLabel: "View Score",
-                ),
+                Obx(() {
+                  final score = controller.creditPrediction.value?.simulatedScore ?? 0;
+                  final band = controller.creditPrediction.value?.scoreBand ?? '--';
+                  return HomeFeedWidget(
+                    headlineText: "Credit Score",
+                    bottomlineText: band,
+                    onPressed: () => Get.toNamed(Routes.CREDIT_SCORE),
+                    image: "assets/view_score_background_image.png",
+                    creditScore: score,
+                    buttonLabel: "View Score",
+                  );
+                }),
                 mediumSpaceSize,
                 HomeFeedWidget(
                   headlineText: "Recommendation",
                   bottomlineText: "Personalized Offers",
                   onPressed: () => Get.toNamed(Routes.LOAN_OFFERS),
                   image: "assets/recommendation_view_background.png",
-                  creditScore: 2,
+                  creditScore: null,
                   buttonLabel: "View Offers",
                 ),
                 mediumSpaceSize,

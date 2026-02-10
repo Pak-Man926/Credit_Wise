@@ -50,7 +50,7 @@ class HomeFeedWidget extends StatelessWidget {
                   Text("$headlineText", style: AppTextStyles.bodySmall),
                   smallSpaceSize,
                   Text(
-                    "$creditScore",
+                    creditScore != null ? "$creditScore" : "",
                     style: AppTextStyles.body,
                   ),
                   smallSpaceSize,

@@ -15,6 +15,7 @@ class CreditScoreController extends GetxController {
   var scoreBand = "".obs;
   var isError = false.obs;
   var logger = Logger();
+  var userProfile = Rxn<Users>();
 
   @override
   void onInit() {
@@ -27,12 +28,26 @@ class CreditScoreController extends GetxController {
   @override
   void onReady() {
     logger.i("Credit Score UI has now loaded....");
+    fetchUserProfile();
+    fetchCreditScore();
     super.onReady();
   }
 
   @override
   void onClose() {
     super.onClose();
+  }
+
+  Future<void> fetchUserProfile() async {
+    try {
+      final profile = await client.profile.getAppUser();
+      if (profile != null) {
+        userProfile.value = profile;
+        logger.d("User profile loaded: ${profile.firstName} ${profile.lastName}, gender: ${profile.gender}");
+      }
+    } catch (e) {
+      logger.e("Error fetching user profile: $e");
+    }
   }
 
   Future<void> fetchCreditScore() async {

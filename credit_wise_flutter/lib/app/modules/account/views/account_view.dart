@@ -24,14 +24,24 @@ class AccountView extends GetView<AccountController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Column(children: [
-                ProfileImageWidget(
-                    profilePic: "assets/female_account_user.png"),
-                smallSpaceSize,
-                const Text("Jane Mwaura", style: AppTextStyles.headingL),
-                smallSpaceSize,
-                const Text("San Francisco, CA", style: AppTextStyles.bodySmall),
-              ]),
+              child: Obx(() {
+                final gender = controller.userProfile.value?.gender ?? 'Male';
+                final avatarAsset = gender.toLowerCase() == 'female'
+                    ? 'assets/female_account_user.png'
+                    : 'assets/male_account_user.png';
+                final fullName =
+                    '${controller.userProfile.value?.firstName ?? ''} ${controller.userProfile.value?.lastName ?? ''}'.trim();
+
+                return Column(children: [
+                  ProfileImageWidget(profilePic: avatarAsset),
+                  smallSpaceSize,
+                  Text(fullName.isNotEmpty ? fullName : 'User',
+                      style: AppTextStyles.headingL),
+                  smallSpaceSize,
+                  Text(controller.userProfile.value?.email ?? '',
+                      style: AppTextStyles.bodySmall),
+                ]);
+              }),
             ),
             mediumSpaceSize,
             const Text("Account & Settings", style: AppTextStyles.headingL),

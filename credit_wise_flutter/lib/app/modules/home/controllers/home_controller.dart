@@ -9,6 +9,7 @@ class HomeController extends GetxController {
   var logger = Logger();
 
   var userProfile = Rxn<Users>();
+  var creditPrediction = Rxn<CreditPrediction>();
 
   @override
   void onInit()
@@ -26,6 +27,7 @@ class HomeController extends GetxController {
     super.onReady();  
     logger.d("HomePage UI is now visible to the user");
     fetchUserProfile();
+    fetchCreditScore();
   }
 
   @override
@@ -47,6 +49,21 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       logger.e("Error fetching user profile data: $e");
+    }
+  }
+
+  Future<void> fetchCreditScore() async {
+    try {
+      logger.i("Fetching credit score for home view...");
+      final result = await client.prediction.getCreditScore();
+      if (result != null) {
+        creditPrediction.value = result;
+        logger.d("Credit score fetched: ${result.simulatedScore}");
+      } else {
+        logger.w("No credit score data available.");
+      }
+    } catch (e) {
+      logger.e("Error fetching credit score: $e");
     }
   }
 }
