@@ -17,6 +17,7 @@ import 'dart:async' as _i3;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i4;
 import 'package:credit_wise_server/src/generated/credit_prediction.dart' as _i5;
 import 'package:credit_wise_server/src/generated/loan_prediction.dart' as _i6;
+import 'package:credit_wise_server/src/generated/user.dart' as _i7;
 import 'package:credit_wise_server/src/generated/protocol.dart';
 import 'package:credit_wise_server/src/generated/endpoints.dart';
 export 'package:serverpod_test/serverpod_test_public_exports.dart';
@@ -455,6 +456,36 @@ class _ProfileEndpoint {
   final _i2.EndpointDispatch _endpointDispatch;
 
   final _i2.SerializationManager _serializationManager;
+
+  _i3.Future<_i7.Users?> getAppUser(
+    _i1.TestSessionBuilder sessionBuilder,
+  ) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'profile',
+            method: 'getAppUser',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'profile',
+          methodName: 'getAppUser',
+          parameters: _i1.testObjectToJson({}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _i3.Future<_i7.Users?>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
 
   _i3.Future<void> createProfileData(
     _i1.TestSessionBuilder sessionBuilder,

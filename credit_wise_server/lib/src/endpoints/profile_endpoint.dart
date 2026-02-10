@@ -8,6 +8,24 @@ class ProfileEndpoint extends Endpoint {
   @override
   bool get requireLogin => true;
 
+  Future<app.Users?> getAppUser(Session session) async {
+  final authInfo = await session.authenticated;
+  final authUserId = authInfo?.userId;
+
+  if (authUserId == null) {
+    throw Exception('User not authenticated');
+  };
+
+  final appUser = await app.Users.db.findFirstRow(
+    session,
+    where: (t) => t.userInfoId.equals(authUserId),
+  );
+  
+  session.log("getAppUser called for authUserId: $authUserId, found appUser: $appUser");
+
+  return appUser;
+}
+
   Future<void> createProfileData(
     Session session,
     int age,

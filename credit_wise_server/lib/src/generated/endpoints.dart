@@ -273,6 +273,16 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'profile',
       endpoint: endpoints['profile']!,
       methodConnectors: {
+        'getAppUser': _i1.MethodConnector(
+          name: 'getAppUser',
+          params: {},
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['profile'] as _i7.ProfileEndpoint)
+                  .getAppUser(session),
+        ),
         'createProfileData': _i1.MethodConnector(
           name: 'createProfileData',
           params: {

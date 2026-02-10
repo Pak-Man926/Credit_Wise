@@ -10,4 +10,5 @@ loan:
 loanPrediction:
   - getLoanPrediction:
 profile:
+  - getAppUser:
   - createProfileData:

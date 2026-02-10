@@ -15,7 +15,8 @@ import 'dart:async' as _i2;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
 import 'package:credit_wise_client/src/protocol/credit_prediction.dart' as _i4;
 import 'package:credit_wise_client/src/protocol/loan_prediction.dart' as _i5;
-import 'protocol.dart' as _i6;
+import 'package:credit_wise_client/src/protocol/user.dart' as _i6;
+import 'protocol.dart' as _i7;
 
 /// {@category Endpoint}
 class EndpointAuth extends _i1.EndpointRef {
@@ -146,6 +147,12 @@ class EndpointProfile extends _i1.EndpointRef {
   @override
   String get name => 'profile';
 
+  _i2.Future<_i6.Users?> getAppUser() => caller.callServerEndpoint<_i6.Users?>(
+    'profile',
+    'getAppUser',
+    {},
+  );
+
   _i2.Future<void> createProfileData(
     int age,
     int dependants,
@@ -193,7 +200,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
          host,
-         _i6.Protocol(),
+         _i7.Protocol(),
          securityContext: securityContext,
          streamingConnectionTimeout: streamingConnectionTimeout,
          connectionTimeout: connectionTimeout,

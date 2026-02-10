@@ -119,5 +119,7 @@ class AuthEndpoint extends Endpoint {
       key: authToken.key,
       userInfo: userInfo,
     );
+
+    
   }
 }
