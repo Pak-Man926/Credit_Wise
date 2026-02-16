@@ -131,6 +131,7 @@ class LoanPreferenceController extends GetxController {
       Get.snackbar("Success", "Loan preferences submitted successfully");
 
       Future.delayed(Duration(seconds: 4), () {
+        logger.i("Navigating back after successful submission");
         Get.back();
       });
     } catch (e) {
